@@ -2,10 +2,15 @@
 
 ## Descripción del Proyecto
 
-Breve descripción del juego, su propósito, cómo se juega y cualquier otro detalle importante que describa la idea general del proyecto.
+**"DeepDive"** Consiste en un videojuego desarrolado en C++ que se ejecuta exclusivamente en consola. El Jugador controla un **submarino** que debe esquivar obstáculos como peces y rocas mientras avanza bajo el mar. El juego se maneja mediante menús interactivos y el uso del teclado expecíficamente con las teclas **(W,A,S,D)** para moverse.
 
-**Por ejemplo:**
-Este proyecto consiste en un juego de aventuras donde el jugador debe explorar un mundo virtual, recoger objetos, resolver acertijos y enfrentar enemigos. El juego utiliza estructuras de control como `if`, `switch`, y bucles `while` y `for` para generar interacciones dinámicas.
+**El juego cuenta con dos modos de juego:**
+1-**Supervivencia:** resistir el mayor tiempo posible sin hundirse
+2-**Misiones o Niveles:** deberá cumplir con objetivos específicos o llegar a un destino.
+
+Los obstáculos se generaran aleatoriamente usando estructuras y la funcion **rand()**, y el submarino tiene un sistemas de **vidas** que le permite resistir varios impactos antes de perder. La interfaz gráfica se basa en caracteres **ASCII**, y se usa la función **kbhit()** de la librería **conio.h** para detectar las teclas presionadas.
+
+Además, se guarda un récord de distancia recorrida en un archivo de texto, permitiendo llevar un seguimiento del progreso del jugador!!!.
 
 ## Equipo
 
