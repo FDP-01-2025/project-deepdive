@@ -1,4 +1,4 @@
-# Proyecto de C++ - [Nombre del Juego]
+# Proyecto de C++ - DeepDive
 
 ## Descripción del Proyecto
 
@@ -9,20 +9,21 @@ Este proyecto consiste en un juego de aventuras donde el jugador debe explorar u
 
 ## Equipo
 
-- **Nombre del equipo:** [Nombre del equipo]
+- **Nombre del equipo:** Tralaleritos :skull:
 
 ### Integrantes del equipo
 
-1. **Nombre completo:** [Nombre del estudiante 1]  
-   **Carnet:** [Carnet del estudiante 1]
+1. **Nombre completo:** Esteban Alejandro Mate Lúe
+   **Carnet:** 00235525
 
-2. **Nombre completo:** [Nombre del estudiante 2]  
-   **Carnet:** [Carnet del estudiante 2]
+2. **Nombre completo:** Yukio Alberto Ogawa Urquilla
+   **Carnet:** 00171625
 
-3. **Nombre completo:** [Nombre del estudiante 3]  
-   **Carnet:** [Carnet del estudiante 3]
+3. **Nombre completo:** René Alexander Moya Hernández
+   **Carnet:** 00090925
 
-(Agregar más integrantes si es necesario)
+4. **Nombre completo:** Javier Gerardo Mangandí Izaguirre
+   **Carnet:** 00204125
 
 ## Instrucciones de Ejecución
 
