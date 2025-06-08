@@ -2,7 +2,7 @@
 
 ## Descripción del Proyecto
 
-**"DeepDive"** Consiste en un videojuego desarrolado en C++ que se ejecuta exclusivamente en consola. El Jugador controla un **submarino** que debe esquivar obstáculos como peces y rocas mientras avanza bajo el mar. El juego se maneja mediante menús interactivos y el uso del teclado expecíficamente con las teclas **(W,A,S,D)** para moverse.
+**"DeepDive"** Consiste en un videojuego desarrollado en C++ que se ejecuta exclusivamente en consola. El Jugador controla un **submarino** que debe esquivar obstáculos como peces y rocas mientras avanza bajo el mar. El juego se maneja mediante menús interactivos y el uso del teclado expecíficamente con las teclas **(W,A,S,D)** para moverse.
 
 **El juego cuenta con dos modos de juego:**
 1-**Supervivencia:** resistir el mayor tiempo posible sin hundirse
