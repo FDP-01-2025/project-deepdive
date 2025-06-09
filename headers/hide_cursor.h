@@ -1,6 +1,5 @@
 #ifndef HIDE_CURSOR_H_INCLUDED
 #define HIDE_CURSOR_H_INCLUDED
-#include <windows.h>
 
 void HideCursor()
 {

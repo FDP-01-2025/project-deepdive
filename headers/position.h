@@ -1,7 +1,6 @@
-#ifndef MOVE_CURSOR_H_INCLUDED
-#define MOVE_CURSOR_H_INCLUDED
-#include <windows.h>
-
+#ifndef POSITION_H_INCLUDED
+#define POSITION_H_INCLUDED
+#include "../libraries/libraries.h"
 /*Función para mover el cursor de la consola, en "x" y "y".*/
 void gotoxy(int x, int y)
 {
