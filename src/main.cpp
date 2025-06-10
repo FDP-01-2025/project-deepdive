@@ -94,7 +94,8 @@ int main()
     } while (submarine.lifes > 0);
 
     //Holiwis i love u so much, muacks, muacks (att.Yukio)
-    //mondongo
+    //mondongoooooo
+    //
 
     return 0;
 }
