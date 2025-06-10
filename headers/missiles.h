@@ -10,12 +10,12 @@ typedef struct
 void MoveMissil(Missiles &missiles)
 {
     gotoxy(missiles.x, missiles.y);
-    printf(" ");
+    cout<<(" ")<<endl;
     if (missiles.x < 115)
     {
         missiles.x++;
         gotoxy(missiles.x, missiles.y);
-        printf("->");
+        cout<<("->")<<endl;
     }
 }
 

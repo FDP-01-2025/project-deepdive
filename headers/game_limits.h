@@ -9,29 +9,29 @@ void GameLimits()
     for (int i = 2; i < 120; i++)
     {
         gotoxy(i, 2);
-        printf("%c", 205);
+        cout<<("%c", 205)<<endl;
         gotoxy(i, 28);
-        printf("%c", 205);
+        cout<<("%c", 205)<<endl;
     }
 
     //Parte vertical
     for (int j = 2; j < 28; j++)
     {
         gotoxy(2, j);
-        printf("%c", 186);
+        cout<<("%c", 186)<<endl;
         gotoxy(119, j);
-        printf("%c", 186);
+        cout<<("%c", 186)<<endl;
     }
 
     //Esquinas
     gotoxy(2, 2);
-    printf("%c", 201);
+    cout<<("%c", 201)<<endl;
     gotoxy(119, 2);
-    printf("%c", 187);
+    cout<<("%c", 187)<<endl;
     gotoxy(2, 28);
-    printf("%c", 200);
+    cout<<("%c", 200)<<endl;
     gotoxy(119, 28);
-    printf("%c", 188);
+    cout<<("%c", 188)<<endl;
 }
 
 #endif

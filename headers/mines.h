@@ -10,21 +10,21 @@ typedef struct
 void PaintMines(Mines *mines)
 {
     gotoxy(mines->x, mines->y);
-    printf(" %c%c%c%c ", 46, 45, 45, 46);
+    cout<<(" %c%c%c%c ", 46, 45, 45, 46)<<endl;
     gotoxy(mines->x, mines->y + 1);
-    printf("%c %c%c %c", 47, 88, 88, 92);
+    cout<<("%c %c%c %c", 47, 88, 88, 92)<<endl;
     gotoxy(mines->x, mines->y + 2);
-    printf("%c%c%c%c%c%c", 96, 45, 45, 45, 45, 39);
+    cout<<("%c%c%c%c%c%c", 96, 45, 45, 45, 45, 39)<<endl;
 }
 
 void MoveMines(Mines *mines)
 {
     gotoxy(mines->x, mines->y);
-    printf("      ");
+    cout<<("      ")<<endl;
     gotoxy(mines->x, mines->y + 1);
-    printf("      ");
+    cout<<("      ")<<endl;
     gotoxy(mines->x, mines->y + 2);
-    printf("      ");
+    cout<<("      ")<<endl;
     mines->x--;
     if (mines->x <= 5)
     {
