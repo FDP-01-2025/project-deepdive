@@ -1,9 +1,7 @@
 #ifndef FISH_H_INCLUDED
 #define FISH_CURSOR_H_INCLUDED
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "../headers/move_cursor.h"
+#include "../headers/position.h"
 #include "../headers/submarine.h"
 
 typedef struct
@@ -44,7 +42,7 @@ void MoveFish(Fish *fish)
 /*Se declara el espacio que ocupa el submarino en "x" y "y", si la posición de "x" y "y"
 coinciden, se detecta un impacto, se reduce la salud del submarino y los obstáculos vuelven a su posición
 inicial.*/
-void collision_fish(Fish *fish, Submarine *submarine)
+void CollisionFish(Fish *fish, Submarine *submarine)
 {
     if (fish->x >= submarine->x && fish->x <= submarine->x + 11 && fish->y >= submarine->y && fish->y <= submarine->y + 3)
     {

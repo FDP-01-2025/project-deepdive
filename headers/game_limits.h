@@ -1,11 +1,11 @@
 #ifndef GAME_LIMITS_H_INCLUDED
 #define GAME_LIMITS_H_INCLUDED
-#include <stdio.h>
-#include "../headers/move_cursor.h"
+#include "../headers/position.h"
 
 /*Pinta los límites del escenario de juego*/
 void GameLimits()
 {
+    //Parte orizontal
     for (int i = 2; i < 120; i++)
     {
         gotoxy(i, 2);
@@ -13,6 +13,8 @@ void GameLimits()
         gotoxy(i, 28);
         printf("%c", 205);
     }
+
+    //Parte vertical
     for (int j = 2; j < 28; j++)
     {
         gotoxy(2, j);
@@ -21,6 +23,7 @@ void GameLimits()
         printf("%c", 186);
     }
 
+    //Esquinas
     gotoxy(2, 2);
     printf("%c", 201);
     gotoxy(119, 2);
