@@ -67,19 +67,19 @@ void DestroySubmarine(Submarine *submarine)
     {
         DeleteSubmarine(submarine);
         gotoxy(submarine->x, submarine->y);
-        cout << (" * * * * ");
+        cout << (" * * * * ")<<endl;
         gotoxy(submarine->x, submarine->y + 1);
-        cout << ("********");
+        cout << ("********")<<endl;
         gotoxy(submarine->x, submarine->y + 2);
-        cout << (" * * * * ");
+        cout << (" * * * * ")<<endl;
         Sleep(350);
         DeleteSubmarine(submarine);
         gotoxy(submarine->x, submarine->y);
-        cout << ("*    *");
+        cout << ("*    *")<<endl;
         gotoxy(submarine->x, submarine->y + 1);
-        cout << (" * * * * ");
+        cout << (" * * * * ")<<endl;
         gotoxy(submarine->x, submarine->y + 2);
-        cout << ("*    *");
+        cout << ("*    *")<<endl;
         Sleep(350);
         DeleteSubmarine(submarine);
         submarine->lifes--;

@@ -13,20 +13,20 @@ typedef struct
 void PaintFish(Fish *fish)
 {
     gotoxy(fish->x, fish->y);
-    printf("<0)))><");
+    cout<<("<0)))><")<<endl;
 }
 
 // Borra la forma del pescado
 void DeleteFish(Fish *fish)
 {
     gotoxy(fish->x, fish->y);
-    printf("        ");
+    cout<<("        ")<<endl;
 }
 
 void MoveFish(Fish *fish)
 {
     gotoxy(fish->x, fish->y);
-    printf("        ");
+    cout<<("        ")<<endl;
     /*Se asigna una posición inicial del pescado en x, y se genera una posición aleatoria en y.
     La posición del pescado va decreciendo en x, hasta llegar a la posición 5 en x,
     y luego se vuelve a ejecutar el mismo proceso.*/
