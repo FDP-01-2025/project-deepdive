@@ -92,10 +92,5 @@ int main()
         Sleep(5);
     } while (submarine.lifes > 0);
 
-    //Holiwis i love u so much, muacks, muacks (att.Yukio)
-    //mondongoooooo
-    //buenasoa
-    //hola, soy el mejor programador del mundo, y te amo mucho, holiwiis
-
     return 0;
 }
