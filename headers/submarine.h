@@ -1,6 +1,10 @@
 #ifndef SUBMARINE_H_INCLUDED
 #define SUBMARINE_H_INCLUDED
+
+#include <iostream> // Asegúrate de tenerlo si no está en position.h
+#include <windows.h>
 #include "../headers/position.h"
+using namespace std;
 
 // Se definen las teclas A, W, S, D en mayúsculas y minúsculas
 #define UP 87
@@ -18,68 +22,67 @@ typedef struct
     int x, y, heart, lifes;
 } Submarine;
 
-/*Pinta al submarino con caracteres del código ASCII*/
+/* Pinta al submarino con caracteres del código ASCII */
 void PaintSubmarine(Submarine *submarine)
 {
     gotoxy(submarine->x, submarine->y);
-    cout << ("       %c%c", 95, 218) << endl;
+    cout << "       " << (char)95 << (char)218;
     gotoxy(submarine->x, submarine->y + 1);
-    cout << (" %c%c%c%c%c%c%c%c%c%c", 126, 42, 95, 95, 95, 47, 111, 111, 92, 95) << endl;
+    cout << ' ' << (char)126 << (char)42 << (char)95 << (char)95 << (char)95
+         << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
     gotoxy(submarine->x, submarine->y + 2);
-    cout << ("  %c%c%c%c%c%c%c%c%c%c", 40, 95, 95, 95, 95, 95, 95, 95, 95, 41) << endl;
+    cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95
+         << (char)95 << (char)95 << (char)95 << (char)95 << (char)41;
 }
 
-/*Borra al submarino en cada desplazamiento*/
+/* Borra al submarino en cada desplazamiento */
 void DeleteSubmarine(Submarine *submarine)
 {
     gotoxy(submarine->x, submarine->y);
-    cout << ("         ") << endl;
+    cout << "         ";
     gotoxy(submarine->x, submarine->y + 1);
-    cout << ("           ") << endl;
+    cout << "           ";
     gotoxy(submarine->x, submarine->y + 2);
-    cout << ("            ") << endl;
+    cout << "            ";
 }
 
-/*Pinta la vida y los corazones del submarino*/
+/* Pinta la vida y los corazones del submarino */
 void PaintHearts(Submarine *submarine)
 {
     gotoxy(80, 1);
-    cout << ("Vidas %d", submarine->lifes) << endl;
+    cout << "Vidas " << submarine->lifes;
     gotoxy(100, 1);
-    cout << ("Salud") << endl;
+    cout << "Salud";
     gotoxy(110, 1);
-    cout << ("     ") << endl;
+    cout << "     ";
 
     for (int i = 0; i < submarine->heart; i++)
     {
         gotoxy(110 + i, 1);
-        cout << ("%c", 223) << endl;
+        cout << (char)223;
     }
 }
 
-/*Se valida si los corazones del submarino son igual a 0,
-en caso que sí, se pinta la exploción del submarino.
-Para dar el efecto de movimiento, se realizan distintas animaciones con un intervalo de tiempo
-para cada una.*/
+/* Si los corazones del submarino llegan a 0, se pinta una explosión animada */
 void DestroySubmarine(Submarine *submarine)
 {
     if (submarine->heart == 0)
     {
         DeleteSubmarine(submarine);
         gotoxy(submarine->x, submarine->y);
-        cout << (" * * * * ")<<endl;
+        cout << " * * * * ";
         gotoxy(submarine->x, submarine->y + 1);
-        cout << ("********")<<endl;
+        cout << "********";
         gotoxy(submarine->x, submarine->y + 2);
-        cout << (" * * * * ")<<endl;
+        cout << " * * * * ";
         Sleep(350);
         DeleteSubmarine(submarine);
         gotoxy(submarine->x, submarine->y);
-        cout << ("*    *")<<endl;
+        cout << "*    *";
         gotoxy(submarine->x, submarine->y + 1);
-        cout << (" * * * * ")<<endl;
+        cout << " * * * * ";
         gotoxy(submarine->x, submarine->y + 2);
-        cout << ("*    *")<<endl;
+        cout << "*    *";
         Sleep(350);
         DeleteSubmarine(submarine);
         submarine->lifes--;
@@ -89,24 +92,21 @@ void DestroySubmarine(Submarine *submarine)
     }
 }
 
+/* Movimiento del submarino en base a las teclas presionadas */
 void MoveSubmarine(char tecla, Submarine *submarine)
 {
-    gotoxy(submarine->x, submarine->y);
     DeleteSubmarine(submarine);
 
-    /*Valida cada tecla presionada, para desplazar al submarino
-    en los ejes "x" y "y", y se añade un límite para no salirse del escenario*/
-
-    if (tecla == LEFT || tecla == LEFTlc && submarine->x > 3)
+    if ((tecla == LEFT || tecla == LEFTlc) && submarine->x > 3)
         submarine->x--;
-    if (tecla == RIGHT || tecla == RIGHTlc && submarine->x < 106)
+    if ((tecla == RIGHT || tecla == RIGHTlc) && submarine->x < 106)
         submarine->x++;
-    if (tecla == UP || tecla == UPlc && submarine->y > 3)
+    if ((tecla == UP || tecla == UPlc) && submarine->y > 3)
         submarine->y--;
-    if (tecla == DOWN || tecla == DOWNlc && submarine->y < 25)
+    if ((tecla == DOWN || tecla == DOWNlc) && submarine->y < 25)
         submarine->y++;
-    gotoxy(submarine->x, submarine->y);
 
     PaintSubmarine(submarine);
 }
+
 #endif
