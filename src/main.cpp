@@ -10,7 +10,6 @@ using namespace std;
 int main()
 {
     int num_fishes;
-    system("mode con: cols=120 lines=30");
     GameLimits(); // LLamada a funciones para pintar el escenario, y ocultar el cursor
     HideCursor();
 
