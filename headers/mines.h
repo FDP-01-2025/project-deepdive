@@ -33,7 +33,7 @@ void MoveMines(Mines *mines)
     if (mines->x <= 5)
     {
         mines->x = 110;
-        // mines->y; ← Esto no tiene ningún efecto, puedes eliminar esta línea
+        mines->y = rand() % 20 + 3;
     }
 
     PaintMines(mines);

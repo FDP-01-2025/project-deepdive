@@ -34,7 +34,7 @@ void MoveFish(Fish *fish)
     if (fish->x <= 5)
     {
         fish->x = 110;
-        fish->y = rand() % 20 + 3;
+        fish->y = rand() % 25 + 3;
     }
     PaintFish(fish);
 }
