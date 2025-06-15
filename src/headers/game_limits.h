@@ -1,7 +1,6 @@
 #ifndef GAME_LIMITS_H_INCLUDED
 #define GAME_LIMITS_H_INCLUDED
-
-#include <iostream> // Asegúrate de incluir esto si no está en position.h
+#include "../libraries/libraries.h"
 #include "position.h"
 
 using namespace std;
