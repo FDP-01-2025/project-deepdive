@@ -2,7 +2,7 @@
 #define GAME_LIMITS_H_INCLUDED
 
 #include <iostream> // Asegúrate de incluir esto si no está en position.h
-#include "../headers/position.h"
+#include "position.h"
 
 using namespace std;
 /* Pinta los límites del escenario de juego */

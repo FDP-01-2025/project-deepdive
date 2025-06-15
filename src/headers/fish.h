@@ -1,8 +1,8 @@
 #ifndef FISH_H_INCLUDED
 #define FISH_CURSOR_H_INCLUDED
 
-#include "../headers/position.h"
-#include "../headers/submarine.h"
+#include "position.h"
+#include "submarine.h"
 
 typedef struct
 {

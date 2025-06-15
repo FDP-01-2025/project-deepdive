@@ -3,13 +3,13 @@
 #define MAX_MISSILES 100
 
 // Llamada de bibliotecas para acceder a sus funciones.
-#include "../headers/position.h"
-#include "../headers/hide_cursor.h"
-#include "../headers/game_limits.h"
-#include "../headers/submarine.h"
-#include "../headers/fish.h"
-#include "../headers/mines.h"
-#include "../headers/missiles.h"
+#include "headers/position.h"
+#include "headers/hide_cursor.h"
+#include "headers/game_limits.h"
+#include "headers/submarine.h"
+#include "headers/fish.h"
+#include "headers/mines.h"
+#include "headers/missiles.h"
 
 using namespace std;
 
