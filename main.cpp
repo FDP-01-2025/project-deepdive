@@ -1,11 +1,12 @@
 #include "src/game_processes.h"
+#include "src/headers/menu.h"
+
 using namespace std;
 int main()
 {
+    menu();
     HideCursor();
-    GameLimits();
-    InitGame();
-    GameLoop();
+
     
     return 0;
 }
