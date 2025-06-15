@@ -2,7 +2,7 @@
 #define MINES_H_INCLUDED
 
 #include <iostream> // Asegúrate de que esté incluido si no lo está en position.h
-#include "../headers/position.h"
+#include "position.h"
 using namespace std;
 
 typedef struct
@@ -33,7 +33,6 @@ void MoveMines(Mines *mines)
     if (mines->x <= 5)
     {
         mines->x = 110;
-        mines->y = rand() % 20 + 3;
     }
 
     PaintMines(mines);

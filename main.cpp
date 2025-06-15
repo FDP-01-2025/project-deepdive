@@ -1,4 +1,4 @@
-#include "../src/game_processes.h"
+#include "src/game_processes.h"
 using namespace std;
 int main()
 {

@@ -3,7 +3,7 @@
 
 #include <iostream> // Asegúrate de tenerlo si no está en position.h
 #include <windows.h>
-#include "../headers/position.h"
+#include "position.h"
 using namespace std;
 
 // Se definen las teclas A, W, S, D en mayúsculas y minúsculas

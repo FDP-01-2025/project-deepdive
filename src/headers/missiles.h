@@ -1,6 +1,6 @@
 #ifndef MISSILES_H_INCLUDED
 #define MISSILES_H_INCLUDED
-#include "../headers/position.h"
+#include "position.h"
 
 typedef struct
 {
