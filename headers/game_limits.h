@@ -3,8 +3,8 @@
 
 #include <iostream> // Asegúrate de incluir esto si no está en position.h
 #include "../headers/position.h"
-using namespace std;
 
+using namespace std;
 /* Pinta los límites del escenario de juego */
 void GameLimits()
 {
