@@ -1,7 +1,8 @@
 #ifndef GAME_TIME_H
 #define GAME_TIME_H
-#include "../libraries/libraries.h"
-using namespace std;
+#include <chrono> //Permite trabajar con el tiempo.
+#include <fstream> //Permite crear archivos .txt.
+
 void SaveGameTimeToFile(long long seconds, const string &filename = "db_deepdive.txt")
 {
     ofstream archivo(filename);

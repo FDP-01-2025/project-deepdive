@@ -1,13 +1,12 @@
 #ifndef MENU_H
 #define MENU_H
-#include "../libraries/libraries.h"
-#include "../game_processes.h"
-using namespace std;
+#include "../levels/survival_mode.h"
+#include "../levels/test_level.h"
 
-int option;
-
-void menu()
+void Menu()
 {
+    int option;
+
     do
     {
         cout << "======================" << endl;
@@ -29,8 +28,9 @@ void menu()
         case 1:
             cout << "Starting Level 1 - Easy...\n";
             GameLimits();
-            InitGame();
-            GameLoop();
+            HideCursor();
+            InitGameSurvivalMode();
+            GameLoopSurvivalMode();
 
             // Limpia pantalla
             #ifdef _WIN32
@@ -58,10 +58,10 @@ void menu()
 
         case 2:
             cout << "Starting Level 2 - Hard...\n";
-            // Aquí puedes implementar el inicio de level 2
-            // Por ejemplo:
-            // InitLevel2();
-            // GameLoopHard();
+            GameLimits();
+            HideCursor();
+            InitGameTL();
+            GameLoopTL();
 
             // Limpia pantalla
             #ifdef _WIN32
