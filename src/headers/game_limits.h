@@ -1,7 +1,7 @@
 #ifndef GAME_LIMITS_H_INCLUDED
 #define GAME_LIMITS_H_INCLUDED
-#include "../libraries/libraries.h"
 #include "position.h"
+#include <iostream>
 
 using namespace std;
 /* Pinta los límites del escenario de juego */

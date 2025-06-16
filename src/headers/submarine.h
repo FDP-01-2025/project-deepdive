@@ -1,7 +1,7 @@
 #ifndef SUBMARINE_H_INCLUDED
 #define SUBMARINE_H_INCLUDED
 
-#include <iostream> // Asegúrate de tenerlo si no está en position.h
+#include <iostream> 
 #include <windows.h>
 #include "position.h"
 using namespace std;
