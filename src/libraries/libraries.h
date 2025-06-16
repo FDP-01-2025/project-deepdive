@@ -5,5 +5,5 @@
 #include <conio.h>   //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 #include <iostream>
 #include <chrono> //Permite trabajar con el tiempo.
-#include <fstream> //Permite crear archivos .txt.
+#include <fstream> //Permite crear archivos .txt
 #endif
