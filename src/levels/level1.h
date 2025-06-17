@@ -11,8 +11,8 @@ static int level1_num_fishes;
 static void InitGamelevel1Mode()
 {
     level1Submarine = {5, 15, 1, 3};
-    PaintSubmarine(&level1Submarine);
-    PaintHearts(&level1Submarine);
+    PaintSubmarine(level1Submarine);
+    PaintHearts(level1Submarine);
 
     level1Fishes[0] = {80, 3};
     level1Fishes[1] = {90, 10};
@@ -29,13 +29,13 @@ static void GameLooplevel1Mode()
         if (kbhit())
         {
             char tecla = getch();
-            MoveSubmarine(tecla, &level1Submarine);
+            MoveSubmarine(tecla, level1Submarine);
         }
 
         for (int i = 0; i < level1_num_fishes; i++)
         {
-            MoveFish(&level1Fishes[i]);
-            CollisionFish(&level1Fishes[i], &level1Submarine);
+            MoveFish(level1Fishes[i]);
+            CollisionFish(level1Fishes[i], level1Submarine);
         }
         Sleep(5);
 
