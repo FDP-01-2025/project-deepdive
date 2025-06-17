@@ -1,6 +1,7 @@
 #ifndef MISSILES_H_INCLUDED
 #define MISSILES_H_INCLUDED
 #include "position.h"
+#include <iostream>
 
 typedef struct
 {
@@ -10,12 +11,12 @@ typedef struct
 void MoveMissil(Missiles &missiles)
 {
     gotoxy(missiles.x, missiles.y);
-    cout<<(" ")<<endl;
+    std::cout << (" ") << "\n";
     if (missiles.x < 115)
     {
         missiles.x++;
         gotoxy(missiles.x, missiles.y);
-        cout<<("->")<<endl;
+        std::cout << ("->") << "\n";
     }
 }
 

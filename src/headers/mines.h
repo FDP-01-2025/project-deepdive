@@ -3,7 +3,6 @@
 
 #include <iostream> // Asegúrate de que esté incluido si no lo está en position.h
 #include "position.h"
-using namespace std;
 
 typedef struct
 {
@@ -13,21 +12,21 @@ typedef struct
 void PaintMines(Mines &mines)
 {
     gotoxy(mines.x, mines.y);
-    cout << ' ' << (char)46 << (char)45 << (char)45 << (char)46 << ' ';
+    std::cout << ' ' << (char)46 << (char)45 << (char)45 << (char)46 << ' ';
     gotoxy(mines.x, mines.y + 1);
-    cout << (char)47 << ' ' << (char)88 << (char)88 << ' ' << (char)92;
+    std::cout << (char)47 << ' ' << (char)88 << (char)88 << ' ' << (char)92;
     gotoxy(mines.x, mines.y + 2);
-    cout << (char)96 << (char)45 << (char)45 << (char)45 << (char)45 << (char)39;
+    std::cout << (char)96 << (char)45 << (char)45 << (char)45 << (char)45 << (char)39;
 }
 
 void MoveMines(Mines &mines)
 {
     gotoxy(mines.x, mines.y);
-    cout << "      ";
+    std::cout << "      ";
     gotoxy(mines.x, mines.y + 1);
-    cout << "      ";
+    std::cout << "      ";
     gotoxy(mines.x, mines.y + 2);
-    cout << "      ";
+    std::cout << "      ";
 
     mines.x--;
     if (mines.x <= 5)
