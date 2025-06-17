@@ -1,5 +1,5 @@
-#ifndef GAME_TIME_H
-#define GAME_TIME_H
+#ifndef GAME_TIME_H_INCLUDED
+#define GAME_TIME_H_INCLUDED
 #include <chrono> //Permite trabajar con el tiempo.
 #include <fstream> //Permite crear archivos .txt.
 

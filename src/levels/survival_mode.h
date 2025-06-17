@@ -1,7 +1,7 @@
-#ifndef SURVIVAL_MODE_H
-#define SURVIVAL_MODE_H
-#include "../headers/fish.h"
-#include "../headers/game_time.h"
+#ifndef SURVIVAL_MODE_H_INCLUDED
+#define SURVIVAL_MODE_H_INCLUDED
+#include "headers/fish.h"
+#include "headers/game_time.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
 using namespace std::chrono;
@@ -12,8 +12,8 @@ static int survival_num_fishes;
 static void InitGameSurvivalMode()
 {
     survivalSubmarine = {5, 15, 1, 3};
-    PaintSubmarine(&survivalSubmarine);
-    PaintHearts(&survivalSubmarine);
+    PaintSubmarine(survivalSubmarine);
+    PaintHearts(survivalSubmarine);
 
     survivalFishes[0] = {80, 3};
     survivalFishes[1] = {90, 10};
@@ -47,13 +47,13 @@ static void GameLoopSurvivalMode()
         if (kbhit())
         {
             char tecla = getch();
-            MoveSubmarine(tecla, &survivalSubmarine);
+            MoveSubmarine(tecla, survivalSubmarine);
         }
 
         for (int i = 0; i < survival_num_fishes; i++)
         {
-            MoveFish(&survivalFishes[i]);
-            CollisionFish(&survivalFishes[i], &survivalSubmarine);
+            MoveFish(survivalFishes[i]);
+            CollisionFish(survivalFishes[i], survivalSubmarine);
         }
         Sleep(5);
 
