@@ -4,8 +4,6 @@
 #include <iostream>
 #include <windows.h>
 #include "position.h"
-using namespace std;
-
 // Se definen las teclas A, W, S, D en mayúsculas y minúsculas
 #define UP 87
 #define DOWN 83
@@ -26,40 +24,40 @@ typedef struct
 void PaintSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    cout << "       " << (char)95 << (char)218;
+    std::cout << "       " << (char)95 << (char)218;
     gotoxy(submarine.x, submarine.y + 1);
-    cout << ' ' << (char)126 << (char)42 << (char)95 << (char)95 << (char)95
-         << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
+    std::cout << ' ' << (char)126 << (char)42 << (char)95 << (char)95 << (char)95
+              << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
     gotoxy(submarine.x, submarine.y + 2);
-    cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95
-         << (char)95 << (char)95 << (char)95 << (char)95 << (char)41;
+    std::cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95
+              << (char)95 << (char)95 << (char)95 << (char)95 << (char)41;
 }
 
 /* Borra al submarino en cada desplazamiento */
 void DeleteSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    cout << "         ";
+    std::cout << "         ";
     gotoxy(submarine.x, submarine.y + 1);
-    cout << "           ";
+    std::cout << "           ";
     gotoxy(submarine.x, submarine.y + 2);
-    cout << "            ";
+    std::cout << "            ";
 }
 
 /* Pinta la vida y los corazones del submarino */
 void PaintHearts(Submarine &submarine)
 {
     gotoxy(80, 1);
-    cout << "Vidas " << submarine.lifes;
+    std::cout << "Vidas " << submarine.lifes;
     gotoxy(100, 1);
-    cout << "Salud";
+    std::cout << "Salud";
     gotoxy(110, 1);
-    cout << "     ";
+    std::cout << "     ";
 
     for (int i = 0; i < submarine.heart; i++)
     {
         gotoxy(110 + i, 1);
-        cout << (char)223;
+        std::cout << (char)223;
     }
 }
 
@@ -70,19 +68,19 @@ void DestroySubmarine(Submarine &submarine)
     {
         DeleteSubmarine(submarine);
         gotoxy(submarine.x, submarine.y);
-        cout << " * * * * ";
+        std::cout << " * * * * ";
         gotoxy(submarine.x, submarine.y + 1);
-        cout << "********";
+        std::cout << "********";
         gotoxy(submarine.x, submarine.y + 2);
-        cout << " * * * * ";
+        std::cout << " * * * * ";
         Sleep(350);
         DeleteSubmarine(submarine);
         gotoxy(submarine.x, submarine.y);
-        cout << "*    *";
+        std::cout << "*    *";
         gotoxy(submarine.x, submarine.y + 1);
-        cout << " * * * * ";
+        std::cout << " * * * * ";
         gotoxy(submarine.x, submarine.y + 2);
-        cout << "*    *";
+        std::cout << "*    *";
         Sleep(350);
         DeleteSubmarine(submarine);
         submarine.lifes--;

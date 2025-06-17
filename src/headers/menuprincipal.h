@@ -8,12 +8,11 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
-using namespace std;
 
 // --- Arte ASCII del título ---
 const int TITLE_ROWS = 9;
 const int MENU_WIDTH  = 50;
-const string titleLines[TITLE_ROWS] = {
+const std::string titleLines[TITLE_ROWS] = {
     "██████╗  ███████╗  ███████╗ ██████╗       ██████╗   ██╗ ██╗   ██╗ ███████╗",
     "██╔══██╗ ██╔════╝  ██╔════╝ ██╔══██╗      ██╔══██╗  ██║ ██║   ██║ ██╔════╝",
     "██║  ██║ █████╗    █████╗   ██████╔╝      ██║  ██║  ██║ ██║   ██║ █████╗  ",
@@ -48,18 +47,18 @@ inline void drawTitle(int color) {
     setColor(color);
     for (int i = 0; i < TITLE_ROWS; ++i) {
         goTo(0, i);
-        cout << titleLines[i];
+        std::cout << titleLines[i];
     }
 }
 
 // Dibuja una opción
-inline void drawMenuOption(int row, bool selected, const string &text) {
+inline void drawMenuOption(int row, bool selected, const std::string &text) {
     int y = TITLE_ROWS + row;
     goTo(0, y);
     setColor(selected ? 14 : 7);
-    cout << (selected ? "➤ " : "  ")
+    std::cout << (selected ? "➤ " : "  ")
          << text
-         << string(max(0, MENU_WIDTH - int(text.size()) - 3), ' ');
+         << std::string(std::max(0, MENU_WIDTH - int(text.size()) - 3), ' ');
 }
 
 // Dibuja borde arriba y abajo del bloque de opciones
@@ -68,8 +67,8 @@ inline void MenuBorder(int linesHigh) {
     int yTop    = TITLE_ROWS - 2;
     int yBottom = TITLE_ROWS + linesHigh;
     for (int x = 0; x < MENU_WIDTH; ++x) {
-        goTo(x, yTop);    cout << ' ';
-        goTo(x, yBottom); cout << ' ';
+        goTo(x, yTop);    std::cout << ' ';
+        goTo(x, yBottom); std::cout << ' ';
     }
 }
 
@@ -79,14 +78,14 @@ inline void runMenu() {
     setlocale(LC_ALL, "es_ES.UTF-8");
     srand((unsigned)time(nullptr));
 
-    const string mainOpts[] = { "Start Game", "Options", "High Scores", "Exit" };
-    const string levelOpts[] = {
+    const std::string mainOpts[] = { "Start Game", "Options", "High Scores", "Exit" };
+    const std::string levelOpts[] = {
         "Nivel 1", "Nivel 2", "Nivel 3",
         "Nivel 4", "Nivel 5", "Regresar"
     };
     const int N_main  = sizeof(mainOpts)  / sizeof(mainOpts[0]);
     const int N_level = sizeof(levelOpts) / sizeof(levelOpts[0]);
-    const int linesHigh = max(N_main, N_level);
+    const int linesHigh = std::max(N_main, N_level);
 
     bool  inLevelMenu = false;
     int   selected    = 0;
@@ -128,7 +127,7 @@ inline void runMenu() {
                     continue;
 
                 // Repinta únicamente las dos opciones afectadas
-                const string* opts = inLevelMenu ? levelOpts : mainOpts;
+                const std::string* opts = inLevelMenu ? levelOpts : mainOpts;
                 drawMenuOption(prev,    false, opts[prev]);
                 drawMenuOption(selected, true,  opts[selected]);
             }
@@ -142,7 +141,7 @@ inline void runMenu() {
                         // Borra menú principal
                         for (int i = 0; i < N_main; ++i) {
                             goTo(0, TITLE_ROWS + i);
-                            cout << string(MENU_WIDTH, ' ');
+                            std::cout << std::string(MENU_WIDTH, ' ');
                         }
                         // Pinta submenú
                         for (int i = 0; i < N_level; ++i)
@@ -163,7 +162,7 @@ inline void runMenu() {
                         // Borra niveles
                         for (int i = 0; i < N_level; ++i) {
                             goTo(0, TITLE_ROWS + i);
-                            cout << string(MENU_WIDTH, ' ');
+                            std::cout << std::string(MENU_WIDTH, ' ');
                         }
                         // Vuelve a menú principal
                         for (int i = 0; i < N_main; ++i)
@@ -172,7 +171,7 @@ inline void runMenu() {
                         // Elegir nivel concreto
                         system("cls");
                         setColor(7);
-                        cout << "\nIniciando " << levelOpts[selected] << "...\n\n";
+                        std::cout << "\nIniciando " << levelOpts[selected] << "...\n\n";
                         system("pause");
                         // Regresa a principal
                         system("cls");
@@ -193,7 +192,7 @@ inline void runMenu() {
                     selected    = 0;
                     for (int i = 0; i < N_level; ++i) {
                         goTo(0, TITLE_ROWS + i);
-                        cout << string(MENU_WIDTH, ' ');
+                        std::cout << std::string(MENU_WIDTH, ' ');
                     }
                     for (int i = 0; i < N_main; ++i)
                         drawMenuOption(i, i == selected, mainOpts[i]);

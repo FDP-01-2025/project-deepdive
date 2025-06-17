@@ -3,6 +3,7 @@
 
 #include "position.h"
 #include "submarine.h"
+#include <iostream>
 
 typedef struct
 {
@@ -13,20 +14,20 @@ typedef struct
 void PaintFish(Fish &fish)
 {
     gotoxy(fish.x, fish.y);
-    cout << ("<0)))><") << endl;
+    std::cout << ("<0)))><") << "\n";
 }
 
 // Borra la forma del pescado
 void DeleteFish(Fish &fish)
 {
     gotoxy(fish.x, fish.y);
-    cout << ("        ") << endl;
+    std::cout << ("        ") << "\n";
 }
 
 void MoveFish(Fish &fish)
 {
     gotoxy(fish.x, fish.y);
-    cout << ("        ") << endl;
+    std::cout << ("        ") << "\n";
     /*Se asigna una posición inicial del pescado en x, y se genera una posición aleatoria en y.
     La posición del pescado va decreciendo en x, hasta llegar a la posición 5 en x,
     y luego se vuelve a ejecutar el mismo proceso.*/
