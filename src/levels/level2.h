@@ -9,7 +9,7 @@ static Fish level2Fishes[4];
 static int level2Numfishes;
 static pieces level2Pieces[1];
 static int level2NumPieces;
-
+//Numero de Piezas
 
 
 static void InitGamelevel2Mode()
