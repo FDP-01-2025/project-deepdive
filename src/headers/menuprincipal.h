@@ -5,11 +5,14 @@
 #include <windows.h>
 #include <conio.h>
 #include <string>
+#include <cstdlib>
 #include <ctime>
-
+#include <algorithm>
 using namespace std;
 
-const int TITLE_ROWS = 8;
+// --- Arte ASCII del título ---
+const int TITLE_ROWS = 9;
+const int MENU_WIDTH  = 50;
 const string titleLines[TITLE_ROWS] = {
     "██████╗  ███████╗  ███████╗ ██████╗       ██████╗   ██╗ ██╗   ██╗ ███████╗",
     "██╔══██╗ ██╔════╝  ██╔════╝ ██╔══██╗      ██╔══██╗  ██║ ██║   ██║ ██╔════╝",
@@ -21,27 +24,27 @@ const string titleLines[TITLE_ROWS] = {
     "                                                                       "
 };
 
-const string menuOptions[] = { "Start Game", "Options", "High Scores", "Exit" };
-const int numOptions = 4;
+// Handle de consola
+static HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-void goTo(int x, int y) {
+// Ubica el cursor
+inline void goTo(int x, int y) {
     COORD pos = { SHORT(x), SHORT(y) };
     SetConsoleCursorPosition(hConsole, pos);
 }
 
-void setColor(int fg) {
+// Cambia color de texto
+inline void setColor(int fg) {
     SetConsoleTextAttribute(hConsole, fg);
 }
 
-// Genera un color aleatorio
-int randomColor() {
+// Color aleatorio (1..15)
+inline int randomColor() {
     return rand() % 15 + 1;
 }
 
-// Dibuja el título con color aleatorio
-void drawTitle(int color) {
+// Dibuja título en su color
+inline void drawTitle(int color) {
     setColor(color);
     for (int i = 0; i < TITLE_ROWS; ++i) {
         goTo(0, i);
@@ -49,86 +52,159 @@ void drawTitle(int color) {
     }
 }
 
-// Dibuja una opción del menú
-void drawMenuOption(int row, bool selected) {
+// Dibuja una opción
+inline void drawMenuOption(int row, bool selected, const string &text) {
     int y = TITLE_ROWS + row;
     goTo(0, y);
     setColor(selected ? 14 : 7);
-    cout << (selected ? "➤ " : "  ") << menuOptions[row];
-    cout << string(50 - menuOptions[row].size(), ' '); // Limpia línea
+    cout << (selected ? "➤ " : "  ")
+         << text
+         << string(max(0, MENU_WIDTH - int(text.size()) - 3), ' ');
 }
 
-void MenuBorder() {
-    int width = 50;
+// Dibuja borde arriba y abajo del bloque de opciones
+inline void MenuBorder(int linesHigh) {
     setColor(7);
-    for (int i = 0; i < width; ++i) {
-        goTo(i, TITLE_ROWS - 1);
-        cout << "-";
-        goTo(i, TITLE_ROWS + numOptions);
-        cout << "-";
+    int yTop    = TITLE_ROWS - 2;
+    int yBottom = TITLE_ROWS + linesHigh;
+    for (int x = 0; x < MENU_WIDTH; ++x) {
+        goTo(x, yTop);    cout << ' ';
+        goTo(x, yBottom); cout << ' ';
     }
 }
 
-// **Función principal del menú**
-void runMenu() {
+// Ejecuta menú principal y submenú de niveles
+inline void runMenu() {
     system("chcp 65001 > nul");
     setlocale(LC_ALL, "es_ES.UTF-8");
     srand((unsigned)time(nullptr));
 
+    const string mainOpts[] = { "Start Game", "Options", "High Scores", "Exit" };
+    const string levelOpts[] = {
+        "Nivel 1", "Nivel 2", "Nivel 3",
+        "Nivel 4", "Nivel 5", "Regresar"
+    };
+    const int N_main  = sizeof(mainOpts)  / sizeof(mainOpts[0]);
+    const int N_level = sizeof(levelOpts) / sizeof(levelOpts[0]);
+    const int linesHigh = max(N_main, N_level);
+
+    bool  inLevelMenu = false;
+    int   selected    = 0;
+    int   titleColor  = randomColor();
+    DWORD lastTitle   = GetTickCount();
+
+    // Dibujo inicial
     system("cls");
-    int titleColor = randomColor();
     drawTitle(titleColor);
-    for (int i = 0; i < numOptions; ++i)
-        drawMenuOption(i, i == 0);
+    MenuBorder(linesHigh);
+    for (int i = 0; i < N_main; ++i)
+        drawMenuOption(i, i == selected, mainOpts[i]);
 
-    MenuBorder();
-
-    int selected = 0;
-
+    // Bucle principal
     while (true) {
+        // 1) Actualizar color del título cada 1s
+        DWORD now = GetTickCount();
+        if (now - lastTitle >= 1000) {
+            titleColor = randomColor();
+            drawTitle(titleColor);
+            lastTitle = now;
+        }
+
+        // 2) Gestionar entrada de usuario
         if (_kbhit()) {
             int key = _getch();
+
+            // Flechas
             if (key == 0 || key == 224) {
                 key = _getch();
                 int prev = selected;
-                if (key == 72)        // Flecha arriba
-                    selected = (selected + numOptions - 1) % numOptions;
-                else if (key == 80)   // Flecha abajo
-                    selected = (selected + 1) % numOptions;
-                if (prev != selected) {
-                    drawMenuOption(prev, false);
-                    drawMenuOption(selected, true);
-                }
+                int N    = inLevelMenu ? N_level : N_main;
+
+                if (key == 72)       // ↑
+                    selected = (selected + N - 1) % N;
+                else if (key == 80)  // ↓
+                    selected = (selected + 1)     % N;
+                else
+                    continue;
+
+                // Repinta únicamente las dos opciones afectadas
+                const string* opts = inLevelMenu ? levelOpts : mainOpts;
+                drawMenuOption(prev,    false, opts[prev]);
+                drawMenuOption(selected, true,  opts[selected]);
             }
-            else if (key == 13) {    // Enter
-                system("cls");
-                setColor(7);
-                cout << "\n>>> " << menuOptions[selected] << " <<<\n\n";
-                switch (selected) {
-                    case 0: cout << "Iniciando el juego...\n";   break;
-                    case 1: cout << "Abriendo configuración...\n"; break;
-                    case 2: cout << "Mostrando puntajes altos...\n"; break;
-                    case 3:
-                        cout << "Saliendo...\n";
-                        Sleep(1000);
+            // Enter
+            else if (key == 13) {
+                if (!inLevelMenu) {
+                    if (selected == 0) {
+                        // Entrar a niveles
+                        inLevelMenu = true;
+                        selected    = 0;
+                        // Borra menú principal
+                        for (int i = 0; i < N_main; ++i) {
+                            goTo(0, TITLE_ROWS + i);
+                            cout << string(MENU_WIDTH, ' ');
+                        }
+                        // Pinta submenú
+                        for (int i = 0; i < N_level; ++i)
+                            drawMenuOption(i, i == selected, levelOpts[i]);
+                    }
+                    else if (selected == 3) {
+                        // Salir
                         return;
+                    }
+                    // Aquí: Options(1) y High Scores(2)
                 }
-                system("pause");
-                system("cls");
-                drawTitle(titleColor);
-                for (int i = 0; i < numOptions; ++i)
-                    drawMenuOption(i, i == selected);
+                else {
+                    // Dentro de niveles
+                    if (selected == N_level - 1) {
+                        // Regresar
+                        inLevelMenu = false;
+                        selected    = 0;
+                        // Borra niveles
+                        for (int i = 0; i < N_level; ++i) {
+                            goTo(0, TITLE_ROWS + i);
+                            cout << string(MENU_WIDTH, ' ');
+                        }
+                        // Vuelve a menú principal
+                        for (int i = 0; i < N_main; ++i)
+                            drawMenuOption(i, i == selected, mainOpts[i]);
+                    } else {
+                        // Elegir nivel concreto
+                        system("cls");
+                        setColor(7);
+                        cout << "\nIniciando " << levelOpts[selected] << "...\n\n";
+                        system("pause");
+                        // Regresa a principal
+                        system("cls");
+                        drawTitle(titleColor);
+                        MenuBorder(linesHigh);
+                        inLevelMenu = false;
+                        selected    = 0;
+                        for (int i = 0; i < N_main; ++i)
+                            drawMenuOption(i, i == selected, mainOpts[i]);
+                    }
+                }
             }
-            else if (key == 27) {    // Escape
-                goTo(0, TITLE_ROWS + numOptions + 2);
-                setColor(7);
-                cout << "Saliendo...\n";
-                Sleep(500);
-                return;
+            // Escape
+            else if (key == 27) {
+                if (inLevelMenu) {
+                    // Regresar a principal
+                    inLevelMenu = false;
+                    selected    = 0;
+                    for (int i = 0; i < N_level; ++i) {
+                        goTo(0, TITLE_ROWS + i);
+                        cout << string(MENU_WIDTH, ' ');
+                    }
+                    for (int i = 0; i < N_main; ++i)
+                        drawMenuOption(i, i == selected, mainOpts[i]);
+                } else {
+                    return;
+                }
             }
         }
+
         Sleep(20);
     }
 }
 
-#endif
+#endif // MENUPRINCIPAL_H
