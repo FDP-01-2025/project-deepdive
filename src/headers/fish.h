@@ -1,5 +1,5 @@
-#ifndef FISH_H_INCLUDED
-#define FISH_CURSOR_H_INCLUDED
+#ifndef FISH_H
+#define FISH_H
 
 #include "position.h"
 #include "submarine.h"
