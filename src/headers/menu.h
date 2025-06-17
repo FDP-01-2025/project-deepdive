@@ -1,10 +1,8 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef MENU_H_INCLUDED
+#define MENU_H_INCLUDED
 #include "../levels/survival_mode.h"
 #include "../levels/test_level.h"
-#include "../levels/level2.h"
-#include "../levels/level3.h"
-//fALTA 4 y 5 + el survival mode
+// fALTA 4 y 5 + el survival mode
 
 void Menu()
 {
@@ -17,15 +15,15 @@ void Menu()
         cout << "======================" << endl;
         cout << "1. Level 1 - Easy" << endl;
         cout << "2. Level 2 - Normal" << endl;
-        cout<<  "3. Level 3 - Hard"<<endl;
+        cout << "3. Level 3 - Hard" << endl;
         cout << "4. Exit" << endl;
-        cout << "Choose an option: "; 
+        cout << "Choose an option: ";
         cin >> option;
 
-        // Limpia la pantalla justo antes de ejecutar el case elegido
-        #ifdef _WIN32
+// Limpia la pantalla justo antes de ejecutar el case elegido
+#ifdef _WIN32
         system("cls"); // en Windows
-        #endif
+#endif
 
         switch (option)
         {
@@ -33,12 +31,12 @@ void Menu()
             cout << "Starting Level 1 - Easy...\n";
             GameLimits();
             HideCursor();
-            InitGameSurvivalMode();
-            GameLoopSurvivalMode();
-            // Limpia pantalla
-            #ifdef _WIN32
+            InitGameTL();
+            GameLoopTL();
+// Limpia pantalla
+#ifdef _WIN32
             system("cls");
-            #endif
+#endif
 
             // Muestra "GAME OVER"
             cout << "  GGGGG   AAA   MMM   MMM  EEEEE  " << endl;
@@ -52,28 +50,26 @@ void Menu()
             cin.ignore();
             cin.get();
 
-            // Limpia pantalla antes de volver al menu
-            #ifdef _WIN32
+// Limpia pantalla antes de volver al menu
+#ifdef _WIN32
             system("cls");
-            #endif
+#endif
 
             break;
-
-        
 
         case 2:
             cout << "Starting Level 2 - Hard...\n";
             GameLimits();
             HideCursor();
-            InitGamelevel2();
-            GameLooplevel2();
+            InitGameSurvivalMode();
+            GameLoopSurvivalMode();
 
-            // Limpia pantalla
-            #ifdef _WIN32
+// Limpia pantalla
+#ifdef _WIN32
             system("cls");
-            #else
+#else
             system("clear");
-            #endif
+#endif
 
             cout << "  GGGGG   AAA   MMM   MMM  EEEEE  " << endl;
             cout << " G       A   A  M M M M   E      " << endl;
@@ -86,53 +82,13 @@ void Menu()
             cin.ignore();
             cin.get();
 
-            // Limpia pantalla antes de volver al menu
-            #ifdef _WIN32
+// Limpia pantalla antes de volver al menu
+#ifdef _WIN32
             system("cls");
-            #else
+#else
             system("clear");
-            #endif
+#endif
 
-            break;
-
-        case 3:
-            cout << "Starting Level 3- Hard...\n";
-            GameLimits();
-            HideCursor();
-            InitGamelevel3();
-            GameLooplevel3();
-
-            // Limpia pantalla
-            #ifdef _WIN32
-            system("cls");
-            #else
-            system("clear");
-            #endif
-
-            cout << "  GGGGG   AAA   MMM   MMM  EEEEE  " << endl;
-            cout << " G       A   A  M M M M   E      " << endl;
-            cout << " G  GG  AAAAA   M  M  M   EEEE   " << endl;
-            cout << " G   G  A   A   M     M   E      " << endl;
-            cout << "  GGGGG  A   A  M     M   EEEEE  " << endl;
-            cout << endl;
-            cout << "          GAME OVER!  " << endl;
-            cout << "    Press ENTER to return to menu...";
-            cin.ignore();
-            cin.get();
-
-            // Limpia pantalla antes de volver al menu
-            #ifdef _WIN32
-            system("cls");
-            #else
-            system("clear");
-            #endif
-
-            break;
-            
-            //Faltan case para otros niveles/////////////////////////////////
-            //
-        case 4:
-            cout << "Exiting game. Goodbye!\n";
             break;
 
         default:
@@ -140,7 +96,7 @@ void Menu()
         }
         cout << endl;
 
-    } while (option != 3);
+    } while (option != 4);
 }
 
 #endif

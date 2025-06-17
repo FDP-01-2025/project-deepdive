@@ -1,14 +1,15 @@
-#ifndef TEST_LEVEL_H
-#define TEST_LEVEL_H
+#ifndef TEST_LEVEL_H_INCLUDED
+#define TEST_LEVEL_H_INCLUDED
 #define MAX_MISSILES 100
 
 // Llamada de bibliotecas para acceder a sus funciones.
-#include "../headers/position.h"
-#include "../headers/hide_cursor.h"
-#include "../headers/game_limits.h"
-#include "../headers/submarine.h"
-#include "../headers/mines.h"
-#include "../headers/missiles.h"
+#include "headers/position.h"
+#include "headers/hide_cursor.h"
+#include "headers/game_limits.h"
+#include "headers/submarine.h"
+#include "headers/mines.h"
+#include "headers/missiles.h"
+#include "headers/fish.h"
 #include <conio.h>
 
 // Declaración de variables globales como estaticas, para que no den conflicto en múltiples inclusiones.
@@ -23,8 +24,8 @@ static int testLevelMissilesCout;
 static void InitGameTL()
 {
     testLevelSubmarine = {5, 15, 1, 3};
-    PaintSubmarine(&testLevelSubmarine);
-    PaintHearts(&testLevelSubmarine);
+    PaintSubmarine(testLevelSubmarine);
+    PaintHearts(testLevelSubmarine);
 
     testLevelFishes[0] = {90, 3};
     testLevelFishes[1] = {80, 12};
@@ -53,7 +54,7 @@ static void GameLoopTL()
                     testLevelMissilesCout++;
                 }
             }
-            MoveSubmarine(tecla, &testLevelSubmarine);
+            MoveSubmarine(tecla, testLevelSubmarine);
         }
 
         for (int i = 0; i < testLevelMissilesCout;)
@@ -100,12 +101,12 @@ static void GameLoopTL()
             }
         }
 
-        MoveMines(&testLevelMines1);
+        MoveMines(testLevelMines1);
 
         for (int i = 0; i < testLevelNumFishes; i++)
         {
-            MoveFish(&testLevelFishes[i]);
-            CollisionFish(&testLevelFishes[i], &testLevelSubmarine);
+            MoveFish(testLevelFishes[i]);
+            CollisionFish(testLevelFishes[i], testLevelSubmarine);
         }
 
         Sleep(5);
