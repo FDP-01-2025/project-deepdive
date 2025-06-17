@@ -1,6 +1,5 @@
 #ifndef LEVEL1_H
 #define LEVEL1_H
-using namespace std;
 #include "../headers/fish.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
