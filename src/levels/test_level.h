@@ -63,7 +63,7 @@ static void GameLoopTL()
             if (testLevelMissiles[i].x >= 115)
             {
                 gotoxy(testLevelMissiles[i].x, testLevelMissiles[i].y);
-                cout << ("  ") << endl;
+                std::cout << ("  ") << std::endl;
 
                 testLevelMissiles[i] = testLevelMissiles[testLevelMissilesCout - 1];
                 testLevelMissilesCout--;
@@ -83,13 +83,13 @@ static void GameLoopTL()
                 if ((testLevelMissiles[i].x == testLevelFishes[j].x || testLevelMissiles[i].x == testLevelFishes[j].x + 3 || testLevelMissiles[i].x == testLevelFishes[j].x + 6) && testLevelMissiles[i].y == testLevelFishes[j].y)
                 {
                     gotoxy(testLevelMissiles[i].x, testLevelMissiles[i].y);
-                    cout << ("  ") << endl;
+                    std::cout << ("  ") << std::endl;
                     testLevelMissiles[i] = testLevelMissiles[testLevelMissilesCout - 1];
                     testLevelMissilesCout--;
                     erasedMissil = true;
 
                     gotoxy(testLevelFishes[j].x, testLevelFishes[j].y);
-                    cout << ("         ") << endl;
+                    std::cout << ("         ") << std::endl;
                     testLevelFishes[j].x = 110;
                     testLevelFishes[j].y = rand() % 20 + 3;
                     break;
