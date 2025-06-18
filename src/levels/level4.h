@@ -47,7 +47,7 @@ static void GameLoopLevel4()
         if (kbhit())
         {
             char tecla = getch();
-            if (tecla == 112 || tecla == 80)
+            if (tecla == 32)
             {
                 if (level4MissilesCout < MAX_MISSILES)
                 {
@@ -111,7 +111,6 @@ static void GameLoopLevel4()
             CollisionFish(level4Fishes[i], level4Submarine);
         }
 
-        Sleep(5);
     } while (level4Submarine.lifes > 0);
 }
 
