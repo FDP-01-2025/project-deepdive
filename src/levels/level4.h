@@ -14,7 +14,7 @@
 
 // Declaración de variables globales como estaticas, para que no den conflicto en múltiples inclusiones.
 static Submarine level4Submarine;
-static Fish level4Fishes[5];
+static Fish level4Fishes[3];
 static int level4NumFishes;
 
 static Missiles level4Missiles[MAX_MISSILES];
@@ -30,10 +30,8 @@ static void InitGameLevel4()
     level4Fishes[0] = {90, 3};
     level4Fishes[1] = {80, 12};
     level4Fishes[2] = {100, 17};
-    level4Fishes[3] = {110, 5};
-    level4Fishes[4] = {95, 20};
 
-    level4NumFishes = 5;
+    level4NumFishes = 3;
 
     level4MissilesCout = 0;
 }
@@ -111,6 +109,7 @@ static void GameLoopLevel4()
             CollisionFish(level4Fishes[i], level4Submarine);
         }
 
+        Sleep(5);
     } while (level4Submarine.lifes > 0);
 }
 
