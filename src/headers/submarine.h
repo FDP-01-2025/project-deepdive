@@ -24,33 +24,33 @@ typedef struct
 void PaintSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "       " << (char)95 << (char)218;
+    std::cout << "       " << (char)95 << (char)218 << "\n";
     gotoxy(submarine.x, submarine.y + 1);
     std::cout << ' ' << (char)126 << (char)42 << (char)95 << (char)95 << (char)95
-              << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
+              << (char)47 << (char)111 << (char)111 << (char)92 << (char)95 << "\n";
     gotoxy(submarine.x, submarine.y + 2);
     std::cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95
-              << (char)95 << (char)95 << (char)95 << (char)95 << (char)41;
+              << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\n";
 }
 
 /* Borra al submarino en cada desplazamiento */
 void DeleteSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "         ";
+    std::cout << "         " << "\n";
     gotoxy(submarine.x, submarine.y + 1);
-    std::cout << "           ";
+    std::cout << "           " << "\n";
     gotoxy(submarine.x, submarine.y + 2);
-    std::cout << "            ";
+    std::cout << "            " << "\n";
 }
 
 /* Pinta la vida y los corazones del submarino */
 void PaintHearts(Submarine &submarine)
 {
     gotoxy(80, 1);
-    std::cout << "Vidas " << submarine.lifes;
+    std::cout << "Lives" << submarine.lifes;
     gotoxy(100, 1);
-    std::cout << "Salud";
+    std::cout << "Health";
     gotoxy(110, 1);
     std::cout << "     ";
 
@@ -64,15 +64,12 @@ void PaintHearts(Submarine &submarine)
 void PaintOxygen(Submarine &submarine)
 {
     // Barra de Oxigeno
-    gotoxy(80, 2);
+    gotoxy(50, 1);
     std::cout << "Oxygen";
-    gotoxy(90, 2);
-    std::cout << "      ";
 
     for (int i = 0; i < submarine.oxygen; i++)
     {
-        gotoxy(90 + i, 2);
-        std::cout << (char)223;
+        std::cout << (char)178;
     }
 }
 
