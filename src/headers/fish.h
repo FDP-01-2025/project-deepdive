@@ -48,6 +48,7 @@ void CollisionFish(Fish &fish, Submarine &submarine)
     if (fish.x >= submarine.x && fish.x <= submarine.x + 11 && fish.y >= submarine.y && fish.y <= submarine.y + 3)
     {
         submarine.heart--;
+        CollisionSubmarine(submarine);
         DestroySubmarine(submarine);
         DeleteFish(fish);
         PaintSubmarine(submarine);
