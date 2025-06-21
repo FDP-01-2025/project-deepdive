@@ -41,7 +41,6 @@ static void GameLoopLevel4()
     do
     {
         HideCursor();
-        GameLimits();
         if (kbhit())
         {
             char tecla = getch();
@@ -101,15 +100,14 @@ static void GameLoopLevel4()
             }
         }
 
-        
-
         for (int i = 0; i < level4NumFishes; i++)
         {
             MoveFish(level4Fishes[i]);
             CollisionFish(level4Fishes[i], level4Submarine);
         }
 
-        Sleep(5);
+        Sleep(10);
+
     } while (level4Submarine.lifes > 0);
 }
 
