@@ -64,8 +64,8 @@ void PaintHearts(Submarine &submarine)
 void PaintOxygen(Submarine &submarine)
 {
     // Barra de Oxigeno
-    gotoxy(50, 1);
-    std::cout << "Oxygen";
+    gotoxy(40, 1);
+    std::cout << "Oxygen:";
 
     for (int i = 0; i < submarine.oxygen; i++)
     {
