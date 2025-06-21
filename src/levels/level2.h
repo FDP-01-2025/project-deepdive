@@ -3,7 +3,11 @@
 #include "../headers/fish.h"
 #include "../headers/pieces.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
+/*
+OBJETIVO DEL NIVEL 2: 
+-REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES 
 
+*/
 static Submarine level2Submarine;
 static Fish level2Fishes[4];
 static int level2Numfishes;
@@ -12,11 +16,12 @@ static int level2NumPieces;
 //Numero de Piezas
 
 
-static void InitGamelevel2Mode()
+static void InitGamelevel2()
 {
     level2Submarine = {5, 15, 1, 3};
     PaintSubmarine(level2Submarine);
     PaintHearts(level2Submarine);
+    PaintOxygen(level2Submarine);
 
     level2Fishes[0] = {80, 3};
     level2Fishes[1] = {90, 10};
@@ -29,7 +34,7 @@ static void InitGamelevel2Mode()
     
 }
 
-static void GameLooplevel2Mode()
+static void GameLooplevel2()
 {
     do
     {
@@ -50,7 +55,7 @@ static void GameLooplevel2Mode()
             Movepieces(level2Pieces[i]);
             Collisionpieces(level2Pieces[i], level2Submarine);
         }
-        Sleep(5);
+        Sleep(13);
 
     } while (level2Submarine.lifes > 0);
 }

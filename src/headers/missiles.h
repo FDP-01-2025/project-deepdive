@@ -16,7 +16,7 @@ void MoveMissil(Missiles &missiles)
     {
         missiles.x++;
         gotoxy(missiles.x, missiles.y);
-        std::cout << ("->") << "\n";
+        std::cout << ("=>") << "\n";
     }
 }
 

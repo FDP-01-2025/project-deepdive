@@ -17,14 +17,14 @@
 
 typedef struct
 {
-    int x, y, heart, lifes;
+    int x, y, heart, lifes, oxygen;
 } Submarine;
 
 /* Pinta al submarino con caracteres del código ASCII */
 void PaintSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "       " << (char)95 << (char)218;
+    std::cout << "       " << (char)95 << (char)218 << "\n";
     gotoxy(submarine.x, submarine.y + 1);
     std::cout << " " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
     gotoxy(submarine.x, submarine.y + 2);
@@ -35,11 +35,11 @@ void PaintSubmarine(Submarine &submarine)
 void DeleteSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "         ";
+    std::cout << "         " << "\n";
     gotoxy(submarine.x, submarine.y + 1);
-    std::cout << "           ";
+    std::cout << "           " << "\n";
     gotoxy(submarine.x, submarine.y + 2);
-    std::cout << "            ";
+    std::cout << "            " << "\n";
 }
 
 /* Pinta la vida y los corazones del submarino */
