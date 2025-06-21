@@ -14,9 +14,7 @@ typedef struct
 void Paintpieces(pieces &pieces)
 {
     gotoxy(pieces.x, pieces.y);
-    std::cout << (" /¤\\ ") << "\n";
-    std::cout << ("|¤¤¤|") << "\n";
-    std::cout << (" \\¤/ ") << "\n";
+    std::cout << ("(@)") << "\n";
 }
 
 // Borra la forma de la pieza
@@ -24,15 +22,11 @@ void Deletepieces(pieces &pieces)
 {
     gotoxy(pieces.x, pieces.y);
     std::cout << ("        ") << "\n";
-    std::cout << ("        ") << "\n";
-    std::cout << ("        ") << "\n";
 }
 
 void Movepieces(pieces &pieces)
 {
     gotoxy(pieces.x, pieces.y);
-    std::cout << ("        ") << "\n";
-    std::cout << ("        ") << "\n";
     std::cout << ("        ") << "\n";
     /*Se asigna una posición inicial de la pieza en x, y se genera una posición aleatoria en y.
     La posición de la pieza va decreciendo en x, hasta llegar a la posición 5 en x,
@@ -41,7 +35,7 @@ void Movepieces(pieces &pieces)
     if (pieces.x <= 5)
     {
         pieces.x = 110;
-        pieces.y = rand() % 25 + 3;
+        pieces.y = rand() % 10 + 2;
     }
     Paintpieces(pieces);
 }
@@ -51,15 +45,29 @@ coinciden, se detecta un impacto, se reduce la salud del submarino y los obstác
 inicial.*/
 void Collisionpieces(pieces &pieces, Submarine &submarine)
 {
-    if (pieces.x >= submarine.x && pieces.x <= submarine.x + 11 && pieces.y >= submarine.y && pieces.y <= submarine.y + 3)
-    {
-        submarine.heart--;
-        DestroySubmarine(submarine);
+    if (pieces.x >= submarine.x && pieces.x <= submarine.x + 11 &&
+        pieces.y >= submarine.y && pieces.y <= submarine.y + 3)
+    {   
+        //Aumento de oxigeno
+
+        if (submarine.oxygen < 20){
+            submarine.oxygen++;
+            PaintOxygen(submarine);
+        }
+        // Efecto de parpadeo
+        for (int i = 0; i < 3; i++)
+        {
+            DeleteSubmarine(submarine);
+            Sleep(100);
+            PaintSubmarine(submarine);
+            Sleep(100);
+        }
+
+        // Reposicionar la pieza
         Deletepieces(pieces);
-        PaintSubmarine(submarine);
-        PaintHearts(submarine);
         pieces.x = 110;
-        pieces.y = rand() % 20 + 3;
+        pieces.y = rand() % 10 + 2;
     }
 }
+
 #endif
