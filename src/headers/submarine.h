@@ -17,7 +17,7 @@
 
 typedef struct
 {
-    int x, y, heart, lifes, oxygen;
+    int x, y, heart, lifes, oxygen, Time;
 } Submarine;
 
 /* Pinta al submarino con caracteres del código ASCII */
@@ -74,6 +74,19 @@ void PaintOxygen(Submarine &submarine)
         std::cout << (char)178;
     }
 }
+
+/*void PaintTime(Submarine &submarine)
+{
+    // Barra de tiempo 3 minutos
+    gotoxy(40, 1);
+    std::cout << "Oxygen:";        TA MAL HECHO, ME FALTA REPARARLO
+
+    for (int i = 0; i < submarine.oxygen; i++)
+    {
+        std::cout << (char)178;
+    }
+}
+    */
 /* Si los corazones del submarino llegan a 0, se pinta una explosión animada */
 void DestroySubmarine(Submarine &submarine)
 {
