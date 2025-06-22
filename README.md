@@ -14,7 +14,7 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 
 ## Equipo
 
-- **Nombre del equipo:** Tralaleritos :skull:
+- **Nombre del equipo:** :skull:
 
 ### Integrantes del equipo
 
