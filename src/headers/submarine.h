@@ -26,11 +26,9 @@ void PaintSubmarine(Submarine &submarine)
     gotoxy(submarine.x, submarine.y);
     std::cout << "       " << (char)95 << (char)218 << "\n";
     gotoxy(submarine.x, submarine.y + 1);
-    std::cout << ' ' << (char)126 << (char)42 << (char)95 << (char)95 << (char)95
-              << (char)47 << (char)111 << (char)111 << (char)92 << (char)95 << "\n";
+    std::cout << " " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
     gotoxy(submarine.x, submarine.y + 2);
-    std::cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95
-              << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\n";
+    std::cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41;
 }
 
 /* Borra al submarino en cada desplazamiento */
@@ -47,30 +45,22 @@ void DeleteSubmarine(Submarine &submarine)
 /* Pinta la vida y los corazones del submarino */
 void PaintHearts(Submarine &submarine)
 {
-    gotoxy(80, 1);
-    std::cout << "Lives" << submarine.lifes;
-    gotoxy(100, 1);
-    std::cout << "Health";
-    gotoxy(110, 1);
-    std::cout << "     ";
 
+    gotoxy(89, 1);
+    std::cout << "Lifes: " << submarine.lifes;
+    gotoxy(100, 1);
+    std::cout << "Hearts: ";
+    gotoxy(108, 1);
+    std::cout << "   ";
+    //Activa el UTF-8
+    system("chcp 65001 > nul");
     for (int i = 0; i < submarine.heart; i++)
     {
-        gotoxy(110 + i, 1);
-        std::cout << (char)223;
+        gotoxy(108 + i, 1);
+        std::cout << "♥";
     }
-}
-
-void PaintOxygen(Submarine &submarine)
-{
-    // Barra de Oxigeno
-    gotoxy(40, 1);
-    std::cout << "Oxygen:";
-
-    for (int i = 0; i < submarine.oxygen; i++)
-    {
-        std::cout << (char)178;
-    }
+    //Restaura la codificación 
+    system("chcp 437 > nul");
 }
 
 /* Si los corazones del submarino llegan a 0, se pinta una explosión animada */
@@ -97,7 +87,24 @@ void DestroySubmarine(Submarine &submarine)
         DeleteSubmarine(submarine);
         submarine.lifes--;
         PaintHearts(submarine);
-        submarine.heart = 1;
+        submarine.heart = 3;
+        PaintSubmarine(submarine);
+    }
+}
+
+void CollisionSubmarine(Submarine &submarine)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        Sleep(250);
+        DeleteSubmarine(submarine);
+        gotoxy(submarine.x, submarine.y);
+        std::cout << "        ";
+        gotoxy(submarine.x, submarine.y + 1);
+        std::cout << "      ";
+        gotoxy(submarine.x, submarine.y + 2);
+        std::cout << "      ";
+        Sleep(250);
         PaintSubmarine(submarine);
     }
 }
