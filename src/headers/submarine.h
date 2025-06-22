@@ -24,7 +24,7 @@ typedef struct
 void PaintSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "       " << (char)95 << (char)218 << "\n";
+    std::cout << "       " << (char)95 << (char)218;
     gotoxy(submarine.x, submarine.y + 1);
     std::cout << " " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
     gotoxy(submarine.x, submarine.y + 2);
@@ -35,11 +35,11 @@ void PaintSubmarine(Submarine &submarine)
 void DeleteSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "         " << "\n";
+    std::cout << "         ";
     gotoxy(submarine.x, submarine.y + 1);
-    std::cout << "           " << "\n";
+    std::cout << "           ";
     gotoxy(submarine.x, submarine.y + 2);
-    std::cout << "            " << "\n";
+    std::cout << "            ";
 }
 
 /* Pinta la vida y los corazones del submarino */
@@ -52,14 +52,14 @@ void PaintHearts(Submarine &submarine)
     std::cout << "Hearts: ";
     gotoxy(108, 1);
     std::cout << "   ";
-    //Activa el UTF-8
+    // Activa el UTF-8
     system("chcp 65001 > nul");
     for (int i = 0; i < submarine.heart; i++)
     {
         gotoxy(108 + i, 1);
         std::cout << "♥";
     }
-    //Restaura la codificación 
+    // Restaura la codificación
     system("chcp 437 > nul");
 }
 
