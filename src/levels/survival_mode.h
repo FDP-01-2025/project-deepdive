@@ -1,13 +1,13 @@
 #ifndef SURVIVAL_MODE_H_INCLUDED
 #define SURVIVAL_MODE_H_INCLUDED
-#include "headers/fish.h"
+#include "headers/rockets.h"
 #include "headers/game_time.h"
-#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 #include "headers/timer.h"
+#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
 static Submarine survivalSubmarine;
-static Fish survivalFishes[4];
-static int survivalNumFishes;
+static Rocket survivalRockets[4];
+static int survivalNumrocketes;
 
 static void InitGameSurvivalMode()
 {
@@ -15,15 +15,17 @@ static void InitGameSurvivalMode()
     PaintSubmarine(survivalSubmarine);
     PaintHearts(survivalSubmarine);
 
-    survivalFishes[0] = {80, 3};
-    survivalFishes[1] = {90, 10};
-    survivalFishes[2] = {100, 15};
-    survivalFishes[3] = {110, 20};
-    survivalNumFishes = 4;
+    survivalRockets[0] = {80, 3};
+    survivalRockets[1] = {90, 10};
+    survivalRockets[2] = {100, 15};
+    survivalRockets[3] = {110, 20};
+    survivalNumrocketes = 4;
 }
 
 static void GameLoopSurvivalMode()
 {
+    int targetFrameTime = 16; // Inicializa en 60 FPS ≈ 16 ms por frame
+    int speed = 0;
     // Tiempo de inicio
     // Se guarda el tiempo actual al comenzar el juego (marca de inicio)
     std::chrono::high_resolution_clock::time_point startTime = std::chrono::high_resolution_clock::now();
@@ -32,7 +34,6 @@ static void GameLoopSurvivalMode()
     // Inicialmente, es el mismo que el de inicio
     std::chrono::high_resolution_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 
-    const int targetFrameTime = 16; // Objetivo: 60 FPS ≈ 16 ms por frame
     do
     {
         // Se toma el tiempo actual (inicio de este nuevo ciclo del bucle)
@@ -46,6 +47,29 @@ static void GameLoopSurvivalMode()
 
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(currentFrameTime - startTime).count();
 
+        speed = elapsed / 10;
+
+        switch (speed)
+        {
+        case 1:
+            targetFrameTime = 11;
+            break;
+        case 2:
+            targetFrameTime = 9;
+            break;
+        case 3:
+            targetFrameTime = 6;
+            break;
+        case 4:
+            targetFrameTime = 4;
+            break;
+        case 5:
+            targetFrameTime = 2;
+            break;
+        default:
+            break;
+        }
+
         // Imprime el contador
         Timer(elapsed);
 
@@ -55,10 +79,10 @@ static void GameLoopSurvivalMode()
             MoveSubmarine(tecla, survivalSubmarine);
         }
 
-        for (int i = 0; i < survivalNumFishes; i++)
+        for (int i = 0; i < survivalNumrocketes; i++)
         {
-            MoveFish(survivalFishes[i]);
-            CollisionFish(survivalFishes[i], survivalSubmarine);
+            MoveRocket(survivalRockets[i]);
+            CollisionRocket(survivalRockets[i], survivalSubmarine);
         }
 
         // CONTROL DE FPS:
@@ -71,6 +95,7 @@ static void GameLoopSurvivalMode()
         }
 
     } while (survivalSubmarine.lifes > 0);
+
     std::chrono::high_resolution_clock::time_point endTime = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
     SaveGameTimeToFile(duration, "database/db_deepdive.txt");
