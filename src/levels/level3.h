@@ -23,14 +23,13 @@ void DeleteAllyFish(Submarine &ally)
     std::cout << "       ";
 }
 
-
 static void InitGameLevel3()
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     PrincipalObjectiveLevel3();
 
     SetConsoleCursorPosition(hConsole, {0, 1});
-    std::cout << "Principal Objective: Escort the ally submarine for 3 minutes!";
+    std::cout << "Principal Objective: Escort the ally fish!";
 
     level3Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
     allySubmarine = {5, 18, 0, 1, 0};    // Aliado a proteger
@@ -53,6 +52,7 @@ static void GameLoopLevel3()
 
     do
     {
+        DeleteAllyFish(allySubmarine); // Borrar pez antes de movimiento del Subm
         if (kbhit())
         {
             char tecla = getch();
@@ -60,9 +60,8 @@ static void GameLoopLevel3()
         }
 
         // Mover aliado detrás del jugador
-        DeleteAllyFish(allySubmarine);
-        allySubmarine.x = level3Submarine.x;
-        allySubmarine.y = level3Submarine.y + 3;
+        allySubmarine.x = level3Submarine.x - 8;
+        allySubmarine.y = level3Submarine.y;
         PaintAllyFish(allySubmarine);
 
         for (int i = 0; i < level3NumFishes; i++)
@@ -75,7 +74,7 @@ static void GameLoopLevel3()
                 (level3Fishes[i].y == allySubmarine.y || level3Fishes[i].y == allySubmarine.y + 1))
             {
                 SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {40, 15});
-                std::cout << "¡El submarino aliado fue destruido!";
+                std::cout << "El pez aliado fue devorado!!!";
                 Sleep(3000);
                 return;
             }
@@ -89,6 +88,13 @@ static void GameLoopLevel3()
             CongratsLevel3();
             return;
         }
+
+        // Mostrar temporizador en la línea 1
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {55, 1});
+        int remaining = 180 - static_cast<int>(elapsed);
+        int minutes = remaining / 60;
+        int seconds = remaining % 60;
+        std::cout << "Tiempo restante: " << minutes << "m " << (seconds < 10 ? "0" : "") << seconds << "s     ";
 
         Sleep(13);
 

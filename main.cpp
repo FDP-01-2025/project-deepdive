@@ -4,6 +4,7 @@ using namespace std;
 int main()
 {
     HideCursor();
-    runMenu(); // Llama al menú y controla toda su ejecución  
+    runMenu(); // Llama al menú y controla toda su ejecución
+   
     return 0;
 }
