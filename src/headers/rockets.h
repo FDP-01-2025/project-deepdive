@@ -14,8 +14,7 @@ std::string frames[] =
     {
         "<##E==",
         "<##E~~",
-        "<##E<<"
-    };
+        "<##E<<"};
 // Pinta la forma del pescado
 
 void Paintrocket(Rocket &rocket)
@@ -31,27 +30,29 @@ void ClearRocket(Rocket &rocket)
     std::cout << ("        ");
 }
 
-void MoveRocket(Rocket &rocket)
+void MoveRocket(Rocket &rocket, float speed)
 {
     ClearRocket(rocket);
-    /*Se asigna una posición inicial del pescado en x, y se genera una posición aleatoria en y.
-    La posición del pescado va decreciendo en x, hasta llegar a la posición 5 en x,
-    y luego se vuelve a ejecutar el mismo proceso.*/
-    rocket.x -= 0.2f;
+    // La cantidad de movimiento depende del parámetro 'speed'
+    rocket.x -= speed;
+
     if (rocket.x <= 5.0f)
     {
+        // Reinicia la posición X del cohete al borde derecho (110.0)
         rocket.x = 110.0f;
+
+        // Asigna una nueva posición
         rocket.y = rand() % 25 + 3;
     }
+    // Actualiza el frame de animación del cohete (cicla entre 0, 1 y 2)
     rocket.frame = (rocket.frame + 1) % 3;
+    // Dibuja el cohete en su nueva posición y con el nuevo frame de animación
     Paintrocket(rocket);
 }
 
-/*Se declara el espacio que ocupa el submarino en "x" y "y", si la posición de "x" y "y"
-coinciden, se detecta un impacto, se reduce la salud del submarino y los obstáculos vuelven a su posición
-inicial.*/
 void CollisionRocket(Rocket &rocket, Submarine &submarine)
 {
+    // Detecta si la posición del cohete es igual a la del submarino
     if (rocket.x >= submarine.x && rocket.x <= submarine.x + 11 && rocket.y >= submarine.y && rocket.y <= submarine.y + 3)
     {
         submarine.heart--;

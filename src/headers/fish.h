@@ -32,25 +32,26 @@ void ClearFish(Fish &fish)
 
 void MoveFish(Fish &fish)
 {
+    // Borra la representación actual del pez de la pantalla
     ClearFish(fish);
-    /*Se asigna una posición inicial del pescado en x, y se genera una posición aleatoria en y.
-    La posición del pescado va decreciendo en x, hasta llegar a la posición 5 en x,
-    y luego se vuelve a ejecutar el mismo proceso.*/
     fish.x -= 0.2f;
     if (fish.x <= 5.0f)
     {
+        // Reinicia la posición X del pez al borde derecho (110.0)
         fish.x = 110.0f;
+        // Asigna una nueva posición Y aleatoria
         fish.y = rand() % 25 + 3;
     }
+    // Actualiza el frame de animación del pez (cicla entre 0, 1 y 2)
     fish.frame = (fish.frame + 1) % 3;
+    // Dibuja el pez en su nueva posición y con el nuevo frame de animación
     PaintFish(fish);
 }
 
-/*Se declara el espacio que ocupa el submarino en "x" y "y", si la posición de "x" y "y"
-coinciden, se detecta un impacto, se reduce la salud del submarino y los obstáculos vuelven a su posición
-inicial.*/
+
 void CollisionFish(Fish &fish, Submarine &submarine)
 {
+    //Si la posición del pescado es igual a la del submarino, se detecta la colisión
     if (fish.x >= submarine.x && fish.x <= submarine.x + 11 && fish.y >= submarine.y && fish.y <= submarine.y + 3)
     {
         submarine.heart--;
