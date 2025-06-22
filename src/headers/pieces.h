@@ -1,6 +1,6 @@
 #ifndef PIECES_H
 #define PIECES_H
-
+#include "messages.h"
 #include "position.h"
 #include "submarine.h"
 #include <iostream>
@@ -35,7 +35,7 @@ void Movepieces(pieces &pieces)
     if (pieces.x <= 5)
     {
         pieces.x = 110;
-        pieces.y = rand() % 10 + 2;
+        pieces.y = rand() % 10 + 3;
     }
     Paintpieces(pieces);
 }
@@ -50,9 +50,14 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
     {   
         //Aumento de oxigeno
 
-        if (submarine.oxygen < 20){
+        if (submarine.oxygen < 30){
             submarine.oxygen++;
             PaintOxygen(submarine);
+
+            if(submarine.oxygen>=30){
+                CongratsLevel2();
+                exit(0);
+            }
         }
         // Efecto de parpadeo
         for (int i = 0; i < 3; i++)
@@ -66,7 +71,7 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
         // Reposicionar la pieza
         Deletepieces(pieces);
         pieces.x = 110;
-        pieces.y = rand() % 10 + 2;
+        pieces.y = rand() % 10 + 3;
     }
 }
 

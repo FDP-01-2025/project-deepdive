@@ -63,6 +63,17 @@ void PaintHearts(Submarine &submarine)
     system("chcp 437 > nul");
 }
 
+void PaintOxygen(Submarine &submarine)
+{
+    // Barra de Oxigeno
+    gotoxy(40, 1);
+    std::cout << "Oxygen:";
+
+    for (int i = 0; i < submarine.oxygen; i++)
+    {
+        std::cout << (char)178;
+    }
+}
 /* Si los corazones del submarino llegan a 0, se pinta una explosión animada */
 void DestroySubmarine(Submarine &submarine)
 {
