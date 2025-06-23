@@ -65,15 +65,6 @@ void SaveGameTimeToFile(int duration)
         }
         outfile.close();
     }
-
-    // Mostrar los tiempos formateados en consola también
-    std::cout << "Top 5 tiempos:\n";
-    for (int i = 0; i < count; i++)
-    {
-        int minutes = times[i] / 60;
-        int seconds = times[i] % 60;
-        std::cout << (i + 1) << "°: " << minutes << " min " << seconds << " sec\n";
-    }
 }
 
 #endif
