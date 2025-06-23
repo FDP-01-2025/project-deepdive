@@ -20,21 +20,6 @@ struct DifficultySettings
     int activeRockets;
 };
 
-static void InitGameSurvivalMode()
-{
-    survivalSubmarine = {5, 15, 3, 3};
-    PaintSubmarine(survivalSubmarine);
-    PaintHearts(survivalSubmarine);
-
-    survivalRockets[0] = {80, 3};
-    survivalRockets[1] = {90, 6};
-    survivalRockets[2] = {100, 9};
-    survivalRockets[3] = {110, 12};
-    survivalRockets[4] = {115, 15};
-    survivalRockets[5] = {120, 18};
-    survivalNumrocketes = 6;
-}
-
 // Calcula la dificultad en base al tiempo
 DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
 {
@@ -47,21 +32,60 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
 
+void GameOver(int duration)
+{
+    int minutes = duration / 60;
+    int seconds = duration % 60;
+    system("cls");
+    system("chcp 65001 > nul");
+
+    std::cout << R"(
+                          ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗
+                         ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+                         ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+                         ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║██║   ██║██╔══╝  ██╔══██╗
+                         ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝╚██████╔╝███████╗██║  ██║
+                          ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+                                        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+                                        ░░       EL JUEGO HA TERMINADO       ░░
+                                        ░░   [Presiona Enter para continuar] ░░
+                                        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░)"
+              << "\n\n";
+    std::cout << "\t\t\t\t\t\tSurvived time: " << minutes << " min" << " " << seconds << " sec" << "\n";
+    system("chcp 437 > nul");
+    // Esperar que presione Enter
+    std::cin.ignore();
+    std::cin.get();
+}
+
+static void InitGameSurvivalMode()
+{
+    survivalSubmarine = {5, 15, 3, 1};
+    PaintSubmarine(survivalSubmarine);
+    PaintHearts(survivalSubmarine);
+
+    survivalRockets[0] = {80, 3};
+    survivalRockets[1] = {90, 6};
+    survivalRockets[2] = {100, 9};
+    survivalRockets[3] = {110, 12};
+    survivalRockets[4] = {115, 15};
+    survivalRockets[5] = {120, 18};
+    survivalNumrocketes = 6;
+}
+
 static void GameLoopSurvivalMode()
 {
     GameLimits();
-
     // Se guarda el tiempo actual al comenzar el juego (marca de inicio)
     auto startTime = std::chrono::high_resolution_clock::now();
-
-    // Se guarda el tiempo de la "última actualización de fotograma" (frame)
-    // Inicialmente, es el mismo que el de inicio
+    // Se guarda el tiempo de la "última actualización de fotograma" (frame). Inicialmente, es el mismo que el de inicio
     auto lastFrameTime = std::chrono::high_resolution_clock::now();
 
+    auto now = startTime;
     while (survivalSubmarine.lifes > 0)
     {
         // Se obtiene el tiempo actual en este instante del bucle
-        auto now = std::chrono::high_resolution_clock::now();
+        now = std::chrono::high_resolution_clock::now();
 
         // Se calcula el tiempo transcurrido desde el último frame, en milisegundos
         // Esto permite ajustar los movimientos y animaciones según el tiempo real entre frames
@@ -75,7 +99,7 @@ static void GameLoopSurvivalMode()
 
         // Se actualizan los parámetros de dificultad en función del tiempo transcurrido y la cantidad de cohetes activos
         auto settings = UpdateDifficulty(elapsed, survivalNumrocketes);
-        
+
         // Imprime el contador
         Timer(elapsed);
 
@@ -99,11 +123,18 @@ static void GameLoopSurvivalMode()
         {
             Sleep(settings.targetFrameTime - frameDuration);
         }
+
+        if (survivalSubmarine.lifes < 0)
+        {
+            auto now = std::chrono::high_resolution_clock::now();
+        }
     }
 
-    std::chrono::high_resolution_clock::time_point endTime = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime).count();
-    SaveGameTimeToFile(duration, "database/db_deepdive.txt");
+    auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - startTime).count();
+
+    SaveGameTimeToFile(duration);
+
+    GameOver(duration);
 }
 
 #endif
