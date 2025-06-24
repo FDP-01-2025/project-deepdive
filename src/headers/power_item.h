@@ -25,7 +25,7 @@ static void mostrarItem()
     if (itemVisible)
     {
         gotoxy(itemX, itemY);
-        std::cout << "{@}";
+        std::cout << "{#}";
     }
 }
 
