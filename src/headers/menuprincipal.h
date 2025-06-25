@@ -202,10 +202,14 @@ inline void runMenu()
                             switch (selected)
                             {
                             case 0:
+                                system("cls");
                                 InitGamelevel1();
+                                GameLooplevel1();
                                 break;
                             case 1:
+                                system("cls");
                                 InitGamelevel2();
+                                GameLooplevel2();
                                 break;
                             case 2:;
                                 break;

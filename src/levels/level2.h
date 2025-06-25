@@ -18,6 +18,10 @@ static int level2NumPieces;
 
 static void InitGamelevel2()
 {
+    system("cls");
+    SetConsoleTextAttribute(hConsole, 7);       // Color blanco predeterminado
+    SetConsoleCursorPosition(hConsole, {0, 0}); // Cursor en la esquina superior izquierda
+    
     PrincipalObjectiveLevel2();
 
     SetConsoleCursorPosition(hConsole, {0, 1});

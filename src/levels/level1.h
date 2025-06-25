@@ -9,7 +9,10 @@ static int level1_num_fishes;
 
 static void InitGamelevel1()
 {
-    
+    system("cls");
+    SetConsoleTextAttribute(hConsole, 7);       // Color blanco predeterminado
+    SetConsoleCursorPosition(hConsole, {0, 0}); // Cursor en la esquina superior izquierda
+
     level1Submarine = {5, 15, 1, 3};
     PaintSubmarine(level1Submarine);
     PaintHearts(level1Submarine);
@@ -21,8 +24,12 @@ static void InitGamelevel1()
     level1_num_fishes = 4;
 }
 
-static void GameLooplevel1Mode()
+static void GameLooplevel1()
 {
+    system("cls");
+    SetConsoleTextAttribute(hConsole, 7);       // Color blanco predeterminado
+    SetConsoleCursorPosition(hConsole, {0, 0}); // Cursor en la esquina superior izquierda
+
     do
     {
         // para que en la siguiente vuelta se mida el nuevo deltaTime correctamente
