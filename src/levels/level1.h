@@ -7,8 +7,9 @@ static Submarine level1Submarine;
 static Fish level1Fishes[4];
 static int level1_num_fishes;
 
-static void InitGamelevel1Mode()
+static void InitGamelevel1()
 {
+    
     level1Submarine = {5, 15, 1, 3};
     PaintSubmarine(level1Submarine);
     PaintHearts(level1Submarine);
