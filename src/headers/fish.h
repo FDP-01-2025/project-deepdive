@@ -10,7 +10,7 @@ typedef struct
     int x, y, frame;
 } Fish;
 
-std::string frames[] =
+static const std::string frames[] =
     {
         "<0)))><",
         "<°)))><",
