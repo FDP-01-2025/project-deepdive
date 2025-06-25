@@ -32,8 +32,8 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
 
-void GameOver(int duration)
-{
+void GameOver()
+{   int duration;
     int minutes = duration / 60;
     int seconds = duration % 60;
     system("cls");
