@@ -1,5 +1,5 @@
-1°: 1 min 1 sec
-2°: 0 min 18 sec
-3°: 0 min 15 sec
-4°: 0 min 11 sec
-5°: 0 min 9 sec
+1°: 1 min 4 sec
+2°: 1 min 1 sec
+3°: 0 min 59 sec
+4°: 0 min 41 sec
+5°: 0 min 18 sec

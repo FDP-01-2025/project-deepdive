@@ -34,10 +34,9 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
 
-/*void GameOver(int duration)
+void GameOver()
 {
-    int minutes = duration / 60;
-    int seconds = duration % 60;
+
     system("cls");
     system("chcp 65001 > nul");
 
@@ -53,12 +52,17 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
                                         ░░   [Presiona Enter para continuar] ░░
                                         ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░)"
               << "\n\n";
-    std::cout << "\t\t\t\t\t\tSurvived time: " << minutes << " min" << " " << seconds << " sec" << "\n";
     system("chcp 437 > nul");
-    // Esperar que presione Enter
+}
+
+void time(int duration)
+{
+    int minutes = duration / 60;
+    int seconds = duration % 60;
+    std::cout << "\t\t\t\t\t\tSurvived time: " << minutes << " min" << " " << seconds << " sec" << "\n";
     std::cin.ignore();
     std::cin.get();
-}*/
+}
 
 static void InitGameSurvivalMode()
 {
@@ -136,7 +140,8 @@ static void GameLoopSurvivalMode()
 
     SaveGameTimeToFile(duration);
 
-    GameOver(duration);
+    GameOver();
+    time(duration);
 }
 
 #endif
