@@ -48,7 +48,7 @@ static void activarPoderRecarga()
     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
     
 }
-
+ //Holaaaaa
 static void actualizarPoder()
 {
     if (poderRecargaActiva)
