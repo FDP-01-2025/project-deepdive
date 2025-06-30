@@ -24,11 +24,13 @@ typedef struct
 void PaintSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
-    std::cout << "       " << (char)95 << (char)218;
+    std::cout << "\033[1;34m       " << (char)95 << (char)218 << "\033[0m";
+
     gotoxy(submarine.x, submarine.y + 1);
-    std::cout << " " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95;
+    std::cout << "\033[1;34m " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95 << "\033[0m";
+
     gotoxy(submarine.x, submarine.y + 2);
-    std::cout << "  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41;
+    std::cout << "\033[1;34m  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\033[0m";
 }
 
 /* Borra al submarino en cada desplazamiento */
@@ -56,8 +58,9 @@ void PaintHearts(Submarine &submarine)
     system("chcp 65001 > nul");
     for (int i = 0; i < submarine.heart; i++)
     {
+        // Se usa ANSI para pintar de otro color los corazones
         gotoxy(108 + i, 1);
-        std::cout << "♥";
+        std::cout << "\033[1;31m♥\033[0m";
     }
     // Restaura la codificación
     system("chcp 437 > nul");
@@ -82,20 +85,28 @@ void DestroySubmarine(Submarine &submarine)
     {
         DeleteSubmarine(submarine);
         gotoxy(submarine.x, submarine.y);
-        std::cout << " * * * * ";
+        std::cout << "\033[1;33m * * * * \033[0m";
         gotoxy(submarine.x, submarine.y + 1);
-        std::cout << "********";
+        std::cout << "\033[1;33m********\033[0m";
         gotoxy(submarine.x, submarine.y + 2);
-        std::cout << " * * * * ";
-        Sleep(350);
+        std::cout << "\033[1;33m * * * * \033[0m";
+        Sleep(180);
         DeleteSubmarine(submarine);
         gotoxy(submarine.x, submarine.y);
-        std::cout << "*    *";
+        std::cout << "\033[1;33m*    *\033[0m";
         gotoxy(submarine.x, submarine.y + 1);
-        std::cout << " * * * * ";
+        std::cout << "\033[1;33m * * * * \033[0m";
         gotoxy(submarine.x, submarine.y + 2);
-        std::cout << "*    *";
-        Sleep(350);
+        std::cout << "\033[1;33m*    *\033[0m";
+        Sleep(180);
+        DeleteSubmarine(submarine);
+        gotoxy(submarine.x, submarine.y);
+        std::cout << "\033[1;33m * * * * \033[0m";
+        gotoxy(submarine.x, submarine.y + 1);
+        std::cout << "\033[1;33m********\033[0m";
+        gotoxy(submarine.x, submarine.y + 2);
+        std::cout << "\033[1;33m * * * * \033[0m";
+        Sleep(180);
         DeleteSubmarine(submarine);
         submarine.lifes--;
         PaintHearts(submarine);
@@ -108,7 +119,7 @@ void CollisionSubmarine(Submarine &submarine)
 {
     for (int i = 0; i < 3; i++)
     {
-        Sleep(250);
+        Sleep(80);
         DeleteSubmarine(submarine);
         gotoxy(submarine.x, submarine.y);
         std::cout << "        ";
@@ -116,7 +127,7 @@ void CollisionSubmarine(Submarine &submarine)
         std::cout << "      ";
         gotoxy(submarine.x, submarine.y + 2);
         std::cout << "      ";
-        Sleep(250);
+        Sleep(80);
         PaintSubmarine(submarine);
     }
 }

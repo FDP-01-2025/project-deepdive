@@ -10,27 +10,27 @@ typedef struct
     int x, y, frame;
 } Rocket;
 
-std::string frames[] =
+static const std::string framesRokets[] =
     {
         "<##E==",
         "<##E~~",
         "<##E<<"};
 // Pinta la forma del pescado
 
-void Paintrocket(Rocket &rocket)
+static void Paintrocket(Rocket &rocket)
 {
     gotoxy(static_cast<int>(rocket.x), rocket.y);
-    std::cout << frames[rocket.frame];
+    std::cout << framesRokets[rocket.frame];
 }
 
 // Borra la forma del pescado
-void ClearRocket(Rocket &rocket)
+static void ClearRocket(Rocket &rocket)
 {
     gotoxy(static_cast<int>(rocket.x), rocket.y);
     std::cout << ("        ");
 }
 
-void MoveRocket(Rocket &rocket, float speed)
+static void MoveRocket(Rocket &rocket, float speed)
 {
     ClearRocket(rocket);
     // La cantidad de movimiento depende del parámetro 'speed'
@@ -50,13 +50,16 @@ void MoveRocket(Rocket &rocket, float speed)
     Paintrocket(rocket);
 }
 
-void CollisionRocket(Rocket &rocket, Submarine &submarine)
+static void CollisionRocket(Rocket &rocket, Submarine &submarine)
 {
     // Detecta si la posición del cohete es igual a la del submarino
-    if (rocket.x >= submarine.x && rocket.x <= submarine.x + 11 && rocket.y >= submarine.y && rocket.y <= submarine.y + 3)
+    if (rocket.x >= submarine.x && rocket.x <= submarine.x + 12 && rocket.y >= submarine.y && rocket.y <= submarine.y + 2)
     {
         submarine.heart--;
-        CollisionSubmarine(submarine);
+        if (submarine.heart > 0)
+        {
+            CollisionSubmarine(submarine);
+        }
         DestroySubmarine(submarine);
         ClearRocket(rocket);
         PaintSubmarine(submarine);

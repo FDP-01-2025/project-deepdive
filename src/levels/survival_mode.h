@@ -9,7 +9,7 @@
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
 static Submarine survivalSubmarine;
-static Rocket survivalRockets[6];
+static Rocket survivalRockets[5];
 static int survivalNumrocketes;
 
 const int BASE_FPS = 60;
@@ -34,54 +34,90 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
 
-void GameOver()
+static void InitGameMessage()
 {
-
     system("cls");
     system("chcp 65001 > nul");
 
-    std::cout << R"(
-                          ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗
-                         ██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
-                         ██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
-                         ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║██║   ██║██╔══╝  ██╔══██╗
-                         ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝╚██████╔╝███████╗██║  ██║
-                          ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
-                                        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-                                        ░░       EL JUEGO HA TERMINADO       ░░
-                                        ░░   [Presiona Enter para continuar] ░░
-                                        ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░)"
-              << "\n\n";
+    const std::string texto[6] = {
+        "███████╗██╗   ██╗██████╗ ██╗   ██╗██╗██╗   ██╗ █████╗ ██╗         ███╗   ███╗ ██████╗ ██████╗ ███████╗",
+        "██╔════╝██║   ██║██╔══██╗██║   ██║██║██║   ██║██╔══██╗██║         ████╗ ████║██╔═══██╗██╔══██╗██╔════╝",
+        "███████╗██║   ██║██████╔╝██║   ██║██║██║   ██║███████║██║         ██╔████╔██║██║   ██║██║  ██║█████╗  ",
+        "╚════██║██║   ██║██╔══██╗╚██╗ ██╔╝██║╚██╗ ██╔╝██╔══██║██║         ██║╚██╔╝██║██║   ██║██║  ██║██╔══╝  ",
+        "███████║╚██████╔╝██║  ██║ ╚████╔╝ ██║ ╚████╔╝ ██║  ██║███████╗    ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████╗",
+        "╚══════╝ ╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝"};
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(10, 2 + i);
+        std::cout << texto[i] << "\n\n";
+    }
     system("chcp 437 > nul");
+
+    gotoxy(45, 9);
+    std::cout << "[Press ENTER twice to continue]" << "\n\n";
+
+    gotoxy(35, 11);
+    std::cout << ">>Dodge obstacles and survive ad long as possible<<" << "\n";
+
+    std::cin.ignore();
+    std::cin.get();
+    system("cls");
 }
 
-void time(int duration)
+static void GameOver()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string texto[6] = {
+        " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
+        "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
+        "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
+        "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗",
+        "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
+        " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(25, 2 + i);
+        std::cout << texto[i] << "\n\n";
+    }
+    system("chcp 437 > nul");
+
+    gotoxy(45, 9);
+    std::cout << "[Press ENTER twice to continue]" << "\n\n";
+}
+
+static void time(int duration)
 {
     int minutes = duration / 60;
     int seconds = duration % 60;
-    std::cout << "\t\t\t\t\t\tSurvived time: " << minutes << " min" << " " << seconds << " sec" << "\n";
+    gotoxy(45, 12);
+    std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
     std::cin.ignore();
     std::cin.get();
 }
 
 static void InitGameSurvivalMode()
 {
+    InitGameMessage();
     survivalSubmarine = {5, 15, 3, 1};
     PaintSubmarine(survivalSubmarine);
     PaintHearts(survivalSubmarine);
 
-    survivalRockets[0] = {80, 3};
-    survivalRockets[1] = {90, 6};
-    survivalRockets[2] = {100, 9};
-    survivalRockets[3] = {110, 12};
-    survivalRockets[4] = {115, 15};
-    survivalRockets[5] = {120, 18};
-    survivalNumrocketes = 6;
+    survivalRockets[0] = {102, 3};
+    survivalRockets[1] = {104, 20};
+    survivalRockets[2] = {106, 15};
+    survivalRockets[3] = {108, 9};
+    survivalRockets[4] = {110, 6};
+    survivalNumrocketes = 5;
 }
 
 static void GameLoopSurvivalMode()
 {
     GameLimits();
+
     // Se guarda el tiempo actual al comenzar el juego (marca de inicio)
     auto startTime = std::chrono::high_resolution_clock::now();
     // Se guarda el tiempo de la "última actualización de fotograma" (frame). Inicialmente, es el mismo que el de inicio
