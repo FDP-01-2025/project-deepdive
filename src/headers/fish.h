@@ -10,27 +10,27 @@ typedef struct
     int x, y, frame;
 } Fish;
 
-static const std::string frames[] =
+static const std::string framesFish[] =
     {
         "<0)))><",
         "<°)))><",
         "<o)))><"};
 // Pinta la forma del pescado
 
-void PaintFish(Fish &fish)
+static void PaintFish(Fish &fish)
 {
     gotoxy(static_cast<int>(fish.x), fish.y);
-    std::cout << frames[fish.frame];
+    std::cout << framesFish[fish.frame];
 }
 
 // Borra la forma del pescado
-void ClearFish(Fish &fish)
+static void ClearFish(Fish &fish)
 {
     gotoxy(static_cast<int>(fish.x), fish.y);
     std::cout << ("        ");
 }
 
-void MoveFish(Fish &fish)
+static void MoveFish(Fish &fish)
 {
     // Borra la representación actual del pez de la pantalla
     ClearFish(fish);
@@ -49,7 +49,7 @@ void MoveFish(Fish &fish)
 }
 
 
-void CollisionFish(Fish &fish, Submarine &submarine)
+static void CollisionFish(Fish &fish, Submarine &submarine)
 {
     //Si la posición del pescado es igual a la del submarino, se detecta la colisión
     if (fish.x >= submarine.x && fish.x <= submarine.x + 11 && fish.y >= submarine.y && fish.y <= submarine.y + 3)

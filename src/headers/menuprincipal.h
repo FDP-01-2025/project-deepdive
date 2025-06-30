@@ -10,24 +10,25 @@
 #include <algorithm>
 
 // Handle de consola
-static HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+const static HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 // Ubica el cursor
-inline void goTo(int x, int y)
+const static void goTo(int x, int y)
 {
     COORD pos = {SHORT(x), SHORT(y)};
     SetConsoleCursorPosition(hConsole, pos);
 }
 
 // Cambia color de texto
-inline void setColor(int fg)
+const static void setColor(int fg)
 {
     SetConsoleTextAttribute(hConsole, fg);
 }
 
 #include "../levels/level1.h"
 #include "../levels/level2.h"
-#include "../levels/level3.h"
+#include "../levels/survival_mode.h"
+#include "../headers/read_database.h"
 
 // --- Arte ASCII del título ---
 const int TITLE_ROWS = 9;
@@ -36,42 +37,48 @@ const std::string titleLines[TITLE_ROWS] = {
     "██████╗ ███████╗███████╗██████╗     ██████╗ ██╗██╗   ██╗███████╗",
     "██╔══██╗██╔════╝██╔════╝██╔══██╗    ██╔══██╗██║██║   ██║██╔════╝",
     "██║  ██║█████╗  █████╗  ██████╔╝    ██║  ██║██║██║   ██║█████╗  ",
-    "██║  ██║██╔══╝  ██╔══╝  ██╔═══╝     ██║  ██║██║██║   ██║██╔══╝  ",
-    "██████╔╝███████╗███████╗██║         ██████╔╝██║╚██████╔╝███████╗",
-    "╚═════╝ ╚══════╝╚══════╝╚═╝         ╚═════╝ ╚═╝ ╚═════╝ ╚══════╝",
+    "██║  ██║██╔══╝  ██╔══╝  ██╔═══╝     ██║  ██║██║╚██╗ ██╔╝██╔══╝  ",
+    "██████╔╝███████╗███████╗██║         ██████╔╝██║ ╚████╔╝ ███████╗",
+    "╚═════╝ ╚══════╝╚══════╝╚═╝         ╚═════╝ ╚═╝  ╚═══╝  ╚══════╝",
     "ESTE MENU AÚN ESTÁ EN DESARROLLO, POR FAVOR SEA PACIENTE, GRACIAS, BESOS",
     "                                                                       "};
 
 // Color aleatorio (1..15)
-inline int randomColor()
+const static int randomColor()
 {
     return rand() % 15 + 1;
 }
 
 // Dibuja título en su color
-inline void drawTitle(int color)
+const static void drawTitle(int color)
 {
     setColor(color);
+    system("chcp 65001 > nul");
+
     for (int i = 0; i < TITLE_ROWS; ++i)
     {
         goTo(0, i);
         std::cout << titleLines[i];
     }
+    system("chcp 437 > nul");
 }
 
 // Dibuja una opción
-inline void drawMenuOption(int row, bool selected, const std::string &text)
+const static void drawMenuOption(int row, bool selected, const std::string &text)
 {
+
     int y = TITLE_ROWS + row;
     goTo(0, y);
     setColor(selected ? 14 : 7);
+    system("chcp 65001 > nul");
     std::cout << (selected ? "➤ " : "  ")
               << text
               << std::string(std::max(0, MENU_WIDTH - int(text.size()) - 3), ' ');
+    system("chcp 437 > nul");
 }
 
 // Dibuja borde arriba y abajo del bloque de opciones
-inline void MenuBorder(int linesHigh)
+const static void MenuBorder(int linesHigh)
 {
     setColor(7);
     int yTop = TITLE_ROWS - 2;
@@ -86,10 +93,9 @@ inline void MenuBorder(int linesHigh)
 }
 
 // Ejecuta menú principal y submenú de niveles
-inline void runMenu()
+const static void runMenu()
 {
-    system("chcp 65001 > nul");
-    setlocale(LC_ALL, "es_ES.UTF-8");
+    // setlocale(LC_ALL, "es_ES.UTF-8");
     srand((unsigned)time(nullptr));
 
     const std::string mainOpts[] = {"Start Game", "Options", "High Scores", "Exit"};
@@ -211,7 +217,10 @@ inline void runMenu()
                                 InitGamelevel2();
                                 GameLooplevel2();
                                 break;
-                            case 2:;
+                            case 2:
+                                system("cls");
+                                InitGameSurvivalMode();
+                                GameLoopSurvivalMode();
                                 break;
                             case 3:;
                                 break;

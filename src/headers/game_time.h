@@ -40,7 +40,8 @@ void SaveGameTimeToFile(int duration)
     }
 
     // Limitar a los mejores 5
-    if (count > MAX_TIMES) count = MAX_TIMES;
+    if (count > MAX_TIMES)
+        count = MAX_TIMES;
 
     // Guardar los tiempos antes de ser procesados en el archivo de datos
     std::ofstream datafile("database/db_deepdive_data.txt");
@@ -51,6 +52,7 @@ void SaveGameTimeToFile(int duration)
             datafile << times[i] << "\n";
         }
         datafile.close();
+        remove("database/db_deepdive_data.txt");
     }
 
     // Guardar el ranking en la base de datos
@@ -65,6 +67,7 @@ void SaveGameTimeToFile(int duration)
         }
         outfile.close();
     }
+    
 }
 
 #endif
