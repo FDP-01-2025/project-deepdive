@@ -1,7 +1,7 @@
 #ifndef SURVIVAL_MODE_H_INCLUDED
 #define SURVIVAL_MODE_H_INCLUDED
 
-#include "headers/gamover.h"
+
 #include "headers/rockets.h"
 #include "headers/game_time.h"
 #include "headers/timer.h"

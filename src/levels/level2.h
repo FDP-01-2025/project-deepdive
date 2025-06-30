@@ -3,6 +3,8 @@
 #include "../headers/fish.h"
 #include "../headers/pieces.h"
 #include "../headers/messages.h"
+#include "../headers/game_limits.h"
+#include "../headers/gameover2.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 /*
 OBJETIVO DEL NIVEL 2:
@@ -14,17 +16,16 @@ static Submarine level2Submarine;
 static Fish level2Fishes[4];
 static int level2Numfishes;
 static pieces level2Pieces[1]; // Numero de Piezas
-static int level2NumPieces;
+static
+int level2NumPieces;
+extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel2()
-{
-    system("cls");
-    SetConsoleTextAttribute(hConsole, 7);       // Color blanco predeterminado
-    SetConsoleCursorPosition(hConsole, {0, 0}); // Cursor en la esquina superior izquierda
+{   
     
+    system("cls");
     PrincipalObjectiveLevel2();
-
-    SetConsoleCursorPosition(hConsole, {0, 1});
+    gotoxy(0,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level2Submarine = {5, 15, 1, 3};
     PaintSubmarine(level2Submarine);
@@ -37,7 +38,7 @@ static void InitGamelevel2()
     level2Fishes[3] = {110, 20};
     level2Numfishes = 4;
 
-    level2Pieces[0] = {80, 3};
+    level2Pieces[0] = {85, 5};
     level2NumPieces = 1;
 }
 
@@ -45,6 +46,7 @@ static void GameLooplevel2()
 {
     do
     {
+        GameLimits();
         // para que en la siguiente vuelta se mida el nuevo deltaTime correctamente
         if (kbhit())
         {
@@ -62,9 +64,10 @@ static void GameLooplevel2()
             Movepieces(level2Pieces[i]);
             Collisionpieces(level2Pieces[i], level2Submarine);
         }
-        Sleep(13);
+        Sleep(sleepTime);
 
     } while (level2Submarine.lifes > 0);
+    GameOver2();
 }
 
 #endif

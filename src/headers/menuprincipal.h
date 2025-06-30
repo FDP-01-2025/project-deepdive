@@ -27,6 +27,7 @@ const static void setColor(int fg)
 
 #include "../levels/level1.h"
 #include "../levels/level2.h"
+#include "../levels/level3.h"
 #include "../levels/survival_mode.h"
 #include "../headers/read_database.h"
 

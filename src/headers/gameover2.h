@@ -3,12 +3,11 @@
 
 #include <iostream>
 #include <limits>
-#include <windows.h>  // Sleep, SetConsoleTextAttribute, etc.
-#include <conio.h>    // getch()
+#include <windows.h>
+#include <conio.h>
 
-// Función inline para que puedas incluirla en tantos headers como quieras
+// Función inline para evitar redefiniciones múltiples
 inline void GameOver2() {
-
     // Limpia pantalla y activa UTF-8
     system("cls");
     system("chcp 65001 > nul");
@@ -28,13 +27,11 @@ inline void GameOver2() {
            ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
     )" << "\n\n";
 
-    std::cout << "\n\n";
-
     // Vuelve a código de página por defecto
     system("chcp 437 > nul");
 
     // Espera ENTER sin atrapar otros caracteres
-    std::cout << "\tPresiona ENTER para continuar...";
+    std::cout << "\tPresiona ENTER dos veces para continuar...";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cin.get();
 }

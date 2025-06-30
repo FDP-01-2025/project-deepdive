@@ -4,6 +4,8 @@
 #include "../headers/fish.h"
 #include "../headers/messages.h"
 #include "../headers/submarine.h"
+#include "../headers/game_limits.h"
+#include "../headers/gameover2.h"
 #include <chrono>
 
 static Submarine level3Submarine;
@@ -13,22 +15,18 @@ static int level3NumFishes;
 
 void PaintAllyFish(Submarine &ally)
 {
-    gotoxy(ally.x, ally.y);
-    std::cout << "><(((°>";
+    
 }
 
 void DeleteAllyFish(Submarine &ally)
 {
-    gotoxy(ally.x, ally.y);
-    std::cout << "       ";
+    
 }
 
 static void InitGameLevel3()
 {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    PrincipalObjectiveLevel3();
-
-    SetConsoleCursorPosition(hConsole, {0, 1});
+    system("cls");
+    gotoxy(0,1);
     std::cout << "Principal Objective: Escort the ally fish!";
 
     level3Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
@@ -47,6 +45,7 @@ static void InitGameLevel3()
 
 static void GameLoopLevel3()
 {
+    GameLimits();
     using namespace std::chrono;
     auto startTime = steady_clock::now();
 
@@ -76,6 +75,7 @@ static void GameLoopLevel3()
                 SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {40, 15});
                 std::cout << "El pez aliado fue devorado!!!";
                 Sleep(3000);
+                GameOver2();
                 return;
             }
         }

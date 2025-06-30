@@ -4,6 +4,7 @@
 #include "position.h"
 #include "submarine.h"
 #include <iostream>
+static int sleepTime;
 
 typedef struct
 {
@@ -47,18 +48,28 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
 {
     if (pieces.x >= submarine.x && pieces.x <= submarine.x + 11 &&
         pieces.y >= submarine.y && pieces.y <= submarine.y + 3)
-    {   
-        //Aumento de oxigeno
+    {
+        // Aumento de oxigeno
 
-        if (submarine.oxygen < 30){
+        if (submarine.oxygen < 30)
+        {
             submarine.oxygen++;
             PaintOxygen(submarine);
 
-            if(submarine.oxygen>=30){
+            if (sleepTime > 5)
+                sleepTime--;
+
+            if (submarine.oxygen >= 30)
+            {
                 CongratsLevel2();
                 exit(0);
             }
         }
+        // Reposicionar la pieza antes del parpadeo
+        Deletepieces(pieces);
+        pieces.x = 110;
+        pieces.y = rand() % 10 + 3;
+
         // Efecto de parpadeo
         for (int i = 0; i < 3; i++)
         {
