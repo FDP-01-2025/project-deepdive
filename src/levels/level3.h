@@ -10,6 +10,11 @@ static Submarine level3Submarine;
 static Submarine allySubmarine;
 static Fish level3Fishes[4];
 static int level3NumFishes;
+static int allyFrame = 0;
+static const std::string framesAllyFish[] = {
+    ">{{{°>",
+    ">{{{o>",
+    ">{{{0>"};
 
 static void InitGameMessagelevel3()
 {
@@ -23,12 +28,11 @@ static void InitGameMessagelevel3()
         "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║                ╚═══██╗",
         "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗          ██████╔╝",
         "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝          ╚═════╝ ",
-        "                                                                    "
-    };
+        "                                                                    "};
 
     for (int i = 0; i < 7; ++i)
     {
-        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
+        gotoxy(30, 8 + i); // Ajusta según la posición deseada
         std::cout << titulo[i];
     }
 
@@ -37,6 +41,37 @@ static void InitGameMessagelevel3()
 
     gotoxy(30, 17);
     std::cout << ">> Principal Objective: Escort and protect the ally fish! <<";
+
+    std::cin.ignore();
+    std::cin.get();
+    system("cls");
+}
+
+static void VictoryLevel3()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string congrats[] = {
+    " ██████╗ ██████╗ ███╗   ██╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗      █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗",
+    "██╔════╝██╔═══██╗████╗  ██║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║     ██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝",
+    "██║     ██║   ██║██╔██╗ ██║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗",
+    "██║     ██║   ██║██║╚██╗██║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║",
+    "╚██████╗╚██████╔╝██║ ╚████║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝███████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║",
+    " ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝",
+    };
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(10, 6 + i);
+        std::cout << congrats[i];
+    }
+
+    gotoxy(28, 14);
+    std::cout << "You successfully protected and escort the ally fish!";
+
+    gotoxy(25, 16);
+    std::cout << "[ Press ENTER to return to menu ]";
 
     std::cin.ignore();
     std::cin.get();
@@ -69,19 +104,24 @@ static void GameOverlevel3()
 
 void PaintAllyFish(Submarine &ally)
 {
-    
+    gotoxy(ally.x, ally.y);
+    std::cout << framesAllyFish[allyFrame];
+    allyFrame = (allyFrame + 1) % 3;
 }
 
 void DeleteAllyFish(Submarine &ally)
 {
-    
+    gotoxy(ally.x, ally.y);
+    std::cout << "       ";
+    gotoxy(ally.x, ally.y + 1); 
+    std::cout << "       ";
 }
 
 static void InitGamelevel3()
-{   
+{
     InitGameMessagelevel3();
     system("cls");
-    gotoxy(0,1);
+    gotoxy(0, 1);
     std::cout << "Principal Objective: Escort the ally fish!";
 
     level3Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
@@ -116,7 +156,13 @@ static void GameLooplevel3()
         // Mover aliado detrás del jugador
         allySubmarine.x = level3Submarine.x - 8;
         allySubmarine.y = level3Submarine.y;
+        //First we paint the Submarine 
+        PaintSubmarine(level3Submarine);
+
+        if(allySubmarine.x + 7 < level3Submarine.x){// Validation to avoid conflicts
+        //After paint Submarine
         PaintAllyFish(allySubmarine);
+        }
 
         for (int i = 0; i < level3NumFishes; i++)
         {
@@ -130,7 +176,7 @@ static void GameLooplevel3()
                 SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {40, 15});
                 std::cout << "El pez aliado fue devorado!!!";
                 Sleep(3000);
-            
+
                 return;
             }
         }
@@ -140,7 +186,7 @@ static void GameLooplevel3()
         auto elapsed = duration_cast<seconds>(currentTime - startTime).count();
         if (elapsed >= 180)
         {
-            
+            VictoryLevel3();
             return;
         }
 

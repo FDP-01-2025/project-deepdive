@@ -48,6 +48,39 @@ static void InitGameMessagelevel2()
     system("cls");
 }
 
+inline void VictoryLevel2()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string congrats[] = {
+    " ██████╗ ██████╗ ██╗   █╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗     █████╗ ████████╗██╗ ██████╗ ██╗   █╗██████╗",
+    "██╔════╝██╔═══██╗███╗  █║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║    ██╔══██╗╚══██╔══╝██║██╔═══██╗███╗  █║██╔═══╝",
+    "██║     ██║   ██║█╔██╗ █║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║    ███████║   ██║   ██║██║   ██║█╔██╗ █║██████╗",
+    "██║     ██║   ██║█║╚██╗█║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║    ██╔══██║   ██║   ██║██║   ██║█║╚██╗█║╚═══██║",
+    "╚██████╗╚██████╔╝█║ ╚███║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝██████╗██║  ██║   ██║   ██║╚██████╔╝█║ ╚███║██████║",
+    " ╚═════╝ ╚═════╝ ╚╝  ╚══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚╝  ╚══╝ ╚════╝",
+    };
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(1, 8 + i);
+        std::cout << congrats[i];
+    }
+
+    gotoxy(43, 15);
+    std::cout << "You successfully filled the oxygen bar!";
+
+    gotoxy(45, 17);
+    std::cout << "[ Press ENTER to return to menu ]";
+
+    std::cin.clear();
+    std::cin.sync();
+    std::cin.get();       // Espera la primera pulsación de ENTER
+    std::cin.get();       // Espera la segunda pulsación de ENTER
+    system("cls");
+}
+
 static void GameOverlevel2()
 {
     system("cls");
@@ -69,7 +102,11 @@ static void GameOverlevel2()
     system("chcp 437 > nul");
 
     gotoxy(45, 17);
-    std::cout << "[Press ENTER twice to continue]" << "\n\n";
+    std::cout << "[Press ENTER to continue]" << "\n\n";
+    std::cin.clear();
+    std::cin.sync();
+    std::cin.get();
+    std::cin.get();
 }
 
 
@@ -85,7 +122,7 @@ static void InitGamelevel2()
 {   
     InitGameMessagelevel2();
     system("cls");
-    gotoxy(0,1);
+    gotoxy(5,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level2Submarine = {5, 15, 1, 3};
     PaintSubmarine(level2Submarine);
