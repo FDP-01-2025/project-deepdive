@@ -10,6 +10,8 @@ typedef struct
     int x, y;
 } pieces;
 
+void VictoryLevel2(); 
+
 // Pinta la forma de la pieza
 void Paintpieces(pieces &pieces)
 {
@@ -55,13 +57,12 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
             submarine.oxygen++;
             PaintOxygen(submarine);
 
-            if (sleepTime > 5)
+            if (sleepTime > 1)
                 sleepTime--;
 
             if (submarine.oxygen >= 30)
             {
-            
-                exit(0);
+                VictoryLevel2();
             }
         }
         // Reposicionar la pieza antes del parpadeo
