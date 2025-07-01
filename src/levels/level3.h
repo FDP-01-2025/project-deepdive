@@ -53,27 +53,29 @@ static void VictoryLevel3()
     system("chcp 65001 > nul");
 
     const std::string congrats[] = {
-    " ██████╗ ██████╗ ███╗   ██╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗      █████╗ ████████╗██╗ ██████╗ ███╗   ██╗███████╗",
-    "██╔════╝██╔═══██╗████╗  ██║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║     ██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║██╔════╝",
-    "██║     ██║   ██║██╔██╗ ██║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║     ███████║   ██║   ██║██║   ██║██╔██╗ ██║███████╗",
-    "██║     ██║   ██║██║╚██╗██║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║     ██╔══██║   ██║   ██║██║   ██║██║╚██╗██║╚════██║",
-    "╚██████╗╚██████╔╝██║ ╚████║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝███████╗██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║███████║",
-    " ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝",
+    " ██████╗ ██████╗ ██╗   █╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗    █████╗ ████████╗██╗ ██████╗ ██╗   █╗███████╗",
+    "██╔════╝██╔═══██╗███╗  █║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║   ██╔══██╗╚══██╔══╝██║██╔═══██╗███╗  █║██╔════╝",
+    "██║     ██║   ██║█╔██╗ █║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║   ███████║   ██║   ██║██║   ██║█╔██╗ █║███████╗",
+    "██║     ██║   ██║█║╚██╗█║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║   ██╔══██║   ██║   ██║██║   ██║█║╚██╗█║╚════██║",
+    "╚██████╗╚██████╔╝█║ ╚███║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝█████╗██║  ██║   ██║   ██║╚██████╔╝█║ ╚███║███████║",
+    " ╚═════╝ ╚═════╝ ╚╝  ╚══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚╝  ╚══╝╚══════╝",
     };
 
     for (int i = 0; i < 6; ++i)
     {
-        gotoxy(10, 6 + i);
+        gotoxy(1, 8 + i);
         std::cout << congrats[i];
     }
 
-    gotoxy(28, 14);
+    gotoxy(35, 15);
     std::cout << "You successfully protected and escort the ally fish!";
 
-    gotoxy(25, 16);
+    gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
 
-    std::cin.ignore();
+    std::cin.clear();
+    std::cin.sync();
+    std::cin.get();
     std::cin.get();
     system("cls");
 }
@@ -100,21 +102,55 @@ static void GameOverlevel3()
 
     gotoxy(45, 17);
     std::cout << "[Press ENTER twice to continue]" << "\n\n";
+    std::cin.clear();
+    std::cin.sync();
+    std::cin.get();
+    std::cin.get();
+}
+
+static void GameOverAllyfish()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string texto[6] = {
+        " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
+        "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
+        "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
+        "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗",
+        "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
+        " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(25, 6 + i);
+        std::cout << texto[i] << "\n\n";
+    }
+    system("chcp 437 > nul");
+
+    gotoxy(45, 17);
+    std::cout << "[The allied fish was deboured]" << "\n\n";
+    std::cin.clear();
+    std::cin.sync();
+    std::cin.get();
+    std::cin.get();
 }
 
 void PaintAllyFish(Submarine &ally)
 {
+    if(ally.x > 1 && ally.x < 110 && ally.y >= 2 && ally.y <= 22){
     gotoxy(ally.x, ally.y);
     std::cout << framesAllyFish[allyFrame];
     allyFrame = (allyFrame + 1) % 3;
+    }
 }
 
 void DeleteAllyFish(Submarine &ally)
-{
+{   
+    if(ally.x > 1 && ally.x < 110 && ally.y >= 2 && ally.y <=22){ 
     gotoxy(ally.x, ally.y);
-    std::cout << "       ";
-    gotoxy(ally.x, ally.y + 1); 
-    std::cout << "       ";
+    std::cout << "       "; 
+    }
 }
 
 static void InitGamelevel3()
@@ -154,7 +190,7 @@ static void GameLooplevel3()
         }
 
         // Mover aliado detrás del jugador
-        allySubmarine.x = level3Submarine.x - 8;
+        allySubmarine.x = std:: max (5,level3Submarine.x-8);
         allySubmarine.y = level3Submarine.y;
         //First we paint the Submarine 
         PaintSubmarine(level3Submarine);
@@ -173,8 +209,7 @@ static void GameLooplevel3()
             if (level3Fishes[i].x == allySubmarine.x &&
                 (level3Fishes[i].y == allySubmarine.y || level3Fishes[i].y == allySubmarine.y + 1))
             {
-                SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {40, 15});
-                std::cout << "El pez aliado fue devorado!!!";
+                GameOverAllyfish();
                 Sleep(3000);
 
                 return;
@@ -191,7 +226,7 @@ static void GameLooplevel3()
         }
 
         // Mostrar temporizador en la línea 1
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {55, 1});
+        gotoxy(50,1);
         int remaining = 180 - static_cast<int>(elapsed);
         int minutes = remaining / 60;
         int seconds = remaining % 60;
