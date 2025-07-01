@@ -102,7 +102,7 @@ const static void runMenu()
     const std::string mainOpts[] = {"Start Game", "Options", "High Scores", "Exit"};
     const std::string levelOpts[] = {
         "Nivel 1", "Nivel 2", "Nivel 3",
-        "Nivel 4", "Nivel 5", "Regresar"};
+        "SurvivalMode", "Nivel 5", "Regresar"};
     const int N_main = sizeof(mainOpts) / sizeof(mainOpts[0]);
     const int N_level = sizeof(levelOpts) / sizeof(levelOpts[0]);
     const int linesHigh = std::max(N_main, N_level);
@@ -220,10 +220,13 @@ const static void runMenu()
                                 break;
                             case 2:
                                 system("cls");
-                                InitGameSurvivalMode();
-                                GameLoopSurvivalMode();
+                                InitGamelevel3();
+                                GameLooplevel3();
                                 break;
                             case 3:;
+                                system("cls");
+                                InitGameSurvivalMode();
+                                GameLoopSurvivalMode();
                                 break;
                             case 4:;
                                 break;

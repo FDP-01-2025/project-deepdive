@@ -1,10 +1,9 @@
 #ifndef PIECES_H
 #define PIECES_H
-#include "messages.h"
 #include "position.h"
 #include "submarine.h"
 #include <iostream>
-static int sleepTime;
+static int sleepTime=13;
 
 typedef struct
 {
@@ -61,7 +60,7 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
 
             if (submarine.oxygen >= 30)
             {
-                CongratsLevel2();
+            
                 exit(0);
             }
         }
