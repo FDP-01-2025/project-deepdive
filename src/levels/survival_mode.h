@@ -2,10 +2,10 @@
 #define SURVIVAL_MODE_H_INCLUDED
 
 
-#include "headers/rockets.h"
-#include "headers/game_time.h"
-#include "headers/timer.h"
-#include "headers/game_limits.h"
+#include "../headers/rockets.h"
+#include "../headers/game_time.h"
+#include "../headers/timer.h"
+#include "../headers/game_limits.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
 static Submarine survivalSubmarine;
@@ -49,15 +49,15 @@ static void InitGameMessage()
 
     for (int i = 0; i < 6; ++i)
     {
-        gotoxy(10, 2 + i);
+        gotoxy(10, 8 + i);
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
 
-    gotoxy(45, 9);
+    gotoxy(45, 15);
     std::cout << "[Press ENTER twice to continue]" << "\n\n";
 
-    gotoxy(35, 11);
+    gotoxy(35, 17);
     std::cout << ">>Dodge obstacles and survive ad long as possible<<" << "\n";
 
     std::cin.ignore();
@@ -65,7 +65,7 @@ static void InitGameMessage()
     system("cls");
 }
 
-static void GameOver()
+static void GameOverSurvivalMode()
 {
     system("cls");
     system("chcp 65001 > nul");
@@ -80,12 +80,12 @@ static void GameOver()
 
     for (int i = 0; i < 6; ++i)
     {
-        gotoxy(25, 2 + i);
+        gotoxy(25, 6 + i);
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
 
-    gotoxy(45, 9);
+    gotoxy(45, 13);
     std::cout << "[Press ENTER twice to continue]" << "\n\n";
 }
 
@@ -93,7 +93,7 @@ static void time(int duration)
 {
     int minutes = duration / 60;
     int seconds = duration % 60;
-    gotoxy(45, 12);
+    gotoxy(45, 15);
     std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
     std::cin.ignore();
     std::cin.get();
@@ -176,7 +176,7 @@ static void GameLoopSurvivalMode()
 
     SaveGameTimeToFile(duration);
 
-    GameOver();
+    GameOverSurvivalMode();
     time(duration);
 }
 

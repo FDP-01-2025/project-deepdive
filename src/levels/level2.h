@@ -2,15 +2,76 @@
 #define LEVEL2_H
 #include "../headers/fish.h"
 #include "../headers/pieces.h"
-#include "../headers/messages.h"
 #include "../headers/game_limits.h"
-#include "../headers/gameover2.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 /*
 OBJETIVO DEL NIVEL 2:
 -REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
 
 */
+
+static void InitGameMessagelevel2()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string titulo[7] = {
+        "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗               ██████╗ ",
+        "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║               ╚════██╗",
+        "██║      █████╗   ██║   ██║ █████╗   ██║                █████╔╝",
+        "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║               ██╔═══╝",
+        "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗          ██████╗",
+        "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝          ╚═════╝ ",
+        "                                                                    "
+    };
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
+        std::cout << titulo[i];
+    }
+
+    for (int i = 0; i < 7; ++i)
+    {
+        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
+        std::cout << titulo[i];
+    }
+
+    gotoxy(43, 15);
+    std::cout << "[ Press ENTER twice to continue ]";
+
+    gotoxy(30, 17);
+    std::cout << ">> OBJECTIVE: Collect the pieces to refill the oxygen bar! <<";
+
+    std::cin.ignore();
+    std::cin.get();
+    system("cls");
+}
+
+static void GameOverlevel2()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string texto[6] = {
+        " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
+        "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
+        "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
+        "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗",
+        "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
+        " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(25, 6 + i);
+        std::cout << texto[i] << "\n\n";
+    }
+    system("chcp 437 > nul");
+
+    gotoxy(45, 17);
+    std::cout << "[Press ENTER twice to continue]" << "\n\n";
+}
+
 
 static Submarine level2Submarine;
 static Fish level2Fishes[4];
@@ -22,9 +83,8 @@ extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel2()
 {   
-    
+    InitGameMessagelevel2();
     system("cls");
-    PrincipalObjectiveLevel2();
     gotoxy(0,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level2Submarine = {5, 15, 1, 3};
@@ -42,11 +102,13 @@ static void InitGamelevel2()
     level2NumPieces = 1;
 }
 
+
 static void GameLooplevel2()
 {
+    GameLimits();
     do
     {
-        GameLimits();
+        
         // para que en la siguiente vuelta se mida el nuevo deltaTime correctamente
         if (kbhit())
         {
@@ -67,7 +129,8 @@ static void GameLooplevel2()
         Sleep(sleepTime);
 
     } while (level2Submarine.lifes > 0);
-    GameOver2();
+    GameOverlevel2();
+
 }
 
 #endif

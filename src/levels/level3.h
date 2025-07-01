@@ -2,16 +2,70 @@
 #define LEVEL3_H
 
 #include "../headers/fish.h"
-#include "../headers/messages.h"
 #include "../headers/submarine.h"
 #include "../headers/game_limits.h"
-#include "../headers/gameover2.h"
 #include <chrono>
 
 static Submarine level3Submarine;
 static Submarine allySubmarine;
 static Fish level3Fishes[4];
 static int level3NumFishes;
+
+static void InitGameMessagelevel3()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string titulo[7] = {
+        "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗               ██████╗ ",
+        "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║               ╚════██╗",
+        "██║      █████╗   ██║   ██║ █████╗   ██║                █████╔╝",
+        "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║                ╚═══██╗",
+        "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗          ██████╔╝",
+        "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝          ╚═════╝ ",
+        "                                                                    "
+    };
+
+    for (int i = 0; i < 7; ++i)
+    {
+        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
+        std::cout << titulo[i];
+    }
+
+    gotoxy(43, 15);
+    std::cout << "[ Press ENTER twice to continue ]";
+
+    gotoxy(30, 17);
+    std::cout << ">> Principal Objective: Escort and protect the ally fish! <<";
+
+    std::cin.ignore();
+    std::cin.get();
+    system("cls");
+}
+
+static void GameOverlevel3()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string texto[6] = {
+        " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
+        "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
+        "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
+        "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗",
+        "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
+        " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(25, 6 + i);
+        std::cout << texto[i] << "\n\n";
+    }
+    system("chcp 437 > nul");
+
+    gotoxy(45, 17);
+    std::cout << "[Press ENTER twice to continue]" << "\n\n";
+}
 
 void PaintAllyFish(Submarine &ally)
 {
@@ -23,8 +77,9 @@ void DeleteAllyFish(Submarine &ally)
     
 }
 
-static void InitGameLevel3()
-{
+static void InitGamelevel3()
+{   
+    InitGameMessagelevel3();
     system("cls");
     gotoxy(0,1);
     std::cout << "Principal Objective: Escort the ally fish!";
@@ -43,7 +98,7 @@ static void InitGameLevel3()
     level3NumFishes = 4;
 }
 
-static void GameLoopLevel3()
+static void GameLooplevel3()
 {
     GameLimits();
     using namespace std::chrono;
@@ -75,7 +130,7 @@ static void GameLoopLevel3()
                 SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {40, 15});
                 std::cout << "El pez aliado fue devorado!!!";
                 Sleep(3000);
-                GameOver2();
+            
                 return;
             }
         }
@@ -85,7 +140,7 @@ static void GameLoopLevel3()
         auto elapsed = duration_cast<seconds>(currentTime - startTime).count();
         if (elapsed >= 180)
         {
-            CongratsLevel3();
+            
             return;
         }
 
@@ -99,6 +154,7 @@ static void GameLoopLevel3()
         Sleep(13);
 
     } while (level3Submarine.lifes > 0);
+    GameOverlevel3();
 }
 
 #endif
