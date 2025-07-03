@@ -6,11 +6,13 @@
 
 static void mostrarEstado(int score, int misilesDisponibles, int maxMisiles)
 {
-    gotoxy(2, 1);
-    std::cout << "Puntaje: " << score << "   ";
+    gotoxy(2, 0);
+    std::cout << "PUNTAJE: " << score << "        ";  // Espacios extra por si el valor anterior era mayor
 
-    gotoxy(2, 2);
-    std::cout << "Misiles: " << misilesDisponibles << "/" << maxMisiles << "   ";
+    gotoxy(2, 1);
+    std::cout << "MISILES: " << misilesDisponibles << "/" << maxMisiles << "       ";
 }
 
 #endif
+
+

@@ -28,6 +28,7 @@ const static void setColor(int fg)
 #include "../levels/level1.h"
 #include "../levels/level2.h"
 #include "../levels/level3.h"
+#include "../levels/level4.h"
 #include "../levels/survival_mode.h"
 #include "../headers/read_database.h"
 
@@ -228,7 +229,10 @@ const static void runMenu()
                                 InitGameSurvivalMode();
                                 GameLoopSurvivalMode();
                                 break;
-                            case 4:;
+                            case 4:
+                                system("cls");
+                                InitGamelevel4();
+                                GameLooplevel4();
                                 break;
                             case 5:;
                                 break;
