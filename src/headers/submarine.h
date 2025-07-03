@@ -48,18 +48,18 @@ void DeleteSubmarine(Submarine &submarine)
 void PaintHearts(Submarine &submarine)
 {
 
-    gotoxy(89, 1);
+    gotoxy(96, 1);
     std::cout << "Lifes: " << submarine.lifes;
-    gotoxy(100, 1);
+    gotoxy(107, 1);
     std::cout << "Hearts: ";
-    gotoxy(108, 1);
+    gotoxy(115, 1);
     std::cout << "   ";
     // Activa el UTF-8
     system("chcp 65001 > nul");
     for (int i = 0; i < submarine.heart; i++)
     {
         // Se usa ANSI para pintar de otro color los corazones
-        gotoxy(108 + i, 1);
+        gotoxy(115 + i, 1);
         std::cout << "\033[1;31m♥\033[0m";
     }
     // Restaura la codificación

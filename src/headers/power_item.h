@@ -32,7 +32,7 @@ static void mostrarItem()
 static void ocultarItem()
 {
     gotoxy(itemX, itemY);
-    std::cout << " ";
+    std::cout << "   ";
     itemVisible = false;
 }
 
@@ -43,8 +43,8 @@ static bool detectarColisionItem(const Submarine& sub)
 
     int subX = sub.x;
     int subY = sub.y;
-    const int subW = 10; // Cambia por el ancho real
-    const int subH = 3;  // Cambia por el alto real
+    const int subW = 12;
+    const int subH = 3;  
 
     int itemPosX = itemX;
     int itemPosY = itemY;
