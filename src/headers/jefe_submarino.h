@@ -32,7 +32,7 @@ void InicializarJefe(JefeSubmarino &jefe) {
 }
 
 void DibujarVidaJefe(JefeSubmarino &jefe) {
-    gotoxy(50, 1);
+    gotoxy(40, 1);
     std::cout << "\033[1;31mJEFE: [";
 
     int vidaRestante = (jefe.vida * 20) / 100;

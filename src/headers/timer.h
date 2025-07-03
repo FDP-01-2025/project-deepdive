@@ -5,7 +5,7 @@
 
 void Timer(int time)
 {
-    gotoxy(10, 1);
+    gotoxy(5, 1);
     std::cout << "Time: " << time <<" sec.";
 }
 #endif
