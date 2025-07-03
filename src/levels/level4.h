@@ -2,7 +2,7 @@
 #define LEVEL4_H
 #define MAX_MISSILES 100
 
-// --- LUEGO LOS INCLUDES ---
+// --- INCLUDES ---
 #include "../headers/position.h"
 #include "../headers/hide_cursor.h"
 #include "../headers/submarine.h"
@@ -17,7 +17,7 @@
 #include <ctime>
 #include <windows.h>
 
-// --- Tus variables y defines ---
+// ---variables ---
 static Submarine level4Submarine;
 static Fish level4Fishes[3];
 static int level4NumFishes;
