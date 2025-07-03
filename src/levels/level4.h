@@ -341,6 +341,7 @@ void InitGamelevel4()
 void GameLooplevel4()
 {
     char tecla = 0;
+    bool paint = false;
 
     do
     {
@@ -441,12 +442,15 @@ void GameLooplevel4()
             {
                 CollisionFish(level4Fishes[i], level4Submarine);
             }
-            else
+            else if (CollisionWithInvulnerability(level4Fishes[i], level4Submarine))
             {
-                PaintSubmarine(level4Submarine);
+                paint = true;
             }
         }
-
+        if (paint)
+        {
+            PaintSubmarine(level4Submarine);
+        }
         actualizarPoder();
         actualizarInvulnerabilidad();
 
