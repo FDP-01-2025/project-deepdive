@@ -48,10 +48,9 @@ static void MoveFish(Fish &fish)
     PaintFish(fish);
 }
 
-
 static void CollisionFish(Fish &fish, Submarine &submarine)
 {
-    //Si la posición del pescado es igual a la del submarino, se detecta la colisión
+    // Si la posición del pescado es igual a la del submarino, se detecta la colisión
     if (fish.x >= submarine.x && fish.x <= submarine.x + 11 && fish.y >= submarine.y && fish.y <= submarine.y + 3)
     {
         submarine.heart--;
@@ -63,5 +62,11 @@ static void CollisionFish(Fish &fish, Submarine &submarine)
         fish.x = 110;
         fish.y = rand() % 20 + 3;
     }
+}
+
+static bool CollisionWithInvulnerability(Fish &fish, Submarine &submarine)
+{
+    fish.x >= submarine.x &&fish.x <= submarine.x + 11 && fish.y >= submarine.y &&fish.y <= submarine.y + 3;
+
 }
 #endif
