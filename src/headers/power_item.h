@@ -38,11 +38,25 @@ static void ocultarItem()
 
 static bool detectarColisionItem(const Submarine& sub)
 {
-    return itemVisible &&
-           sub.x + 6 >= itemX &&
-           sub.x <= itemX + 1 &&
-           sub.y + 2 == itemY;
+    if (!itemVisible)
+        return false;
+
+    int subX = sub.x;
+    int subY = sub.y;
+    const int subW = 10; // Cambia por el ancho real
+    const int subH = 3;  // Cambia por el alto real
+
+    int itemPosX = itemX;
+    int itemPosY = itemY;
+
+    if (subX <= itemPosX && itemPosX < subX + subW &&  subY <= itemPosY && itemPosY < subY + subH)
+    {
+        return true;
+    }
+
+    return false;
 }
+
 
 static void verificarReaparicionItem()
 {
@@ -61,4 +75,4 @@ static void reiniciarItem()
     itemVisible = false;
 }
 
-#endif
+#endif // POWER_ITEM_H
