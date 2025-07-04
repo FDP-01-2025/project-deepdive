@@ -2,7 +2,7 @@
 #define LEVEL4_H
 #define MAX_MISSILES 100
 
-// --- LUEGO LOS INCLUDES ---
+// --- INCLUDES ---
 #include "../headers/position.h"
 #include "../headers/hide_cursor.h"
 #include "../headers/submarine.h"
@@ -17,7 +17,7 @@
 #include <ctime>
 #include <windows.h>
 
-// --- Tus variables y defines ---
+// ---variables ---
 static Submarine level4Submarine;
 static Fish level4Fishes[3];
 static int level4NumFishes;
@@ -31,33 +31,112 @@ static int level4MissilesCout;
 
 static int score = 0;
 
-// Misiles jugador
 static int misilesDisponibles = 10;
 static const int maxMisilesPorRecarga = 10;
 static bool puedeDisparar = true;
 static double tiempoRecarga = 1000;
 static clock_t tiempoUltimoDisparo;
 
-// Poder de recarga rápida
 static bool poderRecargaActiva = false;
 static double duracionPoder = 5000;
 static clock_t tiempoInicioPoder;
 
-// Jefe
 static JefeSubmarino jefe;
 static bool jefeActivo = false;
 static bool jefeDerrotado = false;
 static clock_t tiempoAparicionJefe;
-static const double tiempoParaJefe = 30000; // 30 segundos
+static const double tiempoParaJefe = 30000;
 
-// ------------------ FUNCIONES DE PODER -----------------------
+// 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
+// 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
+static void mensajeInicioJefeFinal()
+{
+    system("cls");
+    system("chcp 65001 > nul");
+
+    const std::string titulo[] = {
+        "███████╗██╗███╗   ██╗ █████╗ ██║            ███████╗   ████╗  ██████╗ ██████╗ ",
+        "██╔════╝██║████╗  ██║██╔══██╗██║            ██╔═══██╗ ██╔═██╗ ██╔═══╝ ██╔═══╝ ",
+        "█████╗  ██║██╔██╗ ██║███████║██║            ███████╔╝ ██║ ██║ ╚█████╗ ╚█████╗ ",
+        "██╔══╝  ██║██║╚██╗██║██╔══██║██║            ██╔═══██╗ ██║ ██║ ╚═══██╗ ╚═══██╗ ",
+        "██║     ██║██║ ╚████║██║  ██║███████╗       ███████╔╝ ╚████╔╝ █████╔╝ █████╔╝ ",
+        "╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝        ╚═════╝   ╚═══╝  ╚════╝  ╚═══╝    ",
+    };
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(15, 6 + i);
+        std::cout << titulo[i];
+    }
+
+    gotoxy(32, 14);
+    std::cout << "[ Press ENTER to face the Final Boss ]";
+
+    while (true)
+    {
+        if (kbhit())
+        {
+            char tecla = getch();
+            if (tecla == 13) break;
+        }
+    }
+
+    // 🟡 Mostrar historia con título
+    system("cls");
+
+    const std::string tituloHistoria[] = {
+        "██╗  ██╗██╗ ███████╗████████╗ ██████╗ ██████╗ ██╗   ██╗",
+        "██║  ██║██║ ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
+        "███████║██║ ███████╗   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
+        "██╔══██║██║ ╚════██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
+        "██║  ██║██║ ███████║   ██║   ╚██████╔╝██   ██║   ██║   ",
+        "╚═╝  ╚═╝╚═╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   "
+    };
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(20, 3 + i);
+        std::cout << tituloHistoria[i];
+    }
+
+    // Historia narrativa
+    gotoxy(10, 11);
+    std::cout << "Después de pasar todos los obstaculos, el submarino se adentra en aguas desconocidas...";
+
+    gotoxy(10, 13);
+    std::cout << "El mar se vuelve silencioso. Una sombra inmensa se aproxima.";
+
+    gotoxy(10, 15);
+    std::cout << "Los sistemas del submarino detectan una presencia hostil colosal.";
+
+    gotoxy(10, 17);
+    std::cout << "Es el Mega Submarino, armado hasta los dientes y con sed de destrucción.";
+
+    gotoxy(10, 19);
+    std::cout << "Tú eres la última esperanza para detenerlo.";
+
+    gotoxy(25, 22);
+    std::cout << "[ Press ENTER to comenzar la batalla final ]";
+
+    while (true)
+    {
+        if (kbhit())
+        {
+            char tecla = getch();
+            if (tecla == 13) break;
+        }
+    }
+
+    system("cls");
+}
+
+
 
 static void activarPoderRecarga()
 {
     poderRecargaActiva = true;
     tiempoRecarga = 300;
     tiempoInicioPoder = clock();
-
     misilesDisponibles = maxMisilesPorRecarga;
     puedeDisparar = true;
     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
@@ -75,32 +154,6 @@ static void actualizarPoder()
         }
     }
 }
-
-// ------------------ FUNCIONES DEL JEFE -----------------------
-
-// static void dibujarVidaJefe()
-// {
-
-//     // Dibuja la barra de vida del jefe en la parte superior central
-//     gotoxy(50, 1);
-//     std::cout << "\033[1;31mJEFE: [";
-
-//     int vidaRestante = (jefe.vida * 20) / 100; // 20 caracteres de ancho
-
-//     // Parte llena de la barra
-//     for (int i = 0; i < vidaRestante; i++)
-//     {
-//         std::cout << "|";
-//     }
-
-//     // Parte vacía de la barra
-//     for (int i = vidaRestante; i < 20; i++)
-//     {
-//         std::cout << " ";
-//     }
-
-//     std::cout << "] " << jefe.vida << "/100\033[0m";
-// }
 
 static void limpiarDisparosJefe()
 {
@@ -127,20 +180,16 @@ static void moverDisparosJefe()
     for (int i = 0; i < jefeMissilesCout;)
     {
         gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
-        std::cout << "  "; // Limpiar anterior
-
-        jefeMissiles[i].x -= 2; // Mover hacia la izquierda
-
-        // Verificar si el misil sigue en pantalla
+        std::cout << "  ";
+        jefeMissiles[i].x -= 2;
         if (jefeMissiles[i].x > 2)
         {
             gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
-            std::cout << "\033[1;31m<<\033[0m"; // Dibujar nuevo
+            std::cout << "\033[1;31m<<\033[0m";
             i++;
         }
         else
         {
-            // Eliminar misil si sale de pantalla
             for (int j = i; j < jefeMissilesCout - 1; j++)
             {
                 jefeMissiles[j] = jefeMissiles[j + 1];
@@ -152,23 +201,21 @@ static void moverDisparosJefe()
 
 static void inicializarJefe()
 {
-    jefe.x = 100; // Posición inicial a la derecha
+    jefe.x = 100;
     jefe.y = 10;
     jefe.vida = 100;
     jefe.estaEnojado = false;
-    jefe.velocidadDisparo = 50; // Más lento que antes
+    jefe.velocidadDisparo = 50;
     jefeActivo = true;
     jefeDerrotado = false;
     PintarJefeSubmarino(jefe);
     DibujarVidaJefe(jefe);
 }
 
-// NUEVA FUNCIÓN IMPLEMENTADA AQUÍ
 static void DetectarImpactoMisilesJugador(JefeSubmarino &jefe)
 {
-    const int anchoJefe = 18; // Ancho área del jefe
-    const int altoJefe = 4;   // Alto área del jefe
-
+    const int anchoJefe = 18;
+    const int altoJefe = 4;
     for (int i = 0; i < level4MissilesCout;)
     {
         bool impacto =
@@ -180,15 +227,11 @@ static void DetectarImpactoMisilesJugador(JefeSubmarino &jefe)
         if (impacto)
         {
             RecibirDanoJefe(jefe, DANO_MISIL_JUGADOR);
-
             gotoxy(level4Missiles[i].x, level4Missiles[i].y);
             std::cout << "  ";
-
             level4Missiles[i] = level4Missiles[level4MissilesCout - 1];
             level4MissilesCout--;
-
             DibujarVidaJefe(jefe);
-
             if (jefe.vida <= 0)
             {
                 jefeDerrotado = true;
@@ -199,52 +242,36 @@ static void DetectarImpactoMisilesJugador(JefeSubmarino &jefe)
                 break;
             }
         }
-        else
-        {
-            i++;
-        }
+        else i++;
     }
 }
 
 static void actualizarJefe()
 {
-    if (!jefeActivo || jefeDerrotado)
-        return;
-
-    // Mover jefe más lentamente (cada 2 iteraciones)
+    if (!jefeActivo || jefeDerrotado) return;
     static int contadorMovimiento = 0;
     contadorMovimiento++;
     if (contadorMovimiento % 2 == 0)
     {
         BorrarJefeSubmarino(jefe);
-
-        // Movimiento vertical más lento y suave
         static bool moviendoseAbajo = true;
         if (moviendoseAbajo)
         {
-            jefe.y += (rand() % 2); // 0 o 1
-            if (jefe.y >= 20)
-                moviendoseAbajo = false;
+            jefe.y += (rand() % 2);
+            if (jefe.y >= 20) moviendoseAbajo = false;
         }
         else
         {
-            jefe.y -= (rand() % 2); // 0 o 1
-            if (jefe.y <= 3)
-                moviendoseAbajo = true;
+            jefe.y -= (rand() % 2);
+            if (jefe.y <= 3) moviendoseAbajo = true;
         }
-
         PintarJefeSubmarino(jefe);
     }
-
-    // Disparar aleatoriamente
     if (rand() % jefe.velocidadDisparo == 0)
     {
         dispararJefe();
     }
-
     moverDisparosJefe();
-
-    // Verificar colisión de misiles del jefe con el submarino
     for (int i = 0; i < jefeMissilesCout;)
     {
         if ((jefeMissiles[i].x >= level4Submarine.x && jefeMissiles[i].x <= level4Submarine.x + 12) &&
@@ -252,7 +279,6 @@ static void actualizarJefe()
         {
             if (!invulnerableActiva)
             {
-
                 level4Submarine.heart--;
                 if (level4Submarine.heart > 0)
                 {
@@ -261,24 +287,16 @@ static void actualizarJefe()
                 DestroySubmarine(level4Submarine);
                 PaintSubmarine(level4Submarine);
                 PaintHearts(level4Submarine);
-
-                PaintHearts(level4Submarine);
             }
             gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
             std::cout << "  ";
             for (int j = i; j < jefeMissilesCout - 1; j++)
-            {
                 jefeMissiles[j] = jefeMissiles[j + 1];
-            }
             jefeMissilesCout--;
         }
-        else
-        {
-            i++;
-        }
+        else i++;
     }
 
-    // Verificar colisión directa del submarino con el jefe
     if (!invulnerableActiva &&
         ((level4Submarine.x + 12 >= jefe.x && level4Submarine.x <= jefe.x + 18) &&
          (level4Submarine.y + 2 >= jefe.y && level4Submarine.y <= jefe.y + 3)))
@@ -288,52 +306,42 @@ static void actualizarJefe()
     }
 }
 
-// ------------------ JUEGO -----------------------
-
 static void actualizarRecarga(char tecla)
 {
     if (tecla == 32 && puedeDisparar && misilesDisponibles > 0 && level4MissilesCout < MAX_MISSILES)
     {
-        if (misilesDisponibles > 0)
+        level4Missiles[level4MissilesCout].x = level4Submarine.x + 12;
+        level4Missiles[level4MissilesCout].y = level4Submarine.y + 2;
+        level4MissilesCout++;
+        misilesDisponibles--;
+        if (misilesDisponibles == 0)
         {
-            level4Missiles[level4MissilesCout].x = level4Submarine.x + 12;
-            level4Missiles[level4MissilesCout].y = level4Submarine.y + 2;
-            level4MissilesCout++;
-            misilesDisponibles--;
-
-            if (misilesDisponibles == 0)
-            {
-                puedeDisparar = false;
-                tiempoUltimoDisparo = clock();
-            }
-
-            mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
+            puedeDisparar = false;
+            tiempoUltimoDisparo = clock();
         }
+        mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
     }
 }
 
 void InitGamelevel4()
 {
+    mensajeInicioJefeFinal(); // 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
+
     level4Submarine = {5, 15, 3, 3};
     PaintSubmarine(level4Submarine);
     PaintHearts(level4Submarine);
-
     level4Fishes[0] = {90, 3};
     level4Fishes[1] = {80, 12};
     level4Fishes[2] = {100, 17};
-
     level4NumFishes = 3;
     level4MissilesCout = 0;
     jefeMissilesCout = 0;
-
     score = 0;
     misilesDisponibles = maxMisilesPorRecarga;
     puedeDisparar = true;
-
     jefeActivo = false;
     jefeDerrotado = false;
     tiempoAparicionJefe = clock();
-
     reiniciarItem();
     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
 }
@@ -342,46 +350,30 @@ void GameLooplevel4()
 {
     char tecla = 0;
     bool paint = false;
-
     do
     {
         HideCursor();
-
         if (kbhit())
         {
             tecla = getch();
-
             actualizarRecarga(tecla);
             MoveSubmarine(tecla, level4Submarine);
         }
 
-        // Activar jefe después de 30 segundos si no está activo
-        if (!jefeActivo && !jefeDerrotado &&
-            (clock() - tiempoAparicionJefe) >= tiempoParaJefe)
+        if (!jefeActivo && !jefeDerrotado && (clock() - tiempoAparicionJefe) >= tiempoParaJefe)
         {
             inicializarJefe();
         }
 
-        // --- RECARGA ---
         mostrarItem();
         verificarReaparicionItem();
-        if (detectarColisionItem(level4Submarine))
-        {
-            ocultarItem();
-            activarPoderRecarga();
-        }
+        if (detectarColisionItem(level4Submarine)) { ocultarItem(); activarPoderRecarga(); }
 
-        // --- INVULNERABILIDAD ---
         mostrarItemInvulnerable();
         verificarReaparicionItemInvulnerable();
-        if (detectarColisionItemInvulnerable(level4Submarine))
-        {
-            ocultarItemInvulnerable();
-            activarInvulnerabilidad();
-        }
+        if (detectarColisionItemInvulnerable(level4Submarine)) { ocultarItemInvulnerable(); activarInvulnerabilidad(); }
         actualizarInvulnerabilidad();
 
-        // Mover misiles del jugador
         for (int i = 0; i < level4MissilesCout;)
         {
             MoveMissil(level4Missiles[i]);
@@ -392,24 +384,18 @@ void GameLooplevel4()
                 level4Missiles[i] = level4Missiles[level4MissilesCout - 1];
                 level4MissilesCout--;
             }
-            else
-            {
-                i++;
-            }
+            else i++;
         }
 
-        // Actualizar jefe si está activo
         if (jefeActivo && !jefeDerrotado)
         {
             DetectarImpactoMisilesJugador(jefe);
             actualizarJefe();
         }
 
-        // Colisión misil vs pez
         for (int i = 0; i < level4MissilesCout;)
         {
             bool erasedMissil = false;
-
             for (int j = 0; j < level4NumFishes; j++)
             {
                 if ((level4Missiles[i].x == level4Fishes[j].x || level4Missiles[i].x == level4Fishes[j].x + 3 || level4Missiles[i].x == level4Fishes[j].x + 6) &&
@@ -420,42 +406,76 @@ void GameLooplevel4()
                     level4Missiles[i] = level4Missiles[level4MissilesCout - 1];
                     level4MissilesCout--;
                     erasedMissil = true;
-
                     gotoxy(level4Fishes[j].x, level4Fishes[j].y);
                     std::cout << "         ";
                     level4Fishes[j].x = 110;
                     level4Fishes[j].y = rand() % 20 + 3;
-
                     score += 10;
                     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
                     break;
                 }
             }
-            if (!erasedMissil)
-                i++;
+            if (!erasedMissil) i++;
         }
 
         for (int i = 0; i < level4NumFishes; i++)
         {
             MoveFish(level4Fishes[i]);
-            if (!invulnerableActiva)
-            {
-                CollisionFish(level4Fishes[i], level4Submarine);
-            }
-            else if (CollisionWithInvulnerability(level4Fishes[i], level4Submarine))
-            {
-                paint = true;
-            }
+            if (!invulnerableActiva) CollisionFish(level4Fishes[i], level4Submarine);
+            else if (CollisionWithInvulnerability(level4Fishes[i], level4Submarine)) paint = true;
         }
-        if (paint)
-        {
-            PaintSubmarine(level4Submarine);
-        }
+        if (paint) PaintSubmarine(level4Submarine);
+
         actualizarPoder();
         actualizarInvulnerabilidad();
 
         Sleep(10);
-    } while (level4Submarine.lifes > 0);
+
+    } while (level4Submarine.lifes > 0 && !jefeDerrotado);
+
+   
+    system("cls");
+    gotoxy(45, 12);
+        system("cls");
+    gotoxy(45, 12);
+    
+    if (jefeDerrotado)
+    {
+          mensajeVictoria[] = {
+           
+           
+            "██╗   ██╗██╗ ██████╗ ████████╗ ██████╗ ██████╗ ██╗   ██╗",
+            "██║   ██║██║██╔═══██╗╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
+            "██║   ██║██║██║   ██║   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
+            "╚██╗ ██╔╝██║██║   ██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
+            " ╚████╔╝ ██║╚██████╔╝   ██║   ╚██████╔╝██║  ██║   ██║   ",
+            "  ╚═══╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ",
+        };
+
+        system("cls");
+        for (int i = 0; i < 6; ++i)
+        {
+            gotoxy(20, 6 + i);
+            std::cout << "\033[1;32m" << mensajeVictoria[i] << "\033[0m";
+        }
+
+        gotoxy(32, 14);
+        std::cout << "\033[1;32m[ Press ENTER to continue ]\033[0m";
+
+        while (true)
+        {
+            if (kbhit() && getch() == 13)
+                break;
+        }
+    }
+    else
+    {
+        gotoxy(45, 12);
+        std::cout << "\033[1;31mGAME OVER!\033[0m";
+        Sleep(3000);
+    }
+
+ 
 }
 
 #endif
