@@ -77,7 +77,8 @@ static void mensajeInicioJefeFinal()
         if (kbhit())
         {
             char tecla = getch();
-            if (tecla == 13) break;
+            if (tecla == 13)
+                break;
         }
     }
 
@@ -90,8 +91,7 @@ static void mensajeInicioJefeFinal()
         "███████║██║ ███████╗   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
         "██╔══██║██║ ╚════██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
         "██║  ██║██║ ███████║   ██║   ╚██████╔╝██   ██║   ██║   ",
-        "╚═╝  ╚═╝╚═╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   "
-    };
+        "╚═╝  ╚═╝╚═╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   "};
 
     for (int i = 0; i < 6; ++i)
     {
@@ -123,14 +123,77 @@ static void mensajeInicioJefeFinal()
         if (kbhit())
         {
             char tecla = getch();
-            if (tecla == 13) break;
+            if (tecla == 13)
+                break;
         }
     }
 
     system("cls");
 }
 
+static void GameOverLevel4()
+{
+    system("cls");
+    system("chcp 65001 > nul");
 
+    const std::string texto[6] = {
+        " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
+        "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
+        "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
+        "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗",
+        "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
+        " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
+
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(25, 6 + i);
+        std::cout << texto[i] << "\n\n";
+    }
+    system("chcp 437 > nul");
+
+    gotoxy(45, 13);
+    std::cout << "[Press ENTER twice to continue]" << "\n\n";
+
+    while (true)
+    {
+        if (kbhit())
+        {
+            char tecla = getch();
+            if (tecla == 13)
+                break;
+        }
+    }
+}
+
+static void Victory()
+{
+    system("chcp 65001 > nul");
+    const std::string mensajeVictoria[6] = {
+
+        "██╗   ██╗██╗ ██████╗ ████████╗ ██████╗ ██████╗ ██╗   ██╗",
+        "██║   ██║██║██╔═══██╗╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
+        "██║   ██║██║██║   ██║   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
+        "╚██╗ ██╔╝██║██║   ██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
+        " ╚████╔╝ ██║╚██████╔╝   ██║   ╚██████╔╝██║  ██║   ██║   ",
+        "  ╚═══╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ",
+    };
+    system("cls");
+    for (int i = 0; i < 6; ++i)
+    {
+        gotoxy(20, 6 + i);
+        std::cout << "\033[1;32m" << mensajeVictoria[i] << "\033[0m";
+    }
+    system("chcp 437 > nul");
+
+    gotoxy(32, 14);
+    std::cout << "\033[1;32m[ Press ENTER to continue ]\033[0m";
+
+    while (true)
+    {
+        if (kbhit() && getch() == 13)
+            break;
+    }
+}
 
 static void activarPoderRecarga()
 {
@@ -242,13 +305,15 @@ static void DetectarImpactoMisilesJugador(JefeSubmarino &jefe)
                 break;
             }
         }
-        else i++;
+        else
+            i++;
     }
 }
 
 static void actualizarJefe()
 {
-    if (!jefeActivo || jefeDerrotado) return;
+    if (!jefeActivo || jefeDerrotado)
+        return;
     static int contadorMovimiento = 0;
     contadorMovimiento++;
     if (contadorMovimiento % 2 == 0)
@@ -258,12 +323,14 @@ static void actualizarJefe()
         if (moviendoseAbajo)
         {
             jefe.y += (rand() % 2);
-            if (jefe.y >= 20) moviendoseAbajo = false;
+            if (jefe.y >= 20)
+                moviendoseAbajo = false;
         }
         else
         {
             jefe.y -= (rand() % 2);
-            if (jefe.y <= 3) moviendoseAbajo = true;
+            if (jefe.y <= 3)
+                moviendoseAbajo = true;
         }
         PintarJefeSubmarino(jefe);
     }
@@ -294,7 +361,8 @@ static void actualizarJefe()
                 jefeMissiles[j] = jefeMissiles[j + 1];
             jefeMissilesCout--;
         }
-        else i++;
+        else
+            i++;
     }
 
     if (!invulnerableActiva &&
@@ -367,11 +435,19 @@ void GameLooplevel4()
 
         mostrarItem();
         verificarReaparicionItem();
-        if (detectarColisionItem(level4Submarine)) { ocultarItem(); activarPoderRecarga(); }
+        if (detectarColisionItem(level4Submarine))
+        {
+            ocultarItem();
+            activarPoderRecarga();
+        }
 
         mostrarItemInvulnerable();
         verificarReaparicionItemInvulnerable();
-        if (detectarColisionItemInvulnerable(level4Submarine)) { ocultarItemInvulnerable(); activarInvulnerabilidad(); }
+        if (detectarColisionItemInvulnerable(level4Submarine))
+        {
+            ocultarItemInvulnerable();
+            activarInvulnerabilidad();
+        }
         actualizarInvulnerabilidad();
 
         for (int i = 0; i < level4MissilesCout;)
@@ -384,7 +460,8 @@ void GameLooplevel4()
                 level4Missiles[i] = level4Missiles[level4MissilesCout - 1];
                 level4MissilesCout--;
             }
-            else i++;
+            else
+                i++;
         }
 
         if (jefeActivo && !jefeDerrotado)
@@ -415,16 +492,20 @@ void GameLooplevel4()
                     break;
                 }
             }
-            if (!erasedMissil) i++;
+            if (!erasedMissil)
+                i++;
         }
 
         for (int i = 0; i < level4NumFishes; i++)
         {
             MoveFish(level4Fishes[i]);
-            if (!invulnerableActiva) CollisionFish(level4Fishes[i], level4Submarine);
-            else if (CollisionWithInvulnerability(level4Fishes[i], level4Submarine)) paint = true;
+            if (!invulnerableActiva)
+                CollisionFish(level4Fishes[i], level4Submarine);
+            else if (CollisionWithInvulnerability(level4Fishes[i], level4Submarine))
+                paint = true;
         }
-        if (paint) PaintSubmarine(level4Submarine);
+        if (paint)
+            PaintSubmarine(level4Submarine);
 
         actualizarPoder();
         actualizarInvulnerabilidad();
@@ -433,48 +514,21 @@ void GameLooplevel4()
 
     } while (level4Submarine.lifes > 0 && !jefeDerrotado);
 
-   
     system("cls");
     gotoxy(45, 12);
-        system("cls");
+    system("cls");
     gotoxy(45, 12);
-    
+
     if (jefeDerrotado)
     {
-        const std::string mensajeVictoria[] = {
-
-            "██╗   ██╗██╗ ██████╗ ████████╗ ██████╗ ██████╗ ██╗   ██╗",
-            "██║   ██║██║██╔═══██╗╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
-            "██║   ██║██║██║   ██║   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
-            "╚██╗ ██╔╝██║██║   ██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
-            " ╚████╔╝ ██║╚██████╔╝   ██║   ╚██████╔╝██║  ██║   ██║   ",
-            "  ╚═══╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ",
-        };
-
-        system("cls");
-        for (int i = 0; i < 6; ++i)
-        {
-            gotoxy(20, 6 + i);
-            std::cout << "\033[1;32m" << mensajeVictoria[i] << "\033[0m";
-        }
-
-        gotoxy(32, 14);
-        std::cout << "\033[1;32m[ Press ENTER to continue ]\033[0m";
-
-        while (true)
-        {
-            if (kbhit() && getch() == 13)
-                break;
-        }
+        Victory();
     }
     else
     {
         gotoxy(45, 12);
-        std::cout << "\033[1;31mGAME OVER!\033[0m";
+        GameOverLevel4();
         Sleep(3000);
     }
-
- 
 }
 
 #endif
