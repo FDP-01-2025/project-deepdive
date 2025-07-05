@@ -12,13 +12,6 @@
 // Handle de consola
 const static HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-// Ubica el cursor
-const static void goTo(int x, int y)
-{
-    COORD pos = {SHORT(x), SHORT(y)};
-    SetConsoleCursorPosition(hConsole, pos);
-}
-
 // Cambia color de texto
 const static void setColor(int fg)
 {
@@ -28,9 +21,10 @@ const static void setColor(int fg)
 #include "../levels/level1.h"
 #include "../levels/level2.h"
 #include "../levels/level3.h"
-#include "../levels/level4.h"
+// #include "../levels/level4.h"
 #include "../levels/survival_mode.h"
 #include "../headers/read_database.h"
+#include "../headers/hide_cursor.h"
 
 // --- Arte ASCII del título ---
 const int TITLE_ROWS = 9;
@@ -44,6 +38,8 @@ const std::string titleLines[TITLE_ROWS] = {
     "╚═════╝ ╚══════╝╚══════╝╚═╝         ╚═════╝ ╚═╝  ╚═══╝  ╚══════╝",
     "ESTE MENU AÚN ESTÁ EN DESARROLLO, POR FAVOR SEA PACIENTE, GRACIAS, BESOS",
     "                                                                       "};
+
+// Función para mostrar scores de los jugadores
 
 // Color aleatorio (1..15)
 const static int randomColor()
@@ -59,7 +55,7 @@ const static void drawTitle(int color)
 
     for (int i = 0; i < TITLE_ROWS; ++i)
     {
-        goTo(0, i);
+        gotoxy(0, i);
         std::cout << titleLines[i];
     }
     system("chcp 437 > nul");
@@ -70,7 +66,7 @@ const static void drawMenuOption(int row, bool selected, const std::string &text
 {
 
     int y = TITLE_ROWS + row;
-    goTo(0, y);
+    gotoxy(0, y);
     setColor(selected ? 14 : 7);
     system("chcp 65001 > nul");
     std::cout << (selected ? "➤ " : "  ")
@@ -87,9 +83,9 @@ const static void MenuBorder(int linesHigh)
     int yBottom = TITLE_ROWS + linesHigh;
     for (int x = 0; x < MENU_WIDTH; ++x)
     {
-        goTo(x, yTop);
+        gotoxy(x, yTop);
         std::cout << ' ';
-        goTo(x, yBottom);
+        gotoxy(x, yBottom);
         std::cout << ' ';
     }
 }
@@ -100,9 +96,9 @@ const static void runMenu()
     // setlocale(LC_ALL, "es_ES.UTF-8");
     srand((unsigned)time(nullptr));
 
-    const std::string mainOpts[] = {"Start Game", "Options", "High Scores", "Exit"};
+    const std::string mainOpts[] = {"Start Levels", "High Scores", "Exit"};
     const std::string levelOpts[] = {
-        "Nivel 1", "Nivel 2", "Nivel 3",
+        "Level 1", "Level 2", "Level 3",
         "SurvivalMode", "Nivel 5", "Regresar"};
     const int N_main = sizeof(mainOpts) / sizeof(mainOpts[0]);
     const int N_level = sizeof(levelOpts) / sizeof(levelOpts[0]);
@@ -169,14 +165,25 @@ const static void runMenu()
                         // Borra menú principal
                         for (int i = 0; i < N_main; ++i)
                         {
-                            goTo(0, TITLE_ROWS + i);
+                            gotoxy(0, TITLE_ROWS + i);
                             std::cout << std::string(MENU_WIDTH, ' ');
                         }
                         // Pinta submenú
                         for (int i = 0; i < N_level; ++i)
                             drawMenuOption(i, i == selected, levelOpts[i]);
                     }
-                    else if (selected == 3)
+                    else if (selected == 1) // High Scores
+                    {
+                        readFile("database/db_deepdive.txt");
+
+                        // Redibuja el menú principal
+                        system("cls");
+                        drawTitle(titleColor);
+                        MenuBorder(linesHigh);
+                        for (int i = 0; i < N_main; ++i)
+                            drawMenuOption(i, i == selected, mainOpts[i]);
+                    }
+                    else if (selected == 2)
                     {
                         // Salir
                         return;
@@ -194,7 +201,7 @@ const static void runMenu()
                         // Borra niveles
                         for (int i = 0; i < N_level; ++i)
                         {
-                            goTo(0, TITLE_ROWS + i);
+                            gotoxy(0, TITLE_ROWS + i);
                             std::cout << std::string(MENU_WIDTH, ' ');
                         }
                         // Vuelve a menú principal
@@ -231,8 +238,8 @@ const static void runMenu()
                                 break;
                             case 4:
                                 system("cls");
-                                InitGamelevel4();
-                                GameLooplevel4();
+                                // InitGamelevel4();
+                                // GameLooplevel4();
                                 break;
                             case 5:;
                                 break;
@@ -259,7 +266,7 @@ const static void runMenu()
                     selected = 0;
                     for (int i = 0; i < N_level; ++i)
                     {
-                        goTo(0, TITLE_ROWS + i);
+                        gotoxy(0, TITLE_ROWS + i);
                         std::cout << std::string(MENU_WIDTH, ' ');
                     }
                     for (int i = 0; i < N_main; ++i)
