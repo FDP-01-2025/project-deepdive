@@ -8,7 +8,6 @@
 #include "../headers/submarine.h"
 #include "../headers/missiles.h"
 #include "../headers/fish.h"
-#include "../headers/hud.h"
 #include "../headers/power_item.h"
 #include "../headers/invulnerability.h"
 #include "../headers/jefe_submarino.h"
@@ -110,10 +109,10 @@ static void mensajeInicioJefeFinal()
     std::cout << "Los sistemas del submarino detectan una presencia hostil colosal.";
 
     gotoxy(10, 17);
-    std::cout << "Es el Mega Submarino, armado hasta los dientes y con sed de destrucción.";
+    std::cout << "Es la Mega Nave alienígena, armada hasta los dientes y con sed de destrucción.";
 
     gotoxy(10, 19);
-    std::cout << "Tú eres la última esperanza para detenerlo.";
+    std::cout << "Tú eres la última esperanza para detenerla.";
 
     gotoxy(25, 22);
     std::cout << "[ Press ENTER to comenzar la batalla final ]";
@@ -195,6 +194,15 @@ static void Victory()
     }
 }
 
+  static void mostrarEstado(int score, int misilesDisponibles, int maxMisiles)
+{
+    gotoxy(2, 0);
+    std::cout << "PUNTAJE: " << score << "        ";
+
+    gotoxy(2, 1);
+    std::cout << "MISILES: " << misilesDisponibles << "/" << maxMisiles << "       ";
+}
+
 static void activarPoderRecarga()
 {
     poderRecargaActiva = true;
@@ -261,6 +269,17 @@ static void moverDisparosJefe()
         }
     }
 }
+static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe) {
+    // Verificamos si el área del submarino y el jefe se solapan
+    if ((sub.x + 12 >= jefe.x && sub.x <= jefe.x + 18) && // ancho
+        (sub.y + 2 >= jefe.y && sub.y <= jefe.y + 3))     // alto
+    {
+        // Si chocan, submarino muere de una
+        sub.heart = 0;
+        sub.lifes = 0;
+    }
+}
+
 
 static void inicializarJefe()
 {
@@ -364,7 +383,8 @@ static void actualizarJefe()
         else
             i++;
     }
-
+    // Verificar colisión entre el submarino y el jefe
+    DetectarColisionSubmarinoConJefe(level4Submarine, jefe);
     if (!invulnerableActiva &&
         ((level4Submarine.x + 12 >= jefe.x && level4Submarine.x <= jefe.x + 18) &&
          (level4Submarine.y + 2 >= jefe.y && level4Submarine.y <= jefe.y + 3)))
@@ -394,7 +414,6 @@ static void actualizarRecarga(char tecla)
 void InitGamelevel4()
 {
     mensajeInicioJefeFinal(); // 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
-
     level4Submarine = {5, 15, 3, 3};
     PaintSubmarine(level4Submarine);
     PaintHearts(level4Submarine);
