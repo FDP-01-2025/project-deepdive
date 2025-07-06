@@ -15,6 +15,8 @@
 #include <conio.h>
 #include <ctime>
 #include <windows.h>
+#include <fstream>
+#include <string>
 
 // ---variables ---
 static Submarine level4Submarine;
@@ -433,8 +435,10 @@ void InitGamelevel4()
     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
 }
 
-void GameLooplevel4()
-{
+ void guardarPuntaje(const std::string& nombre, int puntaje);
+ void mostrarPuntajesGuardados();
+
+void GameLooplevel4() {
     char tecla = 0;
     bool paint = false;
     do
@@ -539,9 +543,21 @@ void GameLooplevel4()
     gotoxy(45, 12);
 
     if (jefeDerrotado)
-    {
-        Victory();
-    }
+   if (jefeDerrotado)
+{
+    Victory();
+
+    std::string nombre;
+    system("cls");
+    std::cout << "\n\n  ¡Felicidades! Has derrotado al jefe final.\n";
+    std::cout << "  Ingresa tu nombre para guardar el puntaje: ";
+    std::cin >> nombre;
+
+    guardarPuntaje(nombre, score);
+    system("cls");
+    mostrarPuntajesGuardados();
+}
+
     else
     {
         gotoxy(45, 12);
@@ -549,5 +565,31 @@ void GameLooplevel4()
         Sleep(3000);
     }
 }
+void guardarPuntaje(const std::string& nombre, int puntaje) {
+    std::ofstream archivo("highscores.txt", std::ios::app);
+    if (archivo.is_open()) {
+        archivo << nombre << " " << puntaje << "\n";
+        archivo.close();
+    }
+}
+
+void mostrarPuntajesGuardados() {
+    std::ifstream archivo("highscores.txt");
+    if (archivo.is_open()) {
+        std::string linea;
+        gotoxy(10, 5);
+        std::cout << "Puntajes Guardados:\n";
+        int i = 6;
+        while (std::getline(archivo, linea)) {
+            gotoxy(10, i++);
+            std::cout << linea;
+        }
+        archivo.close();
+    } else {
+        gotoxy(10, 5);
+        std::cout << "No se pudo abrir el archivo de puntajes.\n";
+    }
+}
+
 
 #endif
