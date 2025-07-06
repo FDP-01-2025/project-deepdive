@@ -23,7 +23,7 @@ const static void setColor(int fg)
 #include "../levels/level3.h"
 #include "../levels/level4.h"
 #include "../levels/survival_mode.h"
-#include "../headers/read_database.h"
+#include "../headers/game_data.h"
 #include "../headers/hide_cursor.h"
 
 // --- Arte ASCII del título ---

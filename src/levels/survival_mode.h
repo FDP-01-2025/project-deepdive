@@ -1,10 +1,8 @@
 #ifndef SURVIVAL_MODE_H_INCLUDED
 #define SURVIVAL_MODE_H_INCLUDED
 
-
 #include "../headers/rockets.h"
-#include "../headers/game_time.h"
-#include "../headers/timer.h"
+#include "../headers/game_data.h"
 #include "../headers/game_limits.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
@@ -34,6 +32,23 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
 
+static void WaitEnter()
+{
+    std::string entry;
+    gotoxy(46, 15);
+    std::cout << "[Press ENTER to continue]" << "\n\n";
+    std::getline(std::cin, entry);
+
+    while (!entry.empty())
+    {
+        gotoxy(46, 15);
+        std::cout << "                         " << "\n";
+        gotoxy(46, 15);
+        std::cout << "[Only press ENTER to continue]" << "\n\n";
+        std::getline(std::cin, entry);
+    }
+}
+
 static void InitGameMessage()
 {
     system("cls");
@@ -54,14 +69,10 @@ static void InitGameMessage()
     }
     system("chcp 437 > nul");
 
-    gotoxy(45, 15);
-    std::cout << "[Press ENTER twice to continue]" << "\n\n";
-
     gotoxy(35, 17);
     std::cout << ">>Dodge obstacles and survive ad long as possible<<" << "\n";
 
-    std::cin.ignore();
-    std::cin.get();
+    WaitEnter();
     system("cls");
 }
 
@@ -84,19 +95,22 @@ static void GameOverSurvivalMode()
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
-
-    gotoxy(45, 13);
-    std::cout << "[Press ENTER twice to continue]" << "\n\n";
 }
 
-static void time(int duration)
+
+void Timer(int time)
+{
+    gotoxy(5, 1);
+    std::cout << "Time: " << time <<" sec.";
+}
+
+static void GameTime(int duration)
 {
     int minutes = duration / 60;
     int seconds = duration % 60;
-    gotoxy(45, 15);
+    gotoxy(45, 17);
     std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
-    std::cin.ignore();
-    std::cin.get();
+    WaitEnter();
 }
 
 static void InitGameSurvivalMode()
@@ -177,7 +191,7 @@ static void GameLoopSurvivalMode()
     SaveGameTimeToFile(duration);
 
     GameOverSurvivalMode();
-    time(duration);
+    GameTime(duration);
 }
 
 #endif

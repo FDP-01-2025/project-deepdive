@@ -1,7 +1,9 @@
-#ifndef GAME_TIME_H_INCLUDED
-#define GAME_TIME_H_INCLUDED
-#include <chrono>  //Permite trabajar con el tiempo.
-#include <fstream> //Permite crear archivos .txt.
+#ifndef GAME_DATA_H
+#define GAME_DATA_H
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <chrono> //Permite trabajar con el tiempo.
 
 const int MAX_TIMES = 5;
 
@@ -67,7 +69,40 @@ void SaveGameTimeToFile(int duration)
         }
         outfile.close();
     }
-    
 }
 
+void readFile(const std::string &db_deepdive)
+{
+    system("cls");
+    setColor(11);
+    gotoxy(0, 0);
+
+    std::ifstream file(db_deepdive);
+    if (!file.is_open())
+    {
+        std::cout << "[DBG] No pude abrir: " << db_deepdive << "\n";
+        std::cout << "Pulsa tecla...";
+        int c = _getch();
+        return;
+    }
+    std::string line;
+
+    system("chcp 65001 > nul");
+    std::cout << "\n===== 🏆 TABLE OF RANGES - SURVIVAL MODE 🏆 =====\n\n";
+    std::cout << "╔═════════════════════╦════════════════════════╦══════════════════╗\n";
+    std::cout << "║ Posición            ║ Username               ║ Time             ║\n";
+    std::cout << "╠═════════════════════╬════════════════════════╣══════════════════╣\n";
+
+    while (std::getline(file, line))
+    {
+        std::cout << line << "\n";
+    }
+    std::cout << "╚═════════════════════╩════════════════════════╩══════════════════╝\n";
+
+    system("chcp 437 > nul");
+
+    std::cout << "\nPresione cualquier tecla para continuar...";
+    _getch(); // pausa simple
+    file.close();
+}
 #endif
