@@ -122,6 +122,7 @@ static void InitGamelevel2()
 {   
     InitGameMessagelevel2();
     system("cls");
+    setColor(11);
     gotoxy(5,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level2Submarine = {5, 15, 1, 3};

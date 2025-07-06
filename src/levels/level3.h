@@ -157,7 +157,8 @@ static void InitGamelevel3()
 {
     InitGameMessagelevel3();
     system("cls");
-    gotoxy(0, 1);
+    setColor(11);
+    gotoxy(5, 1);
     std::cout << "Principal Objective: Escort the ally fish!";
 
     level3Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
@@ -190,7 +191,7 @@ static void GameLooplevel3()
         }
 
         // Mover aliado detrás del jugador
-        allySubmarine.x = std:: max (5,level3Submarine.x-8);
+        allySubmarine.x = std::max(5, std::min(level3Submarine.x - 8, 110));
         allySubmarine.y = level3Submarine.y;
         //First we paint the Submarine 
         PaintSubmarine(level3Submarine);
