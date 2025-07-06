@@ -25,6 +25,7 @@ const static void setColor(int fg)
 #include "../levels/survival_mode.h"
 #include "../headers/game_data.h"
 #include "../headers/hide_cursor.h"
+#include "../headers/players.h"
 
 // --- Arte ASCII del título ---
 const int TITLE_ROWS = 9;
@@ -96,7 +97,7 @@ const static void runMenu()
     // setlocale(LC_ALL, "es_ES.UTF-8");
     srand((unsigned)time(nullptr));
 
-    const std::string mainOpts[] = {"Start Levels", "High Scores", "Exit"};
+    const std::string mainOpts[] = {"Start Levels", "High Scores", "Players", "Exit"};
     const std::string levelOpts[] = {
         "Level 1", "Level 2", "Level 3",
         "SurvivalMode", "Nivel 5", "Regresar"};
