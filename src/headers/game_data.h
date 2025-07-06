@@ -97,7 +97,8 @@ void readFile(const std::string &db_deepdive)
     {
         std::cout << line << "\n";
     }
-    
+    std::cout << "╚═════════════════════╩════════════════════════╩══════════════════╝\n";
+
     system("chcp 437 > nul");
 
     std::cout << "\nPresione cualquier tecla para continuar...";
