@@ -36,7 +36,7 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
 
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
-static void WaitEnter()
+void WaitEnter()
 {
     gotoxy(46, 15);
     std::cout << "[Press ENTER to continue]\n\n";

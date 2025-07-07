@@ -68,7 +68,7 @@ inline void Victorylevel2()
     }
 
     gotoxy(35, 15);
-    std::cout << "You successfully protected and escort the ally fish!";
+    std::cout << "You successfully protected and escort the ally fish!✅";
 
     gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
@@ -102,12 +102,10 @@ static void GameOverlevel2()
 
     gotoxy(45, 17);
     std::cout << "[Press ENTER twice to continue]" << "\n\n";
-    std::cin.clear();
-    std::cin.sync();
+    std::cin.ignore();
     std::cin.get();
-    std::cin.get();
+    system("cls");
 }
-
 static void GameOverAllyfish()
 {
     system("cls");
@@ -129,11 +127,10 @@ static void GameOverAllyfish()
     system("chcp 437 > nul");
 
     gotoxy(45, 17);
-    std::cout << "[The allied fish was deboured]" << "\n\n";
-    std::cin.clear();
-    std::cin.sync();
+    std::cout << "🐠[The allied fish was deboured]🐠" << "\n\n";
+    std::cin.ignore();
     std::cin.get();
-    std::cin.get();
+    system("cls");
 }
 
 void PaintAllyFish(Submarine &ally)
@@ -162,7 +159,7 @@ static void InitGamelevel2()
     system("cls");
     setColor(11);
     gotoxy(5, 1);
-    std::cout << "Principal Objective: Escort the ally fish!";
+    std::cout << "Principal Objective: Escort the ally fish❗";
 
     level2Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
     allySubmarine = {5, 18, 0, 1, 0};    // Aliado a proteger
