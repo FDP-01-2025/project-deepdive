@@ -5,7 +5,7 @@
 #include <string>
 #include <chrono> //Permite trabajar con el tiempo.
 
-const int MAX_TIMES = 3;
+const int MAX_TIMES = 4;
 
 static void GameCharacters()
 {
@@ -13,8 +13,7 @@ static void GameCharacters()
     file << "Armand Cortez\n"
          << "Silvia Marlowe\n"
          << "Theo Vázquez\n"
-         << "Ingrid Falkner\n"
-         << "Horacio Blackmoor\n";
+         << "Ingrid Falkner\n";
     file.close();
 }
 

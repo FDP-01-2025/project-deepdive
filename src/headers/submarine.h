@@ -72,16 +72,6 @@ void PaintSubmarine(Submarine &submarine, int option)
         gotoxy(submarine.x, submarine.y + 2);
         std::cout << "\033[1;34m  " << (char)40 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)41 << "\033[0m";
         break;
-    case 5:
-        gotoxy(submarine.x, submarine.y);
-        std::cout << "\033[1;34m       " << (char)95 << (char)252 << "\033[0m";
-
-        gotoxy(submarine.x, submarine.y + 1);
-        std::cout << "\033[1;34m " << (char)176 << (char)62 << (char)95 << (char)95 << (char)219 << (char)47 << (char)233 << (char)233 << (char)92 << (char)45 << "\033[0m";
-
-        gotoxy(submarine.x, submarine.y + 2);
-        std::cout << "\033[1;34m  " << (char)91 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)93 << "\033[0m";
-        break;
     default:
         std::cout << "Error, invalid option\n";
         break;

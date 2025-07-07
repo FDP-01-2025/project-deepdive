@@ -148,14 +148,8 @@ static void SubmarineType(int style)
 
         std::cout << "\033[1;34m  " << (char)40 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)41 << "\033[0m" << "\n";
         break;
-    case 5:
-        std::cout << "\033[1;34m       " << (char)95 << (char)252 << "\033[0m" << "\n";
-
-        std::cout << "\033[1;34m " << (char)176 << (char)62 << (char)95 << (char)95 << (char)219 << (char)47 << (char)233 << (char)233 << (char)92 << (char)45 << "\033[0m" << "\n";
-
-        std::cout << "\033[1;34m  " << (char)91 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)93 << "\033[0m" << "\n";
-        break;
     default:
+        std::cout << "Error, invalid option\n";
         break;
     }
     system("chcp 65001 > nul");
@@ -180,7 +174,7 @@ static void Player()
     // Mostrar personajes
     while (getline(file, line))
     {
-        int style = ((count - 1) % 5) + 1;
+        int style = ((count - 1) % 6) + 1;
 
         std::cout << "\033[1;37m[🔔] Canal táctico -- ID " << count << "\033[0m\n";
         std::cout << "\033[1;37m--------------------------------------------\033[0m\n";
