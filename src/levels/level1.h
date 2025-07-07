@@ -3,7 +3,7 @@
 #include "../headers/fish.h"
 #include "../headers/pieces.h"
 #include "../headers/game_limits.h"
-#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
+#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada key.
 /*
 OBJETIVO DEL NIVEL 2:
 -REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
@@ -36,7 +36,7 @@ static void InitGameMessagelevel1()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string titulo[7] = {
+    const std::string title[7] = {
         "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗                ██╗",
         "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║               ███║",
         "██║      █████╗   ██║   ██║ █████╗   ██║               ╚██║",
@@ -49,7 +49,7 @@ static void InitGameMessagelevel1()
     for (int i = 0; i < 7; ++i)
     {
         gotoxy(30, 8 + i);  // Ajusta según la posición deseada
-        std::cout << titulo[i];
+        std::cout << title[i];
     }
 
     gotoxy(43, 15);
@@ -99,7 +99,7 @@ static void GameOverlevel1()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string texto[6] = {
+    const std::string text[6] = {
         " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
         "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
         "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
@@ -110,7 +110,7 @@ static void GameOverlevel1()
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(25, 6 + i);
-        std::cout << texto[i] << "\n\n";
+        std::cout << text[i] << "\n\n";
     }
     system("chcp 437 > nul");
     WaitEnterlevel1();
@@ -149,8 +149,8 @@ static void GameLooplevel1()
         // para que en la siguiente vuelta se mida el nuevo deltaTime correctamente
         if (kbhit())
         {
-            char tecla = getch();
-            MoveSubmarine(tecla, level1Submarine);
+            char key = getch();
+            MoveSubmarine(key, level1Submarine);
         }
 
         for (int i = 0; i < level1Numfishes; i++)

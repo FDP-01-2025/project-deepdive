@@ -32,7 +32,7 @@ static void InitGameMessagelevel2()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string titulo[7] = {
+    const std::string title[7] = {
         "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗               ██████╗ ",
         "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║               ╚════██╗",
         "██║      █████╗   ██║   ██║ █████╗   ██║                █████╔╝",
@@ -44,7 +44,7 @@ static void InitGameMessagelevel2()
     for (int i = 0; i < 7; ++i)
     {
         gotoxy(30, 8 + i); // Ajusta según la posición deseada
-        std::cout << titulo[i];
+        std::cout << title[i];
     }
 
     gotoxy(43, 15);
@@ -153,8 +153,8 @@ static void GameLooplevel2()
         DeleteAllyFish(allySubmarine); // Borrar pez antes de movimiento del Subm
         if (kbhit())
         {
-            char tecla = getch();
-            MoveWithAlly(tecla, level2Submarine);
+            char key = getch();
+            MoveWithAlly(key, level2Submarine);
         }
 
         // Mover aliado detrás del jugador

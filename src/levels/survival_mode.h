@@ -5,7 +5,7 @@
 #include "../headers/game_data.h"
 #include "../headers/game_limits.h"
 #include "../headers/game_data.h"
-#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
+#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada key.
 #include <limits>
 #include <string>
 
@@ -57,7 +57,7 @@ static void InitGameMessage()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string texto[6] = {
+    const std::string text[6] = {
         "███████╗██╗   ██╗██████╗ ██╗   ██╗██╗██╗   ██╗ █████╗ ██╗         ███╗   ███╗ ██████╗ ██████╗ ███████╗",
         "██╔════╝██║   ██║██╔══██╗██║   ██║██║██║   ██║██╔══██╗██║         ████╗ ████║██╔═══██╗██╔══██╗██╔════╝",
         "███████╗██║   ██║██████╔╝██║   ██║██║██║   ██║███████║██║         ██╔████╔██║██║   ██║██║  ██║█████╗  ",
@@ -68,7 +68,7 @@ static void InitGameMessage()
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(10, 6 + i);
-        std::cout << texto[i] << "\n\n";
+        std::cout << text[i] << "\n\n";
     }
     gotoxy(35, 17);
     std::cout << ">>Dodge obstacles and survive as long as possible<<\n";
@@ -86,7 +86,7 @@ static void GameOverSurvivalMode(int duration)
     int seconds = duration % 60;
     system("chcp 65001 > nul");
 
-    const std::string texto[6] = {
+    const std::string text[6] = {
         " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
         "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
         "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
@@ -97,7 +97,7 @@ static void GameOverSurvivalMode(int duration)
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(25, 6 + i);
-        std::cout << texto[i] << "\n\n";
+        std::cout << text[i] << "\n\n";
     }
     system("chcp 437 > nul");
     gotoxy(45, 17);
@@ -291,8 +291,8 @@ static void GameLoopSurvivalMode()
 
         if (kbhit())
         {
-            char tecla = getch();
-            MoveSubmarine(tecla, survivalSubmarine);
+            char key = getch();
+            MoveSubmarine(key, survivalSubmarine);
         }
 
         for (int i = 0; i < settings.activeRockets; i++)
