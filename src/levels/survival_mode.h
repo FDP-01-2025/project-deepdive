@@ -50,6 +50,7 @@ void WaitEnter()
         std::cout << "[Only press ENTER to continue]\n\n";
     }
 }
+
 static void InitGameMessage()
 {
 
@@ -98,7 +99,6 @@ static void InitGameMessage()
     }
 
     _getch();           // Captura el Enter para continuar
-    system("color 07"); // Restaurar color original
     system("chcp 437 > nul");
 }
 

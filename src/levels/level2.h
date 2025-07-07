@@ -135,29 +135,39 @@ static void GameOverAllyfish()
 
 void PaintAllyFish(Submarine &ally)
 {
-
-    if (ally.x >= 1 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
+    // Evitar pintar sobre el borde
+    if (ally.x >= 0 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
     {
-        gotoxy(ally.x, ally.y);
-        std::cout << framesAllyFish[allyFrame];
-        allyFrame = (allyFrame + 1) % 3;
+        // Verifica que no esté en la fila del borde superior o inferior
+        if (ally.y != 0 && ally.y != 23)
+        {
+            gotoxy(ally.x, ally.y);
+            std::cout << framesAllyFish[allyFrame];
+            allyFrame = (allyFrame + 0) % 3;
+        }
     }
 }
+
 
 void DeleteAllyFish(Submarine &ally)
 {
-    if (ally.x > 1 && ally.x < 110 && ally.y >= 2 && ally.y <= 22)
+    // Evitar borrar el borde
+    if (ally.x >= 0 && ally.x <= 103 && ally.y >= 2 && ally.y <= 22)
     {
-        gotoxy(ally.x, ally.y);
-        std::cout << "       ";
+        if (ally.y != 0 && ally.y != 23)
+        {
+            gotoxy(ally.x, ally.y);
+            std::cout << "       "; // 7 espacios para borrar el pez
+        }
     }
 }
+
 
 static void InitGamelevel2()
 {
     InitGameMessagelevel2();
     system("cls");
-    setColor(11);
+    setColor(15);
     gotoxy(5, 1);
     std::cout << "Principal Objective: Escort the ally fish❗";
 
@@ -193,6 +203,10 @@ static void GameLooplevel2()
         // Mover aliado detrás del jugador
         allySubmarine.x = std::max(2, std::min(level2Submarine.x - 8, 103)); // 103 = 110 - 7 (ancho del pez)
         allySubmarine.y = std::min(level2Submarine.y, 22);
+
+        allySubmarine.x = std::max(1, std::min(allySubmarine.x, 110));
+        allySubmarine.y = std::max(2, std::min(allySubmarine.y, 22));
+
 
         // First we paint the Submarine
         PaintSubmarine(level2Submarine,1);
