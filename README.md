@@ -33,6 +33,69 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
   - ⚓ **Nivel 3**: Derrota al jefe final.
 
 ---
+## 🔧 Sistema modular del juego DeepDive
+
+<details>
+  <summary>📦 Estructura general de los módulos</summary>
+
+DeepDive está organizado de manera modular, con archivos `.h` y `.cpp` separados por función. Esto permite escalar el juego fácilmente, mantener el orden y facilitar el mantenimiento.
+
+### 📁 Archivos clave
+
+#### `submarine.h`
+
+Encargado de toda la lógica del submarino:
+
+* `PaintSubmarine(...)`: Pinta diferentes submarinos en consola con arte ASCII.
+* `DeleteSubmarine(...)`: Borra el submarino al moverse.
+* `MoveSubmarine(...)`: Mueve el submarino con las teclas (WASD y flechas).
+* `PaintHearts(...)`, `PaintOxygen(...)`: Muestra la vida y oxígeno.
+* `DestroySubmarine(...)`: Muestra animaciones de destrucción.
+* `CollisionSubmarine(...)`: Efecto visual al recibir daño.
+
+> Submarino representado en múltiples estilos con colores ANSI y caracteres ASCII. Soporta colisiones y animaciones.
+
+---
+
+#### `fish.h`
+
+Define los peces enemigos (y la base del pez aliado):
+
+* `Fish`: Struct con `x, y, frame`.
+* `PaintFish(...)`, `ClearFish(...)`, `MoveFish(...)`: Animación y movimiento.
+* `CollisionFish(...)`: Detecta choque con el submarino.
+
+> Los peces tienen animación por frames (`<0)))><`, `<°)))><`, `<o)))><`) y se reposicionan al cruzar pantalla.
+
+---
+
+#### `rockets.h`
+
+Controla los proyectiles enemigos:
+
+* `Rocket`: Struct igual que Fish.
+* `Paintrocket(...)`, `ClearRocket(...)`, `MoveRocket(...)`: Movimiento horizontal con animación.
+* `CollisionRocket(...)`: Impacto contra el submarino.
+
+> Los cohetes avanzan desde la derecha, y causan daño al impactar. También tienen animación propia.
+
+---
+
+#### `menuprincipal.h`
+
+Construye el menú principal interactivo:
+
+* Uso de arte ASCII (`██████╗ ███████╗...`).
+* Menú principal y submenú de niveles.
+* Animación de título con colores que cambian.
+* Salida con arte y barra de carga animada.
+* Integración con los niveles: `level1`, `level2`, `level3`, `survival_mode`.
+
+> Interfaz amigable en consola con navegación por flechas y enter, y colores que cambian dinámicamente.
+
+</details>
+
+---
 
 ## 🧠 Equipo de desarrollo
 
