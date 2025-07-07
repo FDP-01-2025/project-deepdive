@@ -58,7 +58,7 @@ static void mensajeInicioJefeFinal()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string titulo[] = {
+    const std::string title[] = {
         "███████╗██╗███╗   ██╗ █████╗ ██║            ███████╗   ████╗  ██████╗ ██████╗ ",
         "██╔════╝██║████╗  ██║██╔══██╗██║            ██╔═══██╗ ██╔═██╗ ██╔═══╝ ██╔═══╝ ",
         "█████╗  ██║██╔██╗ ██║███████║██║            ███████╔╝ ██║ ██║ ╚█████╗ ╚█████╗ ",
@@ -70,7 +70,7 @@ static void mensajeInicioJefeFinal()
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(15, 6 + i);
-        std::cout << titulo[i];
+        std::cout << title[i];
     }
 
     gotoxy(32, 14);
@@ -80,8 +80,8 @@ static void mensajeInicioJefeFinal()
     {
         if (kbhit())
         {
-            char tecla = getch();
-            if (tecla == 13)
+            char key = getch();
+            if (key == 13)
                 break;
         }
     }
@@ -89,7 +89,7 @@ static void mensajeInicioJefeFinal()
     // 🟡 Mostrar historia con título
     system("cls");
 
-    const std::string tituloHistoria[] = {
+    const std::string historyTitle[] = {
         "██╗  ██╗██╗ ███████╗████████╗ ██████╗ ██████╗ ██╗   ██╗",
         "██║  ██║██║ ██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
         "███████║██║ ███████╗   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
@@ -100,7 +100,7 @@ static void mensajeInicioJefeFinal()
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(20, 3 + i);
-        std::cout << tituloHistoria[i];
+        std::cout << historyTitle[i];
     }
 
     // Historia narrativa
@@ -126,8 +126,8 @@ static void mensajeInicioJefeFinal()
     {
         if (kbhit())
         {
-            char tecla = getch();
-            if (tecla == 13)
+            char key = getch();
+            if (key == 13)
                 break;
         }
     }
@@ -162,8 +162,8 @@ static void GameOverlevel3()
     {
         if (kbhit())
         {
-            char tecla = getch();
-            if (tecla == 13)
+            char key = getch();
+            if (key == 13)
                 break;
         }
     }
@@ -401,9 +401,9 @@ static void actualizarJefe()
     }
 }
 // 🟢 NUEVA FUNCIÓN: Actualizar recarga de misiles
-static void actualizarRecarga(char tecla)
+static void actualizarRecarga(char key)
 {
-    if (tecla == 32 && puedeDisparar && misilesDisponibles > 0 && level3MissilesCout < MAX_MISSILES)
+    if (key == 32 && puedeDisparar && misilesDisponibles > 0 && level3MissilesCout < MAX_MISSILES)
     {
         level3Missiles[level3MissilesCout].x = level3Submarine.x + 12;
         level3Missiles[level3MissilesCout].y = level3Submarine.y + 2;
@@ -442,16 +442,16 @@ void InitGamelevel3()
 
 void GameLooplevel3()
 {
-    char tecla = 0;
+    char key = 0;
     bool paint = false;
     do
     {
         HideCursor();
         if (kbhit())
         {
-            tecla = getch();
-            actualizarRecarga(tecla);
-            MoveSubmarine(tecla, level3Submarine);
+            key = getch();
+            actualizarRecarga(key);
+            MoveSubmarine(key, level3Submarine);
         }
 
         if (!jefeActivo && !jefeDerrotado && (clock() - tiempoAparicionJefe) >= tiempoParaJefe)
