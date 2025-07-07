@@ -10,7 +10,7 @@
 #include "../headers/fish.h"
 #include "../headers/power_item.h"
 #include "../headers/invulnerability.h"
-#include "../headers/jefe_submarino.h"
+#include "../headers/submarine_boss.h"
 #include "../headers/game_data.h"
 
 #include <conio.h>
