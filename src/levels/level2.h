@@ -6,6 +6,21 @@
 #include "../headers/game_limits.h"
 #include <chrono>
 
+static void WaitEnterlevel2()
+{
+    gotoxy(46, 15);
+    std::cout << "[Press ENTER to continue]\n\n";
+
+    while (true)
+    {
+        int key = _getch();
+        if (key == 13)
+            break; // 13 = Enter
+        gotoxy(46, 15);
+        std::cout << "[Only press ENTER to continue]\n\n";
+    }
+}
+
 static Submarine level2Submarine;
 static Submarine allySubmarine;
 static Fish level2Fishes[4];
@@ -82,6 +97,8 @@ inline void Victorylevel2()
 
 static void GameOverlevel2()
 {
+    while (_kbhit())
+        _getch();
     system("cls");
     system("chcp 65001 > nul");
 
@@ -99,15 +116,13 @@ static void GameOverlevel2()
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
-
-    gotoxy(45, 17);
-    std::cout << "[Press ENTER twice to continue]" << "\n\n";
-    std::cin.ignore();
-    std::cin.get();
+    WaitEnterlevel2();   
     system("cls");
 }
 static void GameOverAllyfish()
 {
+    while (_kbhit())
+        _getch();
     system("cls");
     system("chcp 65001 > nul");
 
@@ -124,26 +139,25 @@ static void GameOverAllyfish()
         gotoxy(25, 6 + i);
         std::cout << texto[i] << "\n\n";
     }
-    system("chcp 437 > nul");
-
-    gotoxy(45, 17);
+    
+    gotoxy(41,17);
     std::cout << "🐠[The allied fish was deboured]🐠" << "\n\n";
-    std::cin.ignore();
-    std::cin.get();
+    system("chcp 437 > nul");
+    WaitEnterlevel2();
     system("cls");
 }
 
 void PaintAllyFish(Submarine &ally)
 {
     // Evitar pintar sobre el borde
-    if (ally.x >= 0 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
+    if (ally.x >= 5 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
     {
         // Verifica que no esté en la fila del borde superior o inferior
-        if (ally.y != 0 && ally.y != 23)
+        if (ally.y != 5 && ally.y != 23)
         {
             gotoxy(ally.x, ally.y);
             std::cout << framesAllyFish[allyFrame];
-            allyFrame = (allyFrame + 0) % 3;
+            allyFrame = (allyFrame + 2) % 3;
         }
     }
 }
@@ -152,9 +166,9 @@ void PaintAllyFish(Submarine &ally)
 void DeleteAllyFish(Submarine &ally)
 {
     // Evitar borrar el borde
-    if (ally.x >= 0 && ally.x <= 103 && ally.y >= 2 && ally.y <= 22)
+    if (ally.x >= 5 && ally.x <= 103 && ally.y >= 2 && ally.y <= 22)
     {
-        if (ally.y != 0 && ally.y != 23)
+        if (ally.y != 5 && ally.y != 23)
         {
             gotoxy(ally.x, ally.y);
             std::cout << "       "; // 7 espacios para borrar el pez

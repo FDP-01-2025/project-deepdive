@@ -36,7 +36,7 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
 
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
-void WaitEnter()
+static void WaitEnter()
 {
     gotoxy(46, 15);
     std::cout << "[Press ENTER to continue]\n\n";
@@ -65,9 +65,7 @@ static void InitGameMessage()
         "███████║╚██████╔╝██║  ██║ ╚████╔╝ ██║ ╚████╔╝ ██║  ██║███████╗    ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████╗",
         "╚══════╝ ╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝"};
 
-    // Colores (combinaciones de fondo/texto)
-    int colorIndex = 0;
-    const int numColores = sizeof(colores) / sizeof(colores[0]);
+
 
     // Mostrar texto inferior desde el principio
     gotoxy(35, 17);

@@ -9,7 +9,20 @@ OBJETIVO DEL NIVEL 2:
 -REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
 
 */
+static void WaitEnterlevel1()
+{
+    gotoxy(46, 15);
+    std::cout << "[Press ENTER to continue]\n\n";
 
+    while (true)
+    {
+        int key = _getch();
+        if (key == 13)
+            break; // 13 = Enter
+        gotoxy(46, 15);
+        std::cout << "[Only press ENTER to continue]\n\n";
+    }
+}
 static void InitGameMessagelevel1()
 {
     system("cls");
@@ -98,11 +111,7 @@ static void GameOverlevel1()
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
-
-    gotoxy(45, 17);
-    std::cout << "[Press ENTER to continue]" << "\n\n";
-    std::cin.ignore();
-    std::cin.get();
+    WaitEnterlevel1();
     system("cls");
 }
 
