@@ -8,4 +8,6 @@ int main()
     HideCursor();
     GameCharacters();
     runMenu(); // Llama al menú y controla toda su ejecución
+
+    return 0;
 }

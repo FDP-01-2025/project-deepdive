@@ -6,6 +6,21 @@
 #include "../headers/game_limits.h"
 #include <chrono>
 
+static void WaitEnterlevel2()
+{
+    gotoxy(46, 15);
+    std::cout << "[Press ENTER to continue]\n\n";
+
+    while (true)
+    {
+        int key = _getch();
+        if (key == 13)
+            break; // 13 = Enter
+        gotoxy(46, 15);
+        std::cout << "[Only press ENTER to continue]\n\n";
+    }
+}
+
 static Submarine level2Submarine;
 static Submarine allySubmarine;
 static Fish level2Fishes[4];
@@ -68,7 +83,7 @@ inline void Victorylevel2()
     }
 
     gotoxy(35, 15);
-    std::cout << "You successfully protected and escort the ally fish!";
+    std::cout << "You successfully protected and escort the ally fish!✅";
 
     gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
@@ -82,6 +97,8 @@ inline void Victorylevel2()
 
 static void GameOverlevel2()
 {
+    while (_kbhit())
+        _getch();
     system("cls");
     system("chcp 65001 > nul");
 
@@ -99,17 +116,13 @@ static void GameOverlevel2()
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
-
-    gotoxy(45, 17);
-    std::cout << "[Press ENTER twice to continue]" << "\n\n";
-    std::cin.clear();
-    std::cin.sync();
-    std::cin.get();
-    std::cin.get();
+    WaitEnterlevel2();   
+    system("cls");
 }
-
 static void GameOverAllyfish()
 {
+    while (_kbhit())
+        _getch();
     system("cls");
     system("chcp 65001 > nul");
 
@@ -126,43 +139,51 @@ static void GameOverAllyfish()
         gotoxy(25, 6 + i);
         std::cout << texto[i] << "\n\n";
     }
+    
+    gotoxy(41,17);
+    std::cout << "🐠[The allied fish was deboured]🐠" << "\n\n";
     system("chcp 437 > nul");
-
-    gotoxy(45, 17);
-    std::cout << "[The allied fish was deboured]" << "\n\n";
-    std::cin.clear();
-    std::cin.sync();
-    std::cin.get();
-    std::cin.get();
+    WaitEnterlevel2();
+    system("cls");
 }
 
 void PaintAllyFish(Submarine &ally)
 {
-
-    if (ally.x >= 1 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
+    // Evitar pintar sobre el borde
+    if (ally.x >= 5 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
     {
-        gotoxy(ally.x, ally.y);
-        std::cout << framesAllyFish[allyFrame];
-        allyFrame = (allyFrame + 1) % 3;
+        // Verifica que no esté en la fila del borde superior o inferior
+        if (ally.y != 5 && ally.y != 23)
+        {
+            gotoxy(ally.x, ally.y);
+            std::cout << framesAllyFish[allyFrame];
+            allyFrame = (allyFrame + 2) % 3;
+        }
     }
 }
+
 
 void DeleteAllyFish(Submarine &ally)
 {
-    if (ally.x > 1 && ally.x < 110 && ally.y >= 2 && ally.y <= 22)
+    // Evitar borrar el borde
+    if (ally.x >= 5 && ally.x <= 103 && ally.y >= 2 && ally.y <= 22)
     {
-        gotoxy(ally.x, ally.y);
-        std::cout << "       ";
+        if (ally.y != 5 && ally.y != 23)
+        {
+            gotoxy(ally.x, ally.y);
+            std::cout << "       "; // 7 espacios para borrar el pez
+        }
     }
 }
+
 
 static void InitGamelevel2()
 {
     InitGameMessagelevel2();
     system("cls");
-    setColor(11);
+    setColor(15);
     gotoxy(5, 1);
-    std::cout << "Principal Objective: Escort the ally fish!";
+    std::cout << "Principal Objective: Escort the ally fish❗";
 
     level2Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
     allySubmarine = {5, 18, 0, 1, 0};    // Aliado a proteger
@@ -196,6 +217,10 @@ static void GameLooplevel2()
         // Mover aliado detrás del jugador
         allySubmarine.x = std::max(2, std::min(level2Submarine.x - 8, 103)); // 103 = 110 - 7 (ancho del pez)
         allySubmarine.y = std::min(level2Submarine.y, 22);
+
+        allySubmarine.x = std::max(1, std::min(allySubmarine.x, 110));
+        allySubmarine.y = std::max(2, std::min(allySubmarine.y, 22));
+
 
         // First we paint the Submarine
         PaintSubmarine(level2Submarine,1);

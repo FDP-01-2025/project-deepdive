@@ -9,7 +9,20 @@ OBJETIVO DEL NIVEL 2:
 -REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
 
 */
+static void WaitEnterlevel1()
+{
+    gotoxy(46, 15);
+    std::cout << "[Press ENTER to continue]\n\n";
 
+    while (true)
+    {
+        int key = _getch();
+        if (key == 13)
+            break; // 13 = Enter
+        gotoxy(46, 15);
+        std::cout << "[Only press ENTER to continue]\n\n";
+    }
+}
 static void InitGameMessagelevel1()
 {
     system("cls");
@@ -41,7 +54,7 @@ static void InitGameMessagelevel1()
     std::cout << "[ Press ENTER twice to continue ]";
 
     gotoxy(30, 17);
-    std::cout << ">> OBJECTIVE: Collect the pieces to refill the oxygen bar! <<";
+    std::cout << ">> OBJECTIVE: Collect the pieces to refill the oxygen bar❗ <<";
 
     std::cin.ignore();
     std::cin.get();
@@ -69,15 +82,13 @@ inline void Victorylevel1()
     }
 
     gotoxy(43, 15);
-    std::cout << "You successfully filled the oxygen bar!";
+    std::cout << "You successfully filled the oxygen bar!✅";
 
     gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
 
-    std::cin.clear();
-    std::cin.sync();
-    std::cin.get();       // Espera la primera pulsación de ENTER
-    std::cin.get();       // Espera la segunda pulsación de ENTER
+    std::cin.ignore();
+    std::cin.get();
     system("cls");
 }
 
@@ -100,13 +111,8 @@ static void GameOverlevel1()
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
-
-    gotoxy(45, 17);
-    std::cout << "[Press ENTER to continue]" << "\n\n";
-    std::cin.clear();
-    std::cin.sync();
-    std::cin.get();
-    std::cin.get();
+    WaitEnterlevel1();
+    system("cls");
 }
 
 
@@ -124,7 +130,7 @@ static void InitGamelevel1()
     system("cls");
     setColor(15);
     gotoxy(5,1);
-    std::cout << "Principal Objective: Refil the oxygen!";
+    std::cout << "Principal Objective: Refil the oxygen❗";
     level1Submarine = {5, 15, 1, 3};
     PaintSubmarine(level1Submarine, chosenSubmarineStylelevel1);
     PaintHearts(level1Submarine);
