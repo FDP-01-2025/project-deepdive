@@ -100,7 +100,6 @@ static void InitGameMessage()
     _getch();           // Captura el Enter para continuar
     system("color 07"); // Restaurar color original
     system("chcp 437 > nul");
-    system("cls");
 }
 
 static void GameOverSurvivalMode(int duration)
