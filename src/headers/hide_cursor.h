@@ -6,11 +6,11 @@ void HideCursor()
     HANDLE hCon;
     hCon = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO cci;
-    //Tamaño del cursor.
-    cci.dwSize = 2; 
-    //Se asigna false, para definir que el cursor no esté visible.
+    //Cursor size.
+    cci.dwSize = 2;
+    //Set to false to define that the cursor is not visible.
     cci.bVisible = FALSE;
-    //Aplica la configuración para ocultar el cursor.
+    //Apply the settings to hide the cursor.
     SetConsoleCursorInfo(hCon, &cci);
 }
 

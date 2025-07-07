@@ -16,10 +16,10 @@ void PaintAllyFish(AllyFish &ally, Submarine &submarine)
 {
     static int allyFrame = 0;
 
-    // Evitar pintar sobre el borde
+    //Avoid painting over the edge
     if (ally.x > 3 && ally.x < 116 && ally.y > 2 && ally.y < 25)
     {
-        // Verifica que no esté en la fila del borde superior o inferior
+        //Check that it is not on the top or bottom edge row
         gotoxy(ally.x, ally.y);
         std::cout << framesAllyFish[allyFrame];
         allyFrame = (allyFrame + 2) % 3;
@@ -29,7 +29,7 @@ void PaintAllyFish(AllyFish &ally, Submarine &submarine)
 void DeleteAllyFish(AllyFish &ally)
 {
     gotoxy(ally.x, ally.y);
-    std::cout << "       "; // 7 espacios para borrar el pez
+    std::cout << "       "; //7 spaces to erase the fish
 }
 
 #endif

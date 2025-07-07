@@ -117,7 +117,10 @@ static void bossFinalIntroMessage()
     gotoxy(20, 19);
     std::cout << "You are the last hope to stop it.";
 
-    gotoxy(43, 22);
+    gotoxy(20, 21);
+    std::cout << "Controls: W ↑ ,  S ↓ ,  A ← ,  D →  |  SPACE to shoot";
+
+    gotoxy(43, 23);
     std::cout << "[ Press ENTER to begin the final battle ]";
 
     while (true)

@@ -43,7 +43,7 @@ static void InitGameMessagelevel2()
 
     for (int i = 0; i < 7; ++i)
     {
-        gotoxy(30, 8 + i); // Ajusta según la posición deseada
+        gotoxy(30, 8 + i); // Adjust according to the desired position
         std::cout << title[i];
     }
 
@@ -126,7 +126,7 @@ static void InitGamelevel2()
     gotoxy(5, 1);
     std::cout << "Principal Objective: Escort the ally fish🐠";
 
-    level2Submarine = {15, 15, 3, 3}; // Submarino controlado por usuario
+    level2Submarine = {15, 15, 3, 3}; // Submarine controlled by user
 
     PaintSubmarine(level2Submarine, 1);
     PaintAllyFish(allySubmarine, level2Submarine);
@@ -149,14 +149,14 @@ static void GameLooplevel2()
 
     do
     {
-        DeleteAllyFish(allySubmarine); // Borrar pez antes de movimiento del Subm
+        DeleteAllyFish(allySubmarine); // Delete ally fish before submarine movement
         if (kbhit())
         {
             char key = getch();
             MoveWithAlly(key, level2Submarine);
         }
 
-        // Mover aliado detrás del jugador
+        // Move ally behind the player
         allySubmarine.x = level2Submarine.x - 3;
         allySubmarine.y = level2Submarine.y - 2;
 
@@ -169,7 +169,7 @@ static void GameLooplevel2()
             MoveFish(level2Fishes[i]);
             CollisionFish(level2Fishes[i], level2Submarine);
 
-            // Si el aliado es tocado, pierde
+            // If the ally is touched, it loses
             if ((level2Fishes[i].x >= allySubmarine.x &&
                  level2Fishes[i].x <= allySubmarine.x + 6) &&
                 (level2Fishes[i].y == allySubmarine.y))
@@ -178,7 +178,7 @@ static void GameLooplevel2()
             }
         }
 
-        // Verificar si pasaron 3 minutos
+        // Check if 3 minutes have passed
         auto currentTime = steady_clock::now();
         auto elapsed = duration_cast<seconds>(currentTime - startTime).count();
         if (elapsed >= 180)
@@ -186,7 +186,7 @@ static void GameLooplevel2()
             completedTime = true;
         }
 
-        // Mostrar temporizador en la línea 1
+        // Show timer on line 1
         gotoxy(50, 1);
         int remaining = 180 - static_cast<int>(elapsed);
         int minutes = remaining / 60;

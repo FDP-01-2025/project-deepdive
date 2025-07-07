@@ -15,7 +15,7 @@ static const std::string framesFish[] =
         "<0)))><",
         "<°)))><",
         "<o)))><"};
-// Pinta la forma del pescado
+//Paint the shape of the fish
 
 static void PaintFish(Fish &fish)
 {
@@ -23,7 +23,7 @@ static void PaintFish(Fish &fish)
     std::cout << framesFish[fish.frame];
 }
 
-// Borra la forma del pescado
+// Clear the shape of the fish
 static void ClearFish(Fish &fish)
 {
     gotoxy(static_cast<int>(fish.x), fish.y);
@@ -32,25 +32,25 @@ static void ClearFish(Fish &fish)
 
 static void MoveFish(Fish &fish)
 {
-    // Borra la representación actual del pez de la pantalla
+    // Clear the current representation of the fish from the screen
     ClearFish(fish);
     fish.x -= 0.2f;
     if (fish.x <= 5.0f)
     {
-        // Reinicia la posición X del pez al borde derecho (110.0)
+        // Reset the X position of the fish to the right edge (110.0)
         fish.x = 110.0f;
-        // Asigna una nueva posición Y aleatoria
+        // Assign a new random Y position
         fish.y = rand() % 25 + 3;
     }
-    // Actualiza el frame de animación del pez (cicla entre 0, 1 y 2)
+    // Update the animation frame of the fish (cycling between 0, 1, and 2)
     fish.frame = (fish.frame + 1) % 3;
-    // Dibuja el pez en su nueva posición y con el nuevo frame de animación
+    // Draw the fish in its new position and with the new animation frame
     PaintFish(fish);
 }
 
 static void CollisionFish(Fish &fish, Submarine &submarine)
 {
-    // Si la posición del pescado es igual a la del submarino, se detecta la colisión
+    // If the position of the fish is equal to that of the submarine, a collision is detected
     if (fish.x >= submarine.x && fish.x <= submarine.x + 11 && fish.y >= submarine.y && fish.y <= submarine.y + 3)
     {
         submarine.heart--;
