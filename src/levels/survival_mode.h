@@ -11,7 +11,7 @@
 
 static Submarine survivalSubmarine;
 static Rocket survivalRockets[5];
-static int survivalNumrocketes;
+static int survivalNumrockets;
 static int chosenSubmarineStyle = 1;
 static std::string captain;
 
@@ -255,7 +255,7 @@ static void InitGameSurvivalMode()
     survivalRockets[2] = {106, 15};
     survivalRockets[3] = {108, 9};
     survivalRockets[4] = {110, 6};
-    survivalNumrocketes = 5;
+    survivalNumrockets = 5;
 }
 
 static void GameLoopSurvivalMode()
@@ -284,7 +284,7 @@ static void GameLoopSurvivalMode()
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - startTime).count();
 
         // Se actualizan los parámetros de dificultad en función del tiempo transcurrido y la cantidad de cohetes activos
-        auto settings = UpdateDifficulty(elapsed, survivalNumrocketes);
+        auto settings = UpdateDifficulty(elapsed, survivalNumrockets);
 
         // Imprime el contador
         Timer(elapsed);
