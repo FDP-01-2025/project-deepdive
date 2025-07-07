@@ -1,5 +1,5 @@
-#ifndef level3_H
-#define level3_H
+#ifndef LEVEL3_H
+#define LEVEL3_H
 #define MAX_MISSILES 100
 
 // --- INCLUDES ---
@@ -22,7 +22,6 @@
 static Submarine level3Submarine;
 static Fish level3Fishes[3];
 static int level3NumFishes;
-static int chosenSubmarineStylelevel3 = 1; 
 
 static Missiles level3Missiles[MAX_MISSILES];
 static int level3MissilesCout;
@@ -173,10 +172,10 @@ static void Victory()
     const std::string mensajeVictoria[6] = {
 
         "██╗   ██╗██╗ ██████╗ ████████╗ ██████╗ ██████╗ ██╗   ██╗",
-        "██║   ██║██║██╔═══██╗╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
-        "██║   ██║██║██║   ██║   ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
-        "╚██╗ ██╔╝██║██║   ██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
-        " ╚████╔╝ ██║╚██████╔╝   ██║   ╚██████╔╝██║  ██║   ██║   ",
+        "██║   ██║██║██╔════╝ ╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝",
+        "██║   ██║██║██║         ██║   ██║   ██║██████╔╝ ╚████╔╝ ",
+        "╚██╗ ██╔╝██║██║         ██║   ██║   ██║██╔══██╗  ╚██╔╝  ",
+        " ╚████╔╝ ██║╚██████╗    ██║   ╚██████╔╝██║  ██║   ██║   ",
         "  ╚═══╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ",
     };
     system("cls");
@@ -197,7 +196,7 @@ static void Victory()
     }
 }
 
-  static void mostrarEstado(int score, int misilesDisponibles, int maxMisiles)
+static void mostrarEstado(int score, int misilesDisponibles, int maxMisiles)
 {
     gotoxy(2, 0);
     std::cout << "PUNTAJE: " << score << "        ";
@@ -272,7 +271,8 @@ static void moverDisparosJefe()
         }
     }
 }
-static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe) {
+static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe)
+{
     // Verificamos si el área del submarino y el jefe se solapan
     if ((sub.x + 12 >= jefe.x && sub.x <= jefe.x + 18) && // ancho
         (sub.y + 2 >= jefe.y && sub.y <= jefe.y + 3))     // alto
@@ -282,7 +282,6 @@ static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe
         sub.lifes = 0;
     }
 }
-
 
 static void inicializarJefe()
 {
@@ -374,7 +373,7 @@ static void actualizarJefe()
                     CollisionSubmarine(level3Submarine);
                 }
                 DestroySubmarine(level3Submarine);
-                PaintSubmarine(level3Submarine, chosenSubmarineStylelevel3);
+                PaintSubmarine(level3Submarine);
                 PaintHearts(level3Submarine);
             }
             gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
@@ -418,7 +417,7 @@ void InitGamelevel3()
 {
     mensajeInicioJefeFinal(); // 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
     level3Submarine = {5, 15, 3, 3};
-    PaintSubmarine(level3Submarine, chosenSubmarineStylelevel3);
+    PaintSubmarine(level3Submarine);
     PaintHearts(level3Submarine);
     level3Fishes[0] = {90, 3};
     level3Fishes[1] = {80, 12};
@@ -436,10 +435,11 @@ void InitGamelevel3()
     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
 }
 
- void guardarPuntaje(const std::string& nombre, int puntaje);
- void mostrarPuntajesGuardados();
+void guardarPuntaje(const std::string &nombre, int puntaje);
+void mostrarPuntajesGuardados();
 
-void GameLooplevel3() {
+void GameLooplevel3()
+{
     char tecla = 0;
     bool paint = false;
     do
@@ -529,7 +529,7 @@ void GameLooplevel3() {
                 paint = true;
         }
         if (paint)
-            PaintSubmarine(level3Submarine, chosenSubmarineStylelevel3);
+            PaintSubmarine(level3Submarine);
 
         actualizarPoder();
         actualizarInvulnerabilidad();
@@ -544,53 +544,59 @@ void GameLooplevel3() {
     gotoxy(45, 12);
 
     if (jefeDerrotado)
-   if (jefeDerrotado)
+        if (jefeDerrotado)
+        {
+            Victory();
+
+            std::string nombre;
+            system("cls");
+            std::cout << "\n\n  ¡Felicidades! Has derrotado al jefe final.\n";
+            std::cout << "  Ingresa tu nombre para guardar el puntaje: ";
+            std::cin >> nombre;
+
+            guardarPuntaje(nombre, score);
+            system("cls");
+            mostrarPuntajesGuardados();
+        }
+
+        else
+        {
+            gotoxy(45, 12);
+            GameOverlevel3();
+            Sleep(3000);
+        }
+}
+void guardarPuntaje(const std::string &nombre, int puntaje)
 {
-    Victory();
-
-    std::string nombre;
-    system("cls");
-    std::cout << "\n\n  ¡Felicidades! Has derrotado al jefe final.\n";
-    std::cout << "  Ingresa tu nombre para guardar el puntaje: ";
-    std::cin >> nombre;
-
-    guardarPuntaje(nombre, score);
-    system("cls");
-    mostrarPuntajesGuardados();
-}
-
-    else
-    {
-        gotoxy(45, 12);
-        GameOverlevel3();
-        Sleep(3000);
-    }
-}
-void guardarPuntaje(const std::string& nombre, int puntaje) {
     std::ofstream archivo("highscores.txt", std::ios::app);
-    if (archivo.is_open()) {
+    if (archivo.is_open())
+    {
         archivo << nombre << " " << puntaje << "\n";
         archivo.close();
     }
 }
 
-void mostrarPuntajesGuardados() {
+void mostrarPuntajesGuardados()
+{
     std::ifstream archivo("highscores.txt");
-    if (archivo.is_open()) {
+    if (archivo.is_open())
+    {
         std::string linea;
         gotoxy(10, 5);
         std::cout << "Puntajes Guardados:\n";
         int i = 6;
-        while (std::getline(archivo, linea)) {
+        while (std::getline(archivo, linea))
+        {
             gotoxy(10, i++);
             std::cout << linea;
         }
         archivo.close();
-    } else {
+    }
+    else
+    {
         gotoxy(10, 5);
         std::cout << "No se pudo abrir el archivo de puntajes.\n";
     }
 }
-
 
 #endif

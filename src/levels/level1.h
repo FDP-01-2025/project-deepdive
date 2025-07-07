@@ -10,18 +10,18 @@ OBJETIVO DEL NIVEL 2:
 
 */
 
-static void InitGameMessagelevel1()
+static void InitGameMessagelevel2()
 {
     system("cls");
     system("chcp 65001 > nul");
 
     const std::string titulo[7] = {
-        "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗               ██╗",
-        "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║              ███║",
-        "██║      █████╗   ██║   ██║ █████╗   ██║              ╚██║",
-        "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║               ██║",
-        "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗          ██║",
-        "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝          ╚═╝ ",
+        "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗                ██╗",
+        "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║               ███║",
+        "██║      █████╗   ██║   ██║ █████╗   ██║               ╚██║",
+        "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║                ██║",
+        "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗           ██║",
+        "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝           ╚═╝ ",
         "                                                                    "
     };
 
@@ -53,7 +53,7 @@ inline void Victorylevel1()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string congrats[] = {
+    const std::string congrats[6] = {
     " ██████╗ ██████╗ ██╗   █╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗     █████╗ ████████╗██╗ ██████╗ ██╗   █╗██████╗",
     "██╔════╝██╔═══██╗███╗  █║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║    ██╔══██╗╚══██╔══╝██║██╔═══██╗███╗  █║██╔═══╝",
     "██║     ██║   ██║█╔██╗ █║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║    ███████║   ██║   ██║██║   ██║█╔██╗ █║██████╗",
@@ -116,13 +116,13 @@ static int level1Numfishes;
 static pieces level1Pieces[1]; // Numero de Piezas
 static
 int level1NumPieces;
-static int chosenSubmarineStylelevel1 = 1; 
 extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel1()
 {   
     InitGameMessagelevel1();
     system("cls");
+    setColor(11);
     gotoxy(5,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level1Submarine = {5, 15, 1, 3};
@@ -139,6 +139,7 @@ static void InitGamelevel1()
     level1Pieces[0] = {85, 5};
     level1NumPieces = 1;
 }
+
 
 static void GameLooplevel1()
 {

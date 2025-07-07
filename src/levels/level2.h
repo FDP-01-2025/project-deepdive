@@ -11,8 +11,6 @@ static Submarine allySubmarine;
 static Fish level2Fishes[4];
 static int level2NumFishes;
 static int allyFrame = 0;
-static int chosenSubmarineStylelevel2 = 1; 
-
 static const std::string framesAllyFish[] = {
     ">{{{°>",
     ">{{{o>",
@@ -29,7 +27,9 @@ static void InitGameMessagelevel2()
         "██║      █████╗   ██║   ██║ █████╗   ██║                █████╔╝",
         "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║               ██╔═══╝",
         "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗          ██████╗",
-        "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝          ╚═════╝ "};
+        "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝          ╚═════╝ ",
+        
+        "                                                                    "};
 
     for (int i = 0; i < 7; ++i)
     {
@@ -48,12 +48,12 @@ static void InitGameMessagelevel2()
     system("cls");
 }
 
-inline void Victorylevel2()
+static void Victorylevel2()
 {
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string congrats[] = {
+    const std::string congrats[6] = {
     " ██████╗ ██████╗ ██╗   █╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗    █████╗ ████████╗██╗ ██████╗ ██╗   █╗███████╗",
     "██╔════╝██╔═══██╗███╗  █║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║   ██╔══██╗╚══██╔══╝██║██╔═══██╗███╗  █║██╔════╝",
     "██║     ██║   ██║█╔██╗ █║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║   ███████║   ██║   ██║██║   ██║█╔██╗ █║███████╗",
@@ -158,13 +158,14 @@ static void InitGamelevel2()
 {
     InitGameMessagelevel2();
     system("cls");
-    gotoxy(0, 1);
+    setColor(11);
+    gotoxy(5, 1);
     std::cout << "Principal Objective: Escort the ally fish!";
 
     level2Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
     allySubmarine = {5, 18, 0, 1, 0};    // Aliado a proteger
 
-    PaintSubmarine(level2Submarine, chosenSubmarineStylelevel2);
+    PaintSubmarine(level2Submarine);
     PaintAllyFish(allySubmarine);
     PaintHearts(level2Submarine);
 
@@ -191,10 +192,11 @@ static void GameLooplevel2()
         }
 
         // Mover aliado detrás del jugador
-        allySubmarine.x = std:: max (5,level2Submarine.x-8);
-        allySubmarine.y = level2Submarine.y;
+       allySubmarine.x = std::max(2, std::min(level2Submarine.x - 8, 103)); // 103 = 110 - 7 (ancho del pez)
+        allySubmarine.y = std::min(level2Submarine.y, 22);
+
         //First we paint the Submarine 
-        PaintSubmarine(level2Submarine, chosenSubmarineStylelevel2);
+        PaintSubmarine(level2Submarine);
 
         if(allySubmarine.x + 7 < level2Submarine.x){// Validation to avoid conflicts
         //After paint Submarine
