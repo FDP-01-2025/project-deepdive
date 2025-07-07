@@ -116,6 +116,7 @@ static int level2Numfishes;
 static pieces level2Pieces[1]; // Numero de Piezas
 static
 int level2NumPieces;
+static int chosenSubmarineStyleLevel2 = 1; 
 extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel2()
@@ -125,7 +126,7 @@ static void InitGamelevel2()
     gotoxy(5,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level2Submarine = {5, 15, 1, 3};
-    PaintSubmarine(level2Submarine);
+    PaintSubmarine(level2Submarine, chosenSubmarineStyleLevel2);
     PaintHearts(level2Submarine);
     PaintOxygen(level2Submarine);
 
@@ -138,7 +139,6 @@ static void InitGamelevel2()
     level2Pieces[0] = {85, 5};
     level2NumPieces = 1;
 }
-
 
 static void GameLooplevel2()
 {

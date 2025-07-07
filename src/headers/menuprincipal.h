@@ -18,14 +18,12 @@ const static void setColor(int fg)
     SetConsoleTextAttribute(hConsole, fg);
 }
 
-#include "../levels/level1.h"
 #include "../levels/level2.h"
 #include "../levels/level3.h"
 #include "../levels/level4.h"
 #include "../levels/survival_mode.h"
 #include "../headers/game_data.h"
 #include "../headers/hide_cursor.h"
-#include "../headers/players.h"
 
 // --- Arte ASCII del título ---
 const int TITLE_ROWS = 9;
@@ -97,10 +95,10 @@ const static void runMenu()
     // setlocale(LC_ALL, "es_ES.UTF-8");
     srand((unsigned)time(nullptr));
 
-    const std::string mainOpts[] = {"Start Levels", "High Scores", "Players", "Exit"};
+    const std::string mainOpts[] = {"Start Levels", "High Scores", "Exit"};
     const std::string levelOpts[] = {
-        "Level 1", "Level 2", "Level 3",
-        "SurvivalMode", "Nivel 5", "Regresar"};
+        "SurvivalMode", "Level 1", "Level 2",
+        "Final Boss", "Regresar"};
     const int N_main = sizeof(mainOpts) / sizeof(mainOpts[0]);
     const int N_level = sizeof(levelOpts) / sizeof(levelOpts[0]);
     const int linesHigh = std::max(N_main, N_level);
@@ -217,10 +215,10 @@ const static void runMenu()
                             // Ejecutar el nivel correspondiente
                             switch (selected)
                             {
-                            case 0:
+                            case 0:;
                                 system("cls");
-                                InitGamelevel1();
-                                GameLooplevel1();
+                                InitGameSurvivalMode();
+                                GameLoopSurvivalMode();
                                 break;
                             case 1:
                                 system("cls");
@@ -232,17 +230,13 @@ const static void runMenu()
                                 InitGamelevel3();
                                 GameLooplevel3();
                                 break;
-                            case 3:;
-                                system("cls");
-                                InitGameSurvivalMode();
-                                GameLoopSurvivalMode();
-                                break;
-                            case 4:
+                            case 3:
                                 system("cls");
                                 InitGamelevel4();
                                 GameLooplevel4();
                                 break;
-                            case 5:;
+
+                            case 4:;
                                 break;
                             }
                             // Una vez que regrese del nivel, refrescamos el menú principal:

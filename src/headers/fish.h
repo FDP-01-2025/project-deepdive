@@ -57,7 +57,7 @@ static void CollisionFish(Fish &fish, Submarine &submarine)
         CollisionSubmarine(submarine);
         DestroySubmarine(submarine);
         ClearFish(fish);
-        PaintSubmarine(submarine);
+        PaintSubmarine(submarine, 1);
         PaintHearts(submarine);
         fish.x = 110;
         fish.y = rand() % 20 + 3;

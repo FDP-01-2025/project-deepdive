@@ -20,6 +20,7 @@
 static Submarine level4Submarine;
 static Fish level4Fishes[3];
 static int level4NumFishes;
+static int chosenSubmarineStyleLevel4 = 1; 
 
 static Missiles level4Missiles[MAX_MISSILES];
 static int level4MissilesCout;
@@ -371,7 +372,7 @@ static void actualizarJefe()
                     CollisionSubmarine(level4Submarine);
                 }
                 DestroySubmarine(level4Submarine);
-                PaintSubmarine(level4Submarine);
+                PaintSubmarine(level4Submarine, chosenSubmarineStyleLevel4);
                 PaintHearts(level4Submarine);
             }
             gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
@@ -415,7 +416,7 @@ void InitGamelevel4()
 {
     mensajeInicioJefeFinal(); // 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
     level4Submarine = {5, 15, 3, 3};
-    PaintSubmarine(level4Submarine);
+    PaintSubmarine(level4Submarine, chosenSubmarineStyleLevel4);
     PaintHearts(level4Submarine);
     level4Fishes[0] = {90, 3};
     level4Fishes[1] = {80, 12};
@@ -524,7 +525,7 @@ void GameLooplevel4()
                 paint = true;
         }
         if (paint)
-            PaintSubmarine(level4Submarine);
+            PaintSubmarine(level4Submarine, chosenSubmarineStyleLevel4);
 
         actualizarPoder();
         actualizarInvulnerabilidad();
