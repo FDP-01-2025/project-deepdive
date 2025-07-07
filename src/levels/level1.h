@@ -3,10 +3,10 @@
 #include "../headers/fish.h"
 #include "../headers/pieces.h"
 #include "../headers/game_limits.h"
-#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada key.
+#include <conio.h> // It allows the use of the getch() function to detect the keystrokes of each key.
 /*
-OBJETIVO DEL NIVEL 2:
--REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
+OBJECTIVE OF LEVEL 2:
+-COLLECT THE PIECES TO FILL THE OXYGEN BAR AND UNLOCK OTHER LEVELS
 
 */
 static void WaitEnterlevel1()
@@ -40,7 +40,7 @@ static void InitGameMessagelevel1()
 
     for (int i = 0; i < 7; ++i)
     {
-        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
+        gotoxy(30, 8 + i);  // Adjust according to the desired position
         std::cout << title[i];
     }
 
@@ -112,10 +112,10 @@ static void GameOverlevel1()
 static Submarine level1Submarine;
 static Fish level1Fishes[4];
 static int level1Numfishes;
-static pieces level1Pieces[1]; // Numero de Piezas
+static pieces level1Pieces[1]; // Number of Pieces
 static int chosenSubmarineStylelevel1=1;
 static int level1NumPieces;
-extern int sleepTime; //Tiempo inicial de espera
+extern int sleepTime; //Initial wait time
 
 static void InitGamelevel1()
 {   
@@ -145,8 +145,8 @@ static void GameLooplevel1()
     GameLimits();
     do
     {
-        
-        // para que en la siguiente vuelta se mida el nuevo deltaTime correctamente
+
+        // to ensure that the new deltaTime is measured correctly in the next round
         if (kbhit())
         {
             char key = getch();

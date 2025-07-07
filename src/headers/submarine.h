@@ -4,7 +4,7 @@
 #include <iostream>
 #include <windows.h>
 #include "position.h"
-// Se definen las teclas A, W, S, D en mayúsculas y minúsculas
+// The keys A, W, S, D are defined in uppercase and lowercase.
 #define UP 87
 #define DOWN 83
 #define LEFT 65
@@ -22,7 +22,7 @@ typedef struct
 
 static int optionSubmarine = 1;
 
-/* Pinta al submarino con caracteres del código ASCII */
+/* Paint the submarine with ASCII code characters */
 
 inline void PaintSubmarine(Submarine &submarine, int option)
 {
@@ -78,7 +78,7 @@ inline void PaintSubmarine(Submarine &submarine, int option)
     }
 }
 
-/* Borra al submarino en cada desplazamiento */
+/* Delete the submarine in each movement*/
 void DeleteSubmarine(Submarine &submarine)
 {
     gotoxy(submarine.x, submarine.y);
@@ -89,7 +89,7 @@ void DeleteSubmarine(Submarine &submarine)
     std::cout << "            ";
 }
 
-/* Pinta la vida y los corazones del submarino */
+/* Paint the life and hearts of the submarine */
 void PaintHearts(Submarine &submarine)
 {
 
@@ -99,21 +99,21 @@ void PaintHearts(Submarine &submarine)
     std::cout << "Hearts: ";
     gotoxy(115, 1);
     std::cout << "   ";
-    // Activa el UTF-8
+    // Activate UTF-8
     system("chcp 65001 > nul");
     for (int i = 0; i < submarine.heart; i++)
     {
-        // Se usa ANSI para pintar de otro color los corazones
+        // ANSI is used to paint the hearts in another color
         gotoxy(115 + i, 1);
         std::cout << "\033[1;31m♥\033[0m";
     }
-    // Restaura la codificación
+    // Restore the encoding
     system("chcp 437 > nul");
 }
 
 void PaintOxygen(Submarine &submarine)
 {
-    // Barra de Oxigeno
+    // Oxygen bar
     gotoxy(50, 1);
     std::cout << "Oxygen:";
 
@@ -124,7 +124,7 @@ void PaintOxygen(Submarine &submarine)
     }
 }
 
-/* Si los corazones del submarino llegan a 0, se pinta una explosión animada */
+/* If the submarine's hearts reach 0, an animated explosion is drawn. */
 void DestroySubmarine(Submarine &submarine)
 {
     if (submarine.heart == 0)
@@ -178,34 +178,34 @@ void CollisionSubmarine(Submarine &submarine)
     }
 }
 
-/* Movimiento del submarino en base a las teclas presionadas */
-void MoveSubmarine(char tecla, Submarine &submarine)
+/* Submarine movement based on the keys pressed */
+void MoveSubmarine(char key, Submarine &submarine)
 {
     DeleteSubmarine(submarine);
 
-    if ((tecla == LEFT || tecla == LEFTlc) && submarine.x > 3)
+    if ((key == LEFT || key == LEFTlc) && submarine.x > 3)
         submarine.x--;
-    if ((tecla == RIGHT || tecla == RIGHTlc) && submarine.x < 106)
+    if ((key == RIGHT || key == RIGHTlc) && submarine.x < 106)
         submarine.x++;
-    if ((tecla == UP || tecla == UPlc) && submarine.y > 3)
+    if ((key == UP || key == UPlc) && submarine.y > 3)
         submarine.y--;
-    if ((tecla == DOWN || tecla == DOWNlc) && submarine.y < 25)
+    if ((key == DOWN || key == DOWNlc) && submarine.y < 25)
         submarine.y++;
 
     PaintSubmarine(submarine, optionSubmarine);
 }
 
-void MoveWithAlly(char tecla, Submarine &submarine)
+void MoveWithAlly(char key, Submarine &submarine)
 {
     DeleteSubmarine(submarine);
 
-    if ((tecla == LEFT || tecla == LEFTlc) && submarine.x > 7)
+    if ((key == LEFT || key == LEFTlc) && submarine.x > 7)
         submarine.x--;
-    if ((tecla == RIGHT || tecla == RIGHTlc) && submarine.x < 104)
+    if ((key == RIGHT || key == RIGHTlc) && submarine.x < 104)
         submarine.x++;
-    if ((tecla == UP || tecla == UPlc) && submarine.y > 5)
+    if ((key == UP || key == UPlc) && submarine.y > 5)
         submarine.y--;
-    if ((tecla == DOWN || tecla == DOWNlc) && submarine.y < 25)
+    if ((key == DOWN || key == DOWNlc) && submarine.y < 25)
         submarine.y++;
 
     PaintSubmarine(submarine, optionSubmarine);
