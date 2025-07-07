@@ -55,7 +55,7 @@ const static void drawTitle(int color)
 
     for (int i = 0; i < TITLE_ROWS; ++i)
     {
-        gotoxy(0, i);
+        gotoxy(22, i);
         std::cout << titleLines[i];
     }
     system("chcp 437 > nul");

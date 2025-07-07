@@ -26,7 +26,6 @@ static Submarine level2Submarine;
 static AllyFish allySubmarine;
 static Fish level2Fishes[4];
 static int level2NumFishes;
-static bool devouredAlly = false;
 
 static void InitGameMessagelevel2()
 {
@@ -92,13 +91,7 @@ inline void Victorylevel2()
     system("cls");
 }
 
-static void MessageDevouredAlly()
-{
-    gotoxy(41, 17);
-    std::cout << "🐠[The allied fish was deboured]🐠" << "\n\n";
-}
-
-static void GameOverlevel2()
+static void GameOverlevel2(std::string messegeDevouredFish)
 {
     while (_kbhit())
         _getch();
@@ -118,10 +111,9 @@ static void GameOverlevel2()
         gotoxy(25, 6 + i);
         std::cout << texto[i] << "\n\n";
     }
-    if (devouredAlly)
-    {
-        MessageDevouredAlly();
-    }
+    gotoxy(42, 17);
+    std::cout << messegeDevouredFish;
+
     system("chcp 437 > nul");
     WaitEnterlevel2();
     system("cls");
@@ -133,7 +125,7 @@ static void InitGamelevel2()
     system("cls");
     setColor(15);
     gotoxy(5, 1);
-    std::cout << "Principal Objective: Escort the ally fish❗";
+    std::cout << "Principal Objective: Escort the ally fish🐠";
 
     level2Submarine = {15, 15, 3, 3}; // Submarino controlado por usuario
 
@@ -151,7 +143,8 @@ static void InitGamelevel2()
 static void GameLooplevel2()
 {
     GameLimits();
-    bool completedTime = false, stillAlive = true;
+    bool devouredAlly = false, completedTime = false, stillAlive = true;
+    std::string messageDevouredFish;
     using namespace std::chrono;
     auto startTime = steady_clock::now();
 
@@ -212,7 +205,12 @@ static void GameLooplevel2()
 
     if (devouredAlly || !stillAlive)
     {
-        GameOverlevel2();
+        if (devouredAlly)
+            messageDevouredFish = "🐠 [The allied fish was devoured] 🐠";
+        else if (!stillAlive)
+            messageDevouredFish = "💀 [You ran out of lives] 💀";
+
+        GameOverlevel2(messageDevouredFish);
     }
     else if (completedTime)
     {
