@@ -118,7 +118,8 @@ void PaintOxygen(Submarine &submarine)
     std::cout << "Oxygen:";
 
     for (int i = 0; i < submarine.oxygen; i++)
-    {
+    {   
+        setColor(9);
         std::cout << (char)178;
     }
 }
