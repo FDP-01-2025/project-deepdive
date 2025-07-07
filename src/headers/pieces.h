@@ -10,7 +10,7 @@ typedef struct
     int x, y;
 } pieces;
 
-void Victorylevel2(); 
+ void Victorylevel2(); 
 
 // Pinta la forma de la pieza
 void Paintpieces(pieces &pieces)

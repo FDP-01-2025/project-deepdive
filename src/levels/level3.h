@@ -373,7 +373,7 @@ static void actualizarJefe()
                     CollisionSubmarine(level3Submarine);
                 }
                 DestroySubmarine(level3Submarine);
-                PaintSubmarine(level3Submarine);
+                PaintSubmarine(level3Submarine, 1);
                 PaintHearts(level3Submarine);
             }
             gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
@@ -417,7 +417,7 @@ void InitGamelevel3()
 {
     mensajeInicioJefeFinal(); // 🟢 NUEVA FUNCIÓN: Mostrar mensaje de inicio del jefe
     level3Submarine = {5, 15, 3, 3};
-    PaintSubmarine(level3Submarine);
+    PaintSubmarine(level3Submarine,1);
     PaintHearts(level3Submarine);
     level3Fishes[0] = {90, 3};
     level3Fishes[1] = {80, 12};
@@ -529,7 +529,7 @@ void GameLooplevel3()
                 paint = true;
         }
         if (paint)
-            PaintSubmarine(level3Submarine);
+            PaintSubmarine(level3Submarine,1);
 
         actualizarPoder();
         actualizarInvulnerabilidad();

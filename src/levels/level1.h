@@ -10,7 +10,7 @@ OBJETIVO DEL NIVEL 2:
 
 */
 
-static void InitGameMessagelevel2()
+static void InitGameMessagelevel1()
 {
     system("cls");
     system("chcp 65001 > nul");
@@ -114,15 +114,15 @@ static Submarine level1Submarine;
 static Fish level1Fishes[4];
 static int level1Numfishes;
 static pieces level1Pieces[1]; // Numero de Piezas
-static
-int level1NumPieces;
+static int chosenSubmarineStylelevel1=1;
+static int level1NumPieces;
 extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel1()
 {   
     InitGameMessagelevel1();
     system("cls");
-    setColor(11);
+    setColor(15);
     gotoxy(5,1);
     std::cout << "Principal Objective: Refil the oxygen!";
     level1Submarine = {5, 15, 1, 3};
