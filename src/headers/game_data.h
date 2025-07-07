@@ -90,7 +90,7 @@ void SaveGameTimeToFile(int duration, std::string captain)
         {
             int minutes = times[i] / 60;
             int seconds = times[i] % 60;
-            outfile << "\t" << (i + 1) << "°\t\t\t" << captains[i]
+            outfile << "\t" << (i + 1) << "°\t\t" << captains[i]
                     << "\t\t  " << minutes << " min " << seconds << " sec\n";
         }
         outfile.close();
