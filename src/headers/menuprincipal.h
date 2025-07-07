@@ -19,9 +19,9 @@ const static void setColor(int fg)
     SetConsoleTextAttribute(hConsole, fg);
 }
 
+#include "../levels/level1.h"
 #include "../levels/level2.h"
 #include "../levels/level3.h"
-#include "../levels/level4.h"
 #include "../levels/survival_mode.h"
 #include "../headers/game_data.h"
 #include "../headers/hide_cursor.h"
@@ -271,18 +271,18 @@ const static void runMenu()
                                 break;
                             case 1:
                                 system("cls");
-                                InitGamelevel2();
-                                GameLooplevel2();
+                                InitGamelevel1();
+                                GameLooplevel1();
                                 break;
                             case 2:
                                 system("cls");
-                                InitGamelevel3();
-                                GameLooplevel3();
+                                InitGamelevel2();
+                                GameLooplevel2();
                                 break;
                             case 3:
                                 system("cls");
-                                InitGamelevel4();
-                                GameLooplevel4();
+                                InitGamelevel3();
+                                GameLooplevel3();
                                 break;
 
                             case 4:;

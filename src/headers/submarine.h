@@ -24,7 +24,7 @@ static int optionSubmarine = 1;
 
 /* Pinta al submarino con caracteres del código ASCII */
 
-void PaintSubmarine(Submarine &submarine, int option)
+inline void PaintSubmarine(Submarine &submarine, int option)
 {
 
     optionSubmarine = option;
