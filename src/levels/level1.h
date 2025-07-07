@@ -38,12 +38,6 @@ static void InitGameMessagelevel1()
         "                                                                    "
     };
 
-    for (int i = 0; i < 6; ++i)
-    {
-        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
-        std::cout << titulo[i];
-    }
-
     for (int i = 0; i < 7; ++i)
     {
         gotoxy(30, 8 + i);  // Ajusta según la posición deseada
@@ -114,7 +108,6 @@ static void GameOverlevel1()
     WaitEnterlevel1();
     system("cls");
 }
-
 
 static Submarine level1Submarine;
 static Fish level1Fishes[4];
