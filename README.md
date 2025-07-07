@@ -66,6 +66,13 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 ---
 
+## 🤝 Créditos
+Desarrollado por AlgorithMinds
+Bajo el sello de AlgorithTech
+🧠 “Impulsamos el futuro con cada línea de pensamiento”
+
+---
+
 ## 📂 Estructura del proyecto (resumen)
 
 ```plaintext
@@ -102,3 +109,4 @@ proyect-deepdive
 │  
 |── main.cpp
 └── README.md
+
