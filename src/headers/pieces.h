@@ -75,7 +75,7 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
         {
             DeleteSubmarine(submarine);
             Sleep(100);
-            PaintSubmarine(submarine);
+            PaintSubmarine(submarine, 1);
             Sleep(100);
         }
 

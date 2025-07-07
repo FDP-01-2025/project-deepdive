@@ -20,17 +20,53 @@ typedef struct
     int x, y, heart, lifes, oxygen, Time;
 } Submarine;
 
+static int optionSubmarine = 1;
+
 /* Pinta al submarino con caracteres del código ASCII */
-void PaintSubmarine(Submarine &submarine)
+
+void PaintSubmarine(Submarine &submarine, int option)
 {
-    gotoxy(submarine.x, submarine.y);
-    std::cout << "\033[1;34m       " << (char)95 << (char)218 << "\033[0m";
 
-    gotoxy(submarine.x, submarine.y + 1);
-    std::cout << "\033[1;34m " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95 << "\033[0m";
+    optionSubmarine = option;
+    switch (optionSubmarine)
+    {
+    case 1:
+        gotoxy(submarine.x, submarine.y);
+        std::cout << "\033[1;34m       " << (char)95 << (char)218 << "\033[0m";
 
-    gotoxy(submarine.x, submarine.y + 2);
-    std::cout << "\033[1;34m  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\033[0m";
+        gotoxy(submarine.x, submarine.y + 1);
+        std::cout << "\033[1;34m " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95 << "\033[0m";
+
+        gotoxy(submarine.x, submarine.y + 2);
+        std::cout << "\033[1;34m  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\033[0m";
+        break;
+    case 2:
+        gotoxy(submarine.x, submarine.y);
+        std::cout << "\033[1;36m       " << (char)95 << (char)201 << "\033[0m";
+
+        gotoxy(submarine.x, submarine.y + 1);
+        std::cout << "\033[1;36m " << (char)177 << (char)62 << (char)95 << (char)95 << (char)219 << (char)47 << (char)240 << (char)240 << (char)92 << (char)92 << "\033[0m";
+
+        gotoxy(submarine.x, submarine.y + 2);
+        std::cout << "\033[1;36m  " << (char)40 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)41 << "\033[0m";
+
+        break;
+    case 3:
+        gotoxy(submarine.x, submarine.y);
+        std::cout << "\033[1;35m       " << (char)95 << (char)254 << "\033[0m";
+
+        gotoxy(submarine.x, submarine.y + 1);
+        std::cout << "\033[1;35m " << (char)178 << (char)35 << (char)95 << (char)95 << (char)95 << (char)47 << (char)216 << (char)216 << (char)92 << (char)45 << "\033[0m";
+
+        gotoxy(submarine.x, submarine.y + 2);
+        std::cout << "\033[1;35m  " << (char)40 << (char)61 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)61 << (char)41 << "\033[0m";
+
+        break;
+
+    default:
+        std::cout << "Error, invalid option\n";
+        break;
+    }
 }
 
 /* Borra al submarino en cada desplazamiento */
@@ -111,7 +147,7 @@ void DestroySubmarine(Submarine &submarine)
         submarine.lifes--;
         PaintHearts(submarine);
         submarine.heart = 3;
-        PaintSubmarine(submarine);
+        PaintSubmarine(submarine, optionSubmarine);
     }
 }
 
@@ -128,7 +164,7 @@ void CollisionSubmarine(Submarine &submarine)
         gotoxy(submarine.x, submarine.y + 2);
         std::cout << "      ";
         Sleep(80);
-        PaintSubmarine(submarine);
+        PaintSubmarine(submarine, optionSubmarine);
     }
 }
 
@@ -146,7 +182,7 @@ void MoveSubmarine(char tecla, Submarine &submarine)
     if ((tecla == DOWN || tecla == DOWNlc) && submarine.y < 25)
         submarine.y++;
 
-    PaintSubmarine(submarine);
+    PaintSubmarine(submarine, optionSubmarine);
 }
 
 #endif

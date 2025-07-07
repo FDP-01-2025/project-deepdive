@@ -4,11 +4,13 @@
 #include "../headers/rockets.h"
 #include "../headers/game_data.h"
 #include "../headers/game_limits.h"
+#include "../headers/game_data.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 
 static Submarine survivalSubmarine;
 static Rocket survivalRockets[5];
 static int survivalNumrocketes;
+static int chosenSubmarineStyle = 1; 
 
 const int BASE_FPS = 60;
 const int BASE_FRAME_TIME_MS = 1000 / BASE_FPS;
@@ -97,11 +99,10 @@ static void GameOverSurvivalMode()
     system("chcp 437 > nul");
 }
 
-
 void Timer(int time)
 {
     gotoxy(5, 1);
-    std::cout << "Time: " << time <<" sec.";
+    std::cout << "Time: " << time << " sec.";
 }
 
 static void GameTime(int duration)
@@ -113,11 +114,100 @@ static void GameTime(int duration)
     WaitEnter();
 }
 
+static void SubmarineType(int style)
+{
+    system("chcp 437 > nul");
+
+    switch (style)
+    {
+    case 1:
+        std::cout << "\033[1;34m       " << (char)95 << (char)218 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;34m " << (char)126 << (char)42 << (char)95 << (char)95 << (char)95 << (char)47 << (char)111 << (char)111 << (char)92 << (char)95 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;34m  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\033[0m" << "\n";
+        break;
+    case 2:
+        std::cout << "\033[1;36m       " << (char)95 << (char)201 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;36m " << (char)177 << (char)62 << (char)95 << (char)95 << (char)219 << (char)47 << (char)240 << (char)240 << (char)92 << (char)92 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;36m  " << (char)40 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)41 << "\033[0m" << "\n";
+
+        break;
+    case 3:
+        std::cout << "\033[1;35m       " << (char)95 << (char)254 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;35m " << (char)178 << (char)35 << (char)95 << (char)95 << (char)95 << (char)47 << (char)216 << (char)216 << (char)92 << (char)45 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;35m  " << (char)40 << (char)61 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)61 << (char)41 << "\033[0m" << "\n";
+        break;
+    default:
+        break;
+    }
+    system("chcp 65001 > nul");
+}
+
+
+static void Player()
+{
+    int count = 1, option;
+    std::string line;
+
+    system("cls");
+    system("chcp 65001 > nul");
+
+    std::ifstream file("database/characters.txt");
+    if (!file.is_open())
+    {
+        std::cout << "⚠️ Error: No se pudo abrir el archivo de personajes.\n";
+        WaitEnter();
+        return;
+    }
+
+    // Mostrar personajes
+  while (getline(file, line))
+{
+    int style = (count - 1) % 3 + 1;
+
+    std::cout << "\033[1;37m[🔔] Canal táctico -- ID " << count << "\033[0m\n";
+    std::cout << "\033[1;37m--------------------------------------------\033[0m\n";
+    std::cout << "\033[1;37m👤 Registro de Capitán: " << line << "\033[0m\n";
+    std::cout << "\033[1;37m🛠️ Submarino tipo-" << style << " asignado:\033[0m\n";
+    
+    SubmarineType(style); // debe estar alineado visualmente
+
+    std::cout << "\033[1;37m--------------------------------------------\033[0m\n\n";
+
+    count++;
+}
+
+    file.close();
+
+    // Capturar selección
+    std::cout << "🔱 Elige tu personaje (1 a " << count - 1 << "): ";
+    std::cin >> option;
+
+    if (option < 1 || option >= count)
+    {
+        std::cout << "❌ Selección inválida. Intenta nuevamente.\n";
+        WaitEnter();
+        return;
+    }
+
+    // Asignar estilo del submarino según selección
+    chosenSubmarineStyle = ((option - 1) % 3) + 1;
+
+    system("chcp 437 > nul");
+    system("cls");
+}
+
 static void InitGameSurvivalMode()
 {
     InitGameMessage();
-    survivalSubmarine = {5, 15, 3, 1};
-    PaintSubmarine(survivalSubmarine);
+    Player();
+    survivalSubmarine = {5, 15, 3, 2};
+    PaintSubmarine(survivalSubmarine, chosenSubmarineStyle);
     PaintHearts(survivalSubmarine);
 
     survivalRockets[0] = {102, 3};

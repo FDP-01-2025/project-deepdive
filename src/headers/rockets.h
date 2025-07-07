@@ -62,7 +62,6 @@ static void CollisionRocket(Rocket &rocket, Submarine &submarine)
         }
         DestroySubmarine(submarine);
         ClearRocket(rocket);
-        PaintSubmarine(submarine);
         PaintHearts(submarine);
         rocket.x = 110;
         rocket.y = rand() % 20 + 3;

@@ -11,6 +11,8 @@ static Submarine allySubmarine;
 static Fish level3Fishes[4];
 static int level3NumFishes;
 static int allyFrame = 0;
+static int chosenSubmarineStyleLevel3 = 1; 
+
 static const std::string framesAllyFish[] = {
     ">{{{°>",
     ">{{{o>",
@@ -163,7 +165,7 @@ static void InitGamelevel3()
     level3Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
     allySubmarine = {5, 18, 0, 1, 0};    // Aliado a proteger
 
-    PaintSubmarine(level3Submarine);
+    PaintSubmarine(level3Submarine, chosenSubmarineStyleLevel3);
     PaintAllyFish(allySubmarine);
     PaintHearts(level3Submarine);
 
@@ -193,7 +195,7 @@ static void GameLooplevel3()
         allySubmarine.x = std:: max (5,level3Submarine.x-8);
         allySubmarine.y = level3Submarine.y;
         //First we paint the Submarine 
-        PaintSubmarine(level3Submarine);
+        PaintSubmarine(level3Submarine, chosenSubmarineStyleLevel3);
 
         if(allySubmarine.x + 7 < level3Submarine.x){// Validation to avoid conflicts
         //After paint Submarine

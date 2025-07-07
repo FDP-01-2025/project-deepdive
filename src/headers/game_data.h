@@ -7,6 +7,15 @@
 
 const int MAX_TIMES = 5;
 
+static void GameCharacters()
+{
+    std::ofstream file("database/characters.txt");
+    file << "Sebas\n"
+         << "Alex\n"
+         << "Alisson\n";
+    file.close();
+}
+
 void SaveGameTimeToFile(int duration)
 {
     int times[MAX_TIMES + 1];
