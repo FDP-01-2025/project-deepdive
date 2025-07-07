@@ -1,4 +1,5 @@
-# 🌊 DeepDive: El Juego del Submarino
+# 🌊 DeepDive:
+![DeepDive Logo](assets/deepdive_logo.gif)
 
 > Un proyecto del equipo **AlgorithMinds**, desarrollado con pasión bajo el sello de **AlgorithTech**  
 > 🧠 *"Impulsamos el futuro con cada línea de pensamiento"*
@@ -147,29 +148,28 @@ proyect-deepdive
 │   │   ├── level2.h
 │   │   └── level3.h
 │   ├── headers/
-│   │   ├── fish.h
-│   │   ├── fish_animation.h
-│   │   ├── game_data.h
-│   │   ├── game_limits.h
-│   │   ├── hide_cursor.h
-│   │   ├── input.h
-|   |   ├── invulnerability.h
-|   |   ├── submarine_boss.h
-|   |   ├── menu.h
-|   |   ├── menu_principal.h
-|   |   ├── missiles.h
-|   |   ├── pieces.h
-|   |   ├── possition.h
-|   |   ├── power_item.h
-|   |   ├── rockets.h
-|   |   └── submarine.h
-|   |
-│   │   
-|   |     
-│   └──libraries/
+│      ├── fish.h
+│      ├── fish_animation.h
+│      ├── game_data.h
+│      ├── game_limits.h
+│      ├── hide_cursor.h
+│      ├── input.h
+|      ├── invulnerability.h
+|      ├── submarine_boss.h
+|      ├── menu.h
+|      ├── menu_principal.h
+|      ├── missiles.h
+|      ├── pieces.h
+|      ├── possition.h
+|      ├── power_item.h
+|      ├── rockets.h
+|      └── submarine.h    
+│   
 │      
 |
 │  
 |── main.cpp
+|── assets/
+|    └── deepdive_logo.gif
 └── README.md
 
