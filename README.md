@@ -1,6 +1,6 @@
 # 🌊 DeepDive:
 
-![DeepDive Logo](assets/deepdive_logo.gif)
+![deepdive_logo] (assets/deepdive_logo.gif)
 
 > Un proyecto del equipo **AlgorithMinds**, desarrollado con pasión bajo el sello de **AlgorithTech**  
 > 🧠 *"Impulsamos el futuro con cada línea de pensamiento"*
@@ -139,7 +139,6 @@ Bajo el sello de AlgorithTech
 ---
 
 ## 📂 Estructura del proyecto (resumen)
-<details>
 ```plaintext
 proyect-deepdive
 |── .vscode/
@@ -175,4 +174,3 @@ proyect-deepdive
 │ 
 |── main.cpp
 └── README.md
-</details>
