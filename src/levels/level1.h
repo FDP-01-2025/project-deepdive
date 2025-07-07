@@ -9,6 +9,14 @@ OBJETIVO DEL NIVEL 2:
 -REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
 
 */
+static Submarine level1Submarine;
+static Fish level1Fishes[4];
+static int level1Numfishes;
+static pieces level1Pieces[1]; // Numero de Piezas
+static int chosenSubmarineStylelevel1=1;
+static int level1NumPieces;
+extern int sleepTime; //Tiempo inicial de espera
+
 static void WaitEnterlevel1()
 {
     gotoxy(46, 15);
@@ -108,14 +116,6 @@ static void GameOverlevel1()
     WaitEnterlevel1();
     system("cls");
 }
-
-static Submarine level1Submarine;
-static Fish level1Fishes[4];
-static int level1Numfishes;
-static pieces level1Pieces[1]; // Numero de Piezas
-static int chosenSubmarineStylelevel1=1;
-static int level1NumPieces;
-extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel1()
 {   

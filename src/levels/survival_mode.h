@@ -157,11 +157,11 @@ static void Player()
 {
     int count = 1, option;
     std::string line, selectedCaptain;
+    std::ifstream file("database/characters.txt");
 
     system("cls");
     system("chcp 65001 > nul");
 
-    std::ifstream file("database/characters.txt");
     if (!file.is_open())
     {
         std::cout << "⚠️ Error: No se pudo abrir el archivo de personajes.\n";
