@@ -72,7 +72,6 @@ static void InitGameMessage()
     }
     gotoxy(35, 17);
     std::cout << ">>Dodge obstacles and survive as long as possible<<\n";
-
     WaitEnter();
     system("chcp 437 > nul");
 }
