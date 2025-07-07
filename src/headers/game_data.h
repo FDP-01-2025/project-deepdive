@@ -90,7 +90,7 @@ void SaveGameTimeToFile(int duration, std::string captain)
         {
             int minutes = times[i] / 60;
             int seconds = times[i] % 60;
-            outfile << "\t" << (i + 1) << "°\t\t" << captains[i]
+            outfile << "\t" << (i + 1) << "°\t\t\t" << captains[i]
                     << "\t\t  " << minutes << " min " << seconds << " sec\n";
         }
         outfile.close();
@@ -128,8 +128,51 @@ void readFile(const std::string &db_deepdive)
 
     system("chcp 437 > nul");
 
-    std::cout << "\nPresione cualquier tecla para continuar...";
-    _getch(); // pausa simple
     file.close();
+
+    std::ifstream archivo("database/deepdive_puntajes.txt");
+    if (!archivo.is_open())
+    {
+        std::cout << "[DBG] No pude abrir: database/deepdive_puntajes.txt\n";
+        std::cout << "Pulsa tecla...";
+        _getch();
+        return;
+    }
+
+    system("chcp 65001 > nul");
+    std::cout << "\n===== 🎯 HISTORIAL DE INTENTOS 🎯 =====\n\n";
+    std::cout << "╔════════════╦═════════════════════════╗\n";
+    std::cout << "║ Intento    ║ Resultado               ║\n";
+    std::cout << "╠════════════╬═════════════════════════╣\n";
+
+    std::string linea;
+    int intento = 1;
+
+    while (std::getline(archivo, linea))
+    {
+        std::cout << "    " << std::left << intento++
+                  << "\t\t" << std::left << linea << "\n";
+    }
+
+    std::cout << "╚════════════╩═════════════════════════╝\n";
+    system("chcp 437 > nul");
+
+    std::cout << "\nPresione cualquier tecla para continuar...";
+    _getch();
+    archivo.close();
 }
+
+static void guardarPuntaje(int puntaje)
+{
+    std::ofstream archivo("database/deepdive_puntajes.txt", std::ios::app);
+    if (!archivo.is_open())
+    {
+        std::cerr << "Error al abrir el archivo de puntajes." << std::endl;
+    }
+    archivo << puntaje << " score" << "\n";
+    archivo.close();
+}
+
 #endif
+
+// que muestre los datos en una tabla
