@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <chrono> //Permite trabajar con el tiempo.
+#include <chrono> // Allows working with time.
 
 const int MAX_TIMES = 4;
 
@@ -24,7 +24,7 @@ void SaveGameTimeToFile(int duration, std::string captain)
     int count = 0;
     bool replaced = false;
 
-    // Leer los registros existentes (capitán + tiempo)
+    // Read existing records (captain + time)
     std::ifstream infile("database/temp.txt");
     if (infile.is_open())
     {
@@ -35,18 +35,18 @@ void SaveGameTimeToFile(int duration, std::string captain)
         infile.close();
     }
 
-    // Verificar si el capitán ya existe
+    // Check if the captain already exists
     for (int i = 0; i < count; i++)
     {
         if (captains[i] == captain)
         {
-            times[i] = duration; // Reemplaza su tiempo actual por el nuevo
+            times[i] = duration; // Replace their current time with the new one
             replaced = true;
             break;
         }
     }
 
-    // Si no se reemplazó, agregar nuevo registro
+    // If not replaced, add new record
     if (!replaced && count < MAX_TIMES + 1)
     {
         captains[count] = captain;
@@ -54,7 +54,7 @@ void SaveGameTimeToFile(int duration, std::string captain)
         count++;
     }
 
-    // Ordenar los tiempos de mayor a menor
+    // Sort times from highest to lowest
     for (int i = 0; i < count - 1; i++)
     {
         for (int j = i + 1; j < count; j++)
@@ -67,11 +67,11 @@ void SaveGameTimeToFile(int duration, std::string captain)
         }
     }
 
-    // Limitar a los mejores 3
+    // Limit to the top 3
     if (count > MAX_TIMES)
         count = MAX_TIMES;
 
-    // Guardar datos en archivo base (para lectura interna)
+    // Save data to base file (for internal reading)
     std::ofstream datafile("database/temp.txt");
     if (datafile.is_open())
     {
@@ -82,7 +82,7 @@ void SaveGameTimeToFile(int duration, std::string captain)
         datafile.close();
     }
 
-    // Guardar ranking visible
+    // Save visible ranking
     std::ofstream outfile("database/db_deepdive.txt");
     if (outfile.is_open())
     {
@@ -107,17 +107,17 @@ void readFile(const std::string &db_deepdive)
     std::ifstream file(db_deepdive);
     if (!file.is_open())
     {
-        std::cout << "[DBG] No pude abrir: " << db_deepdive << "\n";
-        std::cout << "Pulsa tecla...";
+        std::cout << "[DBG] Could not open: " << db_deepdive << "\n";
+        std::cout << "Press any key...";
         int c = _getch();
         return;
     }
     std::string line;
 
     system("chcp 65001 > nul");
-    std::cout << "\n===== 🏆 TABLE OF RANGES - SURVIVAL MODE 🏆 =====\n\n";
+    std::cout << "\n===== 🏆 TABLE OF RANKINGS - SURVIVAL MODE 🏆 =====\n\n";
     std::cout << "╔═════════════════════╦════════════════════════╦══════════════════╗\n";
-    std::cout << "║ Posición            ║ Username               ║ Time             ║\n";
+    std::cout << "║ Position            ║ Username               ║ Time             ║\n";
     std::cout << "╠═════════════════════╬════════════════════════╣══════════════════╣\n";
 
     while (std::getline(file, line))
@@ -130,49 +130,47 @@ void readFile(const std::string &db_deepdive)
 
     file.close();
 
-    std::ifstream archivo("database/deepdive_puntajes.txt");
-    if (!archivo.is_open())
+    std::ifstream historyFile("database/deepdive_puntajes.txt");
+    if (!historyFile.is_open())
     {
-        std::cout << "[DBG] No pude abrir: database/deepdive_puntajes.txt\n";
-        std::cout << "Pulsa tecla...";
+        std::cout << "[DBG] Could not open: database/deepdive_puntajes.txt\n";
+        std::cout << "Press any key...";
         _getch();
         return;
     }
 
     system("chcp 65001 > nul");
-    std::cout << "\n===== 🎯 HISTORIAL DE INTENTOS 🎯 =====\n\n";
+    std::cout << "\n===== 🎯 ATTEMPT HISTORY 🎯 =====\n\n";
     std::cout << "╔════════════╦═════════════════════════╗\n";
-    std::cout << "║ Intento    ║ Resultado               ║\n";
+    std::cout << "║ Attempt    ║ Result                  ║\n";
     std::cout << "╠════════════╬═════════════════════════╣\n";
 
-    std::string linea;
-    int intento = 1;
+    std::string lineHistory;
+    int attempt = 1;
 
-    while (std::getline(archivo, linea))
+    while (std::getline(historyFile, lineHistory))
     {
-        std::cout << "    " << std::left << intento++
-                  << "\t\t" << std::left << linea << "\n";
+        std::cout << "    " << std::left << attempt++
+                  << "\t\t" << std::left << lineHistory << "\n";
     }
 
     std::cout << "╚════════════╩═════════════════════════╝\n";
     system("chcp 437 > nul");
 
-    std::cout << "\nPresione cualquier tecla para continuar...";
+    std::cout << "\nPress any key to continue...";
     _getch();
-    archivo.close();
+    historyFile.close();
 }
 
-static void guardarPuntaje(int puntaje)
+static void saveScore(int score)
 {
-    std::ofstream archivo("database/deepdive_puntajes.txt", std::ios::app);
-    if (!archivo.is_open())
+    std::ofstream file("database/deepdive_puntajes.txt", std::ios::app);
+    if (!file.is_open())
     {
-        std::cerr << "Error al abrir el archivo de puntajes." << std::endl;
+        std::cerr << "Error opening the score file." << std::endl;
     }
-    archivo << puntaje << " score" << "\n";
-    archivo.close();
+    file << score << " score" << "\n";
+    file.close();
 }
 
 #endif
-
-// que muestre los datos en una tabla
