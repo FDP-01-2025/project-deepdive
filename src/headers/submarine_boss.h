@@ -1,5 +1,5 @@
-#ifndef JEFE_SUBMARINO_H_INCLUDED
-#define JEFE_SUBMARINO_H_INCLUDED
+#ifndef BOSS_SUBMARINE_H_INCLUDED
+#define BOSS_SUBMARINE_H_INCLUDED
 
 #include <iostream>
 #include <windows.h>
@@ -11,169 +11,169 @@
 
 typedef struct {
     int x, y;
-    int vida;
-    bool estaEnojado;
-    int velocidadDisparo;
-    int velocidadMovimiento;
-    clock_t ultimoDisparo;
-} JefeSubmarino;
+    int health;
+    bool isAngry;
+    int fireRate;
+    int moveRate;
+    clock_t lastShot;
+} BossSubmarine;
 
-static Missiles jefeMissiles[10];
-static int jefeMissilesCout = 0;
+static Missiles bossMissiles[10];
+static int bossMissilesCount = 0;
 
-void InicializarJefe(JefeSubmarino &jefe) {
-    jefe.x = 100;
-    jefe.y = 10;
-    jefe.vida = 100;
-    jefe.estaEnojado = false;
-    jefe.velocidadDisparo = 20;
-    jefe.velocidadMovimiento = 2;
-    jefe.ultimoDisparo = clock();
+void InitializeBoss(BossSubmarine &boss) {
+    boss.x = 100;
+    boss.y = 10;
+    boss.health = 100;
+    boss.isAngry = false;
+    boss.fireRate = 20;
+    boss.moveRate = 2;
+    boss.lastShot = clock();
 }
 
-void DibujarVidaJefe(JefeSubmarino &jefe) {
+void DrawBossHealth(BossSubmarine &boss) {
     gotoxy(40, 1);
-    std::cout << "\033[1;31mJEFE: [";
+    std::cout << "\033[1;31mBOSS: [";
 
-    int vidaRestante = (jefe.vida * 20) / 100;
-    for (int i = 0; i < vidaRestante; i++) {
+    int healthLeft = (boss.health * 20) / 100;
+    for (int i = 0; i < healthLeft; i++) {
         std::cout << "|";
     }
-    for (int i = vidaRestante; i < 20; i++) {
+    for (int i = healthLeft; i < 20; i++) {
         std::cout << " ";
     }
-    std::cout << "] " << jefe.vida << "/100\033[0m";
+    std::cout << "] " << boss.health << "/100\033[0m";
 }
 
-void PintarJefeSubmarino(JefeSubmarino &jefe) {
-    gotoxy(jefe.x, jefe.y);
+void DrawBossSubmarine(BossSubmarine &boss) {
+    gotoxy(boss.x, boss.y);
     std::cout << "\033[1;31m    .--.___.--.    \033[0m";
-    gotoxy(jefe.x, jefe.y + 1);
+    gotoxy(boss.x, boss.y + 1);
     std::cout << "\033[1;31m   /===(====)===\\  \033[0m";
-    gotoxy(jefe.x, jefe.y + 2);
+    gotoxy(boss.x, boss.y + 2);
     std::cout << "\033[1;31m   \\============/  \033[0m";
-    gotoxy(jefe.x, jefe.y + 3);
+    gotoxy(boss.x, boss.y + 3);
     std::cout << "\033[1;31m    '--'____'--'   \033[0m";
 
-    DibujarVidaJefe(jefe);
+    DrawBossHealth(boss);
 }
 
-void BorrarJefeSubmarino(JefeSubmarino &jefe) {
+void EraseBossSubmarine(BossSubmarine &boss) {
     for (int i = 0; i < 4; i++) {
-        gotoxy(jefe.x, jefe.y + i);
+        gotoxy(boss.x, boss.y + i);
         std::cout << "                     ";
     }
     gotoxy(50, 1);
     std::cout << "                                             ";
 }
 
-void MoverJefe(JefeSubmarino &jefe) {
-    static int contadorMovimiento = 0;
-    contadorMovimiento++;
+void MoveBoss(BossSubmarine &boss) {
+    static int moveCounter = 0;
+    moveCounter++;
 
-    if (contadorMovimiento % jefe.velocidadMovimiento == 0) {
-        BorrarJefeSubmarino(jefe);
+    if (moveCounter % boss.moveRate == 0) {
+        EraseBossSubmarine(boss);
 
-        static bool moviendoseAbajo = true;
-        if (moviendoseAbajo) {
-            jefe.y += 1;
-            if (jefe.y >= 20) moviendoseAbajo = false;
+        static bool movingDown = true;
+        if (movingDown) {
+            boss.y += 1;
+            if (boss.y >= 20) movingDown = false;
         } else {
-            jefe.y -= 1;
-            if (jefe.y <= 3) moviendoseAbajo = true;
+            boss.y -= 1;
+            if (boss.y <= 3) movingDown = true;
         }
 
-        PintarJefeSubmarino(jefe);
+        DrawBossSubmarine(boss);
     }
 }
 
-void DispararJefe(JefeSubmarino &jefe) {
-    clock_t ahora = clock();
-    int tiempoEntreDisparos = jefe.estaEnojado ? 200 : 400;
+void BossShoot(BossSubmarine &boss) {
+    clock_t now = clock();
+    int timeBetweenShots = boss.isAngry ? 200 : 400;
 
-    if ((ahora - jefe.ultimoDisparo) >= tiempoEntreDisparos && jefeMissilesCout < 10) {
-        int cantidadDisparos = jefe.estaEnojado ? (rand() % 2 + 2) : 1;
+    if ((now - boss.lastShot) >= timeBetweenShots && bossMissilesCount < 10) {
+        int shotsCount = boss.isAngry ? (rand() % 2 + 2) : 1;
 
-        for (int i = 0; i < cantidadDisparos && jefeMissilesCout < 10; i++) {
-            jefeMissiles[jefeMissilesCout].x = jefe.x - 2;
-            jefeMissiles[jefeMissilesCout].y = jefe.y + (rand() % 4);
-            jefeMissilesCout++;
+        for (int i = 0; i < shotsCount && bossMissilesCount < 10; i++) {
+            bossMissiles[bossMissilesCount].x = boss.x - 2;
+            bossMissiles[bossMissilesCount].y = boss.y + (rand() % 4);
+            bossMissilesCount++;
         }
 
-        jefe.ultimoDisparo = ahora;
+        boss.lastShot = now;
     }
 }
 
-void MoverMisilesJefe() {
-    for (int i = 0; i < jefeMissilesCout;) {
-        gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
+void MoveBossMissiles() {
+    for (int i = 0; i < bossMissilesCount;) {
+        gotoxy(bossMissiles[i].x, bossMissiles[i].y);
         std::cout << "  ";
 
-        jefeMissiles[i].x -= 2;
+        bossMissiles[i].x -= 2;
 
-        if (jefeMissiles[i].x > 2) {
-            gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
+        if (bossMissiles[i].x > 2) {
+            gotoxy(bossMissiles[i].x, bossMissiles[i].y);
             std::cout << "\033[1;31m<<\033[0m";
             i++;
         } else {
-            for (int j = i; j < jefeMissilesCout - 1; j++) {
-                jefeMissiles[j] = jefeMissiles[j + 1];
+            for (int j = i; j < bossMissilesCount - 1; j++) {
+                bossMissiles[j] = bossMissiles[j + 1];
             }
-            jefeMissilesCout--;
+            bossMissilesCount--;
         }
     }
 }
 
-void LimpiarMisilesJefe() {
-    for (int i = 0; i < jefeMissilesCout; i++) {
-        gotoxy(jefeMissiles[i].x, jefeMissiles[i].y);
+void ClearBossMissiles() {
+    for (int i = 0; i < bossMissilesCount; i++) {
+        gotoxy(bossMissiles[i].x, bossMissiles[i].y);
         std::cout << "  ";
     }
-    jefeMissilesCout = 0;
+    bossMissilesCount = 0;
 }
 
-void RecibirDanoJefe(JefeSubmarino &jefe, int dano) {
-    jefe.vida -= dano;
-    if (jefe.vida < 0) jefe.vida = 0;
+void BossTakeDamage(BossSubmarine &boss, int damage) {
+    boss.health -= damage;
+    if (boss.health < 0) boss.health = 0;
 
-    if (jefe.vida < 30 && !jefe.estaEnojado) {
-        jefe.estaEnojado = true;
-        jefe.velocidadDisparo = 10;
-        gotoxy(jefe.x, jefe.y + 4);
-        std::cout << "\033[1;91m¡MODO ENOJADO!\033[0m";
+    if (boss.health < 30 && !boss.isAngry) {
+        boss.isAngry = true;
+        boss.fireRate = 10;
+        gotoxy(boss.x, boss.y + 4);
+        std::cout << "\033[1;91mANGRY MODE!\033[0m";
     }
 
-    DibujarVidaJefe(jefe);
+    DrawBossHealth(boss);
 }
 
-void ExplosionJefe(JefeSubmarino &jefe) {
+void BossExplosion(BossSubmarine &boss) {
     for (int frame = 0; frame < 3; frame++) {
-        BorrarJefeSubmarino(jefe);
+        EraseBossSubmarine(boss);
 
-        gotoxy(jefe.x - 2, jefe.y);
+        gotoxy(boss.x - 2, boss.y);
         std::cout << "\033[1;33m*** BOOM ***\033[0m";
-        gotoxy(jefe.x - 2, jefe.y + 1);
+        gotoxy(boss.x - 2, boss.y + 1);
         std::cout << "\033[1;33m  *******  \033[0m";
         Sleep(150);
 
-        gotoxy(jefe.x - 4, jefe.y - 1);
+        gotoxy(boss.x - 4, boss.y - 1);
         std::cout << "\033[1;33m**       **\033[0m";
-        gotoxy(jefe.x - 2, jefe.y);
+        gotoxy(boss.x - 2, boss.y);
         std::cout << "\033[1;33m*  BOOM  *\033[0m";
-        gotoxy(jefe.x - 4, jefe.y + 1);
+        gotoxy(boss.x - 4, boss.y + 1);
         std::cout << "\033[1;33m**       **\033[0m";
         Sleep(150);
 
-        gotoxy(jefe.x - 6, jefe.y - 2);
+        gotoxy(boss.x - 6, boss.y - 2);
         std::cout << "\033[1;33m*           *\033[0m";
-        gotoxy(jefe.x - 6, jefe.y - 1);
+        gotoxy(boss.x - 6, boss.y - 1);
         std::cout << "\033[1;33m *  BOOOOM  *\033[0m";
-        gotoxy(jefe.x - 6, jefe.y);
+        gotoxy(boss.x - 6, boss.y);
         std::cout << "\033[1;33m*           *\033[0m";
         Sleep(150);
     }
-    BorrarJefeSubmarino(jefe);
-    LimpiarMisilesJefe();
+    EraseBossSubmarine(boss);
+    ClearBossMissiles();
 }
 
-#endif // JEFE_SUBMARINO_H_INCLUDED
+#endif // BOSS_SUBMARINE_H_INCLUDED

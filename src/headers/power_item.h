@@ -11,16 +11,18 @@ static int itemX = 0;
 static int itemY = 0;
 static bool itemVisible = false;
 
-static const int intervaloReaparicion = 20000;
-static clock_t tiempoUltimaReaparicion;
+static const int respawnInterval = 20000;
+static clock_t lastRespawnTime;
 
-static void generarPosicionAleatoria()
+// Generates a new random position for the item
+static void generateRandomPosition()
 {
     itemX = rand() % 60 + 40;
     itemY = rand() % 18 + 3;
 }
 
-static void mostrarItem()
+// Shows the item on screen
+static void showItem()
 {
     if (itemVisible)
     {
@@ -29,14 +31,16 @@ static void mostrarItem()
     }
 }
 
-static void ocultarItem()
+// Hides the item
+static void hideItem()
 {
     gotoxy(itemX, itemY);
     std::cout << "   ";
     itemVisible = false;
 }
 
-static bool detectarColisionItem(const Submarine& sub)
+// Detects collision between submarine and item
+static bool detectItemCollision(const Submarine& sub)
 {
     if (!itemVisible)
         return false;
@@ -57,21 +61,22 @@ static bool detectarColisionItem(const Submarine& sub)
     return false;
 }
 
-
-static void verificarReaparicionItem()
+// Checks if the item should respawn
+static void checkItemRespawn()
 {
-    clock_t ahora = clock();
-    if (!itemVisible && ahora - tiempoUltimaReaparicion >= intervaloReaparicion)
+    clock_t now = clock();
+    if (!itemVisible && now - lastRespawnTime >= respawnInterval)
     {
-        generarPosicionAleatoria();
+        generateRandomPosition();
         itemVisible = true;
-        tiempoUltimaReaparicion = ahora;
+        lastRespawnTime = now;
     }
 }
 
-static void reiniciarItem()
+// Resets the item at level start
+static void resetItem()
 {
-    tiempoUltimaReaparicion = clock();
+    lastRespawnTime = clock();
     itemVisible = false;
 }
 
