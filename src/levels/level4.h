@@ -11,6 +11,7 @@
 #include "../headers/power_item.h"
 #include "../headers/invulnerability.h"
 #include "../headers/jefe_submarino.h"
+#include "../headers/game_data.h"
 
 #include <conio.h>
 #include <ctime>
@@ -18,11 +19,12 @@
 #include <fstream>
 #include <string>
 
+
 // ---variables ---
 static Submarine level4Submarine;
 static Fish level4Fishes[3];
 static int level4NumFishes;
-static int chosenSubmarineStyleLevel4 = 1; 
+static int chosenSubmarineStyleLevel4 = 1;
 
 static Missiles level4Missiles[MAX_MISSILES];
 static int level4MissilesCout;
@@ -197,7 +199,7 @@ static void Victory()
     }
 }
 
-  static void mostrarEstado(int score, int misilesDisponibles, int maxMisiles)
+static void mostrarEstado(int score, int misilesDisponibles, int maxMisiles)
 {
     gotoxy(2, 0);
     std::cout << "PUNTAJE: " << score << "        ";
@@ -205,6 +207,8 @@ static void Victory()
     gotoxy(2, 1);
     std::cout << "MISILES: " << misilesDisponibles << "/" << maxMisiles << "       ";
 }
+
+// funcion para guardar el puntaje
 
 static void activarPoderRecarga()
 {
@@ -272,7 +276,8 @@ static void moverDisparosJefe()
         }
     }
 }
-static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe) {
+static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe)
+{
     // Verificamos si el área del submarino y el jefe se solapan
     if ((sub.x + 12 >= jefe.x && sub.x <= jefe.x + 18) && // ancho
         (sub.y + 2 >= jefe.y && sub.y <= jefe.y + 3))     // alto
@@ -282,7 +287,6 @@ static void DetectarColisionSubmarinoConJefe(Submarine &sub, JefeSubmarino &jefe
         sub.lifes = 0;
     }
 }
-
 
 static void inicializarJefe()
 {
@@ -331,7 +335,7 @@ static void DetectarImpactoMisilesJugador(JefeSubmarino &jefe)
             i++;
     }
 }
-
+// 🟢 NUEVA FUNCIÓN: Actualizar jefe submarino
 static void actualizarJefe()
 {
     if (!jefeActivo || jefeDerrotado)
@@ -396,7 +400,7 @@ static void actualizarJefe()
         PaintHearts(level4Submarine);
     }
 }
-
+// 🟢 NUEVA FUNCIÓN: Actualizar recarga de misiles
 static void actualizarRecarga(char tecla)
 {
     if (tecla == 32 && puedeDisparar && misilesDisponibles > 0 && level4MissilesCout < MAX_MISSILES)
@@ -436,10 +440,8 @@ void InitGamelevel4()
     mostrarEstado(score, misilesDisponibles, maxMisilesPorRecarga);
 }
 
- void guardarPuntaje(const std::string& nombre, int puntaje);
- void mostrarPuntajesGuardados();
-
-void GameLooplevel4() {
+void GameLooplevel4()
+{
     char tecla = 0;
     bool paint = false;
     do
@@ -537,60 +539,18 @@ void GameLooplevel4() {
         Sleep(10);
 
     } while (level4Submarine.lifes > 0 && !jefeDerrotado);
+  
 
-    system("cls");
-    gotoxy(45, 12);
-    system("cls");
-    gotoxy(45, 12);
-
-    if (jefeDerrotado)
-   if (jefeDerrotado)
-{
-    Victory();
-
-    std::string nombre;
-    system("cls");
-    std::cout << "\n\n  ¡Felicidades! Has derrotado al jefe final.\n";
-    std::cout << "  Ingresa tu nombre para guardar el puntaje: ";
-    std::cin >> nombre;
-
-    guardarPuntaje(nombre, score);
-    system("cls");
-    mostrarPuntajesGuardados();
-}
+    if (!jefeDerrotado)
+    {
+        GameOverLevel4();
+    }
 
     else
     {
-        gotoxy(45, 12);
-        GameOverLevel4();
-        Sleep(3000);
+        guardarPuntaje(score);
+        Victory();
     }
 }
-void guardarPuntaje(const std::string& nombre, int puntaje) {
-    std::ofstream archivo("highscores.txt", std::ios::app);
-    if (archivo.is_open()) {
-        archivo << nombre << " " << puntaje << "\n";
-        archivo.close();
-    }
-}
-
-void mostrarPuntajesGuardados() {
-    std::ifstream archivo("highscores.txt");
-    if (archivo.is_open()) {
-        std::string linea;
-        gotoxy(10, 5);
-        std::cout << "Puntajes Guardados:\n";
-        int i = 6;
-        while (std::getline(archivo, linea)) {
-            gotoxy(10, i++);
-            std::cout << linea;
-        }
-        archivo.close();
-    } else {
-        gotoxy(10, 5);
-        std::cout << "No se pudo abrir el archivo de puntajes.\n";
-    }
-}
-
 
 #endif
