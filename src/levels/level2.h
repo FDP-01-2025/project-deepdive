@@ -4,6 +4,7 @@
 #include "../headers/fish.h"
 #include "../headers/submarine.h"
 #include "../headers/game_limits.h"
+#include "../headers/ally_fish.h"
 #include <chrono>
 
 static void WaitEnterlevel2()
@@ -22,14 +23,10 @@ static void WaitEnterlevel2()
 }
 
 static Submarine level2Submarine;
-static Submarine allySubmarine;
+static AllyFish allySubmarine;
 static Fish level2Fishes[4];
 static int level2NumFishes;
-static int allyFrame = 0;
-static const std::string framesAllyFish[] = {
-    ">{{{°>",
-    ">{{{o>",
-    ">{{{0>"};
+static bool devouredAlly = false;
 
 static void InitGameMessagelevel2()
 {
@@ -95,6 +92,12 @@ inline void Victorylevel2()
     system("cls");
 }
 
+static void MessageDevouredAlly()
+{
+    gotoxy(41, 17);
+    std::cout << "🐠[The allied fish was deboured]🐠" << "\n\n";
+}
+
 static void GameOverlevel2()
 {
     while (_kbhit())
@@ -115,67 +118,14 @@ static void GameOverlevel2()
         gotoxy(25, 6 + i);
         std::cout << texto[i] << "\n\n";
     }
-    system("chcp 437 > nul");
-    WaitEnterlevel2();   
-    system("cls");
-}
-static void GameOverAllyfish()
-{
-    while (_kbhit())
-        _getch();
-    system("cls");
-    system("chcp 65001 > nul");
-
-    const std::string texto[6] = {
-        " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
-        "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
-        "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
-        "██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗",
-        "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
-        " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
-
-    for (int i = 0; i < 6; ++i)
+    if (devouredAlly)
     {
-        gotoxy(25, 6 + i);
-        std::cout << texto[i] << "\n\n";
+        MessageDevouredAlly();
     }
-    
-    gotoxy(41,17);
-    std::cout << "🐠[The allied fish was deboured]🐠" << "\n\n";
     system("chcp 437 > nul");
     WaitEnterlevel2();
     system("cls");
 }
-
-void PaintAllyFish(Submarine &ally)
-{
-    // Evitar pintar sobre el borde
-    if (ally.x >= 5 && ally.x <= 110 && ally.y >= 2 && ally.y <= 22)
-    {
-        // Verifica que no esté en la fila del borde superior o inferior
-        if (ally.y != 5 && ally.y != 23)
-        {
-            gotoxy(ally.x, ally.y);
-            std::cout << framesAllyFish[allyFrame];
-            allyFrame = (allyFrame + 2) % 3;
-        }
-    }
-}
-
-
-void DeleteAllyFish(Submarine &ally)
-{
-    // Evitar borrar el borde
-    if (ally.x >= 5 && ally.x <= 103 && ally.y >= 2 && ally.y <= 22)
-    {
-        if (ally.y != 5 && ally.y != 23)
-        {
-            gotoxy(ally.x, ally.y);
-            std::cout << "       "; // 7 espacios para borrar el pez
-        }
-    }
-}
-
 
 static void InitGamelevel2()
 {
@@ -185,11 +135,10 @@ static void InitGamelevel2()
     gotoxy(5, 1);
     std::cout << "Principal Objective: Escort the ally fish❗";
 
-    level2Submarine = {5, 15, 3, 3, 10}; // Submarino controlado por usuario
-    allySubmarine = {5, 18, 0, 1, 0};    // Aliado a proteger
+    level2Submarine = {15, 15, 3, 3}; // Submarino controlado por usuario
 
-    PaintSubmarine(level2Submarine,1);
-    PaintAllyFish(allySubmarine);
+    PaintSubmarine(level2Submarine, 1);
+    PaintAllyFish(allySubmarine, level2Submarine);
     PaintHearts(level2Submarine);
 
     level2Fishes[0] = {80, 3};
@@ -202,6 +151,7 @@ static void InitGamelevel2()
 static void GameLooplevel2()
 {
     GameLimits();
+    bool completedTime = false, stillAlive = true;
     using namespace std::chrono;
     auto startTime = steady_clock::now();
 
@@ -211,20 +161,16 @@ static void GameLooplevel2()
         if (kbhit())
         {
             char tecla = getch();
-            MoveSubmarine(tecla, level2Submarine);
+            MoveWithAlly(tecla, level2Submarine);
         }
 
         // Mover aliado detrás del jugador
-        allySubmarine.x = std::max(2, std::min(level2Submarine.x - 8, 103)); // 103 = 110 - 7 (ancho del pez)
-        allySubmarine.y = std::min(level2Submarine.y, 22);
-
-        allySubmarine.x = std::max(1, std::min(allySubmarine.x, 110));
-        allySubmarine.y = std::max(2, std::min(allySubmarine.y, 22));
-
+        allySubmarine.x = level2Submarine.x - 3;
+        allySubmarine.y = level2Submarine.y - 2;
 
         // First we paint the Submarine
-        PaintSubmarine(level2Submarine,1);
-        PaintAllyFish(allySubmarine);
+        PaintSubmarine(level2Submarine, 1);
+        PaintAllyFish(allySubmarine, level2Submarine);
 
         for (int i = 0; i < level2NumFishes; i++)
         {
@@ -232,13 +178,11 @@ static void GameLooplevel2()
             CollisionFish(level2Fishes[i], level2Submarine);
 
             // Si el aliado es tocado, pierde
-            if (level2Fishes[i].x == allySubmarine.x &&
-                (level2Fishes[i].y == allySubmarine.y || level2Fishes[i].y == allySubmarine.y + 1))
+            if ((level2Fishes[i].x >= allySubmarine.x &&
+                 level2Fishes[i].x <= allySubmarine.x + 6) &&
+                (level2Fishes[i].y == allySubmarine.y))
             {
-                GameOverAllyfish();
-                Sleep(3000);
-
-                return;
+                devouredAlly = true;
             }
         }
 
@@ -247,8 +191,7 @@ static void GameLooplevel2()
         auto elapsed = duration_cast<seconds>(currentTime - startTime).count();
         if (elapsed >= 180)
         {
-            Victorylevel2();
-            return;
+            completedTime = true;
         }
 
         // Mostrar temporizador en la línea 1
@@ -258,10 +201,23 @@ static void GameLooplevel2()
         int seconds = remaining % 60;
         std::cout << "Tiempo restante: " << minutes << "m " << (seconds < 10 ? "0" : "") << seconds << "s     ";
 
+        if (level2Submarine.lifes <= 0)
+        {
+            stillAlive = false;
+        }
+
         Sleep(13);
 
-    } while (level2Submarine.lifes > 0);
-    GameOverlevel2();
+    } while (!devouredAlly && !completedTime && stillAlive);
+
+    if (devouredAlly || !stillAlive)
+    {
+        GameOverlevel2();
+    }
+    else if (completedTime)
+    {
+        Victorylevel2();
+    }
 }
 
 #endif

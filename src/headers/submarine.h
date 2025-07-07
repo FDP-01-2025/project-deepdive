@@ -194,4 +194,20 @@ void MoveSubmarine(char tecla, Submarine &submarine)
     PaintSubmarine(submarine, optionSubmarine);
 }
 
+void MoveWithAlly(char tecla, Submarine &submarine)
+{
+    DeleteSubmarine(submarine);
+
+    if ((tecla == LEFT || tecla == LEFTlc) && submarine.x > 7)
+        submarine.x--;
+    if ((tecla == RIGHT || tecla == RIGHTlc) && submarine.x < 104)
+        submarine.x++;
+    if ((tecla == UP || tecla == UPlc) && submarine.y > 5)
+        submarine.y--;
+    if ((tecla == DOWN || tecla == DOWNlc) && submarine.y < 25)
+        submarine.y++;
+
+    PaintSubmarine(submarine, optionSubmarine);
+}
+
 #endif
