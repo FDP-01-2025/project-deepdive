@@ -103,7 +103,6 @@ static void GameOverSurvivalMode(int duration)
     system("chcp 437 > nul");
     gotoxy(45, 17);
     std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
-
     WaitEnter();
 }
 
