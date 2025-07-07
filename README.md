@@ -68,7 +68,7 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 ## 📂 Estructura del proyecto (resumen)
 
-```plaintext```
+```plaintext
 proyect-deepdive
 ├── src/
 │   |
