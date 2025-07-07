@@ -50,7 +50,6 @@ static void WaitEnter()
         std::cout << "[Only press ENTER to continue]\n\n";
     }
 }
-
 static void InitGameMessage()
 {
 
@@ -99,7 +98,9 @@ static void InitGameMessage()
     }
 
     _getch();           // Captura el Enter para continuar
+    system("color 07"); // Restaurar color original
     system("chcp 437 > nul");
+    system("cls");
 }
 
 static void GameOverSurvivalMode(int duration)
@@ -120,52 +121,16 @@ static void GameOverSurvivalMode(int duration)
         "╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║",
         " ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝"};
 
-    // Construcción descendente línea por línea
     for (int i = 0; i < 6; ++i)
     {
-        gotoxy(15, 6 + i);
+        gotoxy(25, 6 + i);
         std::cout << texto[i] << "\n\n";
-        Sleep(130);
     }
-
-    // Imprimir cartel completo
-    for (int i = 0; i < 6; ++i)
-    {
-        gotoxy(15, 6 + i);
-        std::cout << texto[i];
-    }
-    Sleep(500);
-
-    // Fase 1: corrupción leve (20 golpes aleatorios)
-    for (int rep = 0; rep < 17; ++rep)
-    {
-        int line = rand() % 6;
-        int col = rand() % texto[line].length();
-        gotoxy(15 + col, 6 + line);
-        char glitch[] = {'.', '+', '@', '~', '#'};
-        std::cout << glitch[rand() % 5];
-        Sleep(40);
-    }
-
-    Sleep(300); // Pausa antes del colapso mayor
-
-    // Fase 2: corrupción masiva (80+ golpes aleatorios)
-    for (int rep = 0; rep < 90; ++rep)
-    {
-        int line = rand() % 6;
-        int col = rand() % texto[line].length();
-        gotoxy(15 + col, 6 + line);
-        char glitch[] = {' ', '.', '*', '%', '|', '-'};
-        std::cout << glitch[rand() % 6];
-        Sleep(10);
-    }
-
     system("chcp 437 > nul");
     gotoxy(45, 17);
     std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
 
     WaitEnter();
-    system("cls");
 }
 
 void Timer(int time)
