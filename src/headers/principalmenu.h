@@ -66,7 +66,7 @@ const static void drawMenuOption(int row, bool selected, const std::string &text
 {
 
     int y = TITLE_ROWS + row;
-    gotoxy(0, y);
+    gotoxy(20, y);
     setColor(selected ? 14 : 7);
     system("chcp 65001 > nul");
     std::cout << (selected ? "➤ " : "  ")
@@ -148,9 +148,13 @@ const static void runMenu()
                     continue;
 
                 // Repinta únicamente las dos opciones afectadas
-                const std::string *opts = inLevelMenu ? levelOpts : mainOpts;
-                drawMenuOption(prev, false, opts[prev]);
-                drawMenuOption(selected, true, opts[selected]);
+                if (inLevelMenu) {
+                    drawMenuOption(prev, false, levelOpts[prev]);
+                    drawMenuOption(selected, true, levelOpts[selected]);
+                } else {
+                    drawMenuOption(prev, false, mainOpts[prev]);
+                    drawMenuOption(selected, true, mainOpts[selected]);
+                }
             }
             // Enter
             else if (key == 13)
@@ -185,7 +189,7 @@ const static void runMenu()
                     }
                     else if (selected == 2)
                     {
-                                                // Dentro de tu opción “Salir”, sustituye el mensaje plano por este bloque:
+                        // Dentro de tu opción “Salir”, sustituye el mensaje plano por este bloque:
 
                         // 1) Define el ASCII art para “EXITING” (6 líneas)
                         static const std::string exitArt[6] = {
