@@ -139,16 +139,23 @@ Bajo el sello de AlgorithTech
 ---
 
 ## 📂 Estructura del proyecto (resumen)
-
+<details>
 ```plaintext
 proyect-deepdive
+|── .vscode/
+|     └──settings.json
+|── assets/
+|    └──deepdive_logo.gif
+|── database/
+|   ├── characters.txt
+│   └── deepdive_puntajes.txt
 ├── src/
 │   |
 │   ├── levels/
 │   │   ├── level1.h
 │   │   ├── level2.h
 │   │   └── level3.h
-│   ├── headers/
+│   └── headers/
 │      ├── fish.h
 │      ├── fish_animation.h
 │      ├── game_data.h
@@ -165,12 +172,7 @@ proyect-deepdive
 |      ├── power_item.h
 |      ├── rockets.h
 |      └── submarine.h    
-│   
-│      
-|
-│  
+│ 
 |── main.cpp
-|── assets/
-|    └──deepdive_logo.gif
 └── README.md
-
+</details>
