@@ -65,7 +65,17 @@ static void InitGameMessage()
         "███████║╚██████╔╝██║  ██║ ╚████╔╝ ██║ ╚████╔╝ ██║  ██║███████╗    ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████╗",
         "╚══════╝ ╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝"};
 
-    for (int i = 0; i < 6; ++i)
+
+
+    // Mostrar texto inferior desde el principio
+    gotoxy(35, 17);
+    std::cout << ">>Dodge obstacles and survive as long as possible<<";
+    gotoxy(50, 15);
+    std::cout << "[Press ENTER to continue]" << "\n\n";
+
+    // Bucle de parpadeo hasta que se presione Enter
+
+    while (!_kbhit()) // _kbhit() detecta si se ha presionado alguna tecla
     {
         gotoxy(10, 6 + i);
         std::cout << texto[i] << "\n\n";
