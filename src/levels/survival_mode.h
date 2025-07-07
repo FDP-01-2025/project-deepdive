@@ -52,6 +52,7 @@ static void WaitEnter()
 }
 static void InitGameMessage()
 {
+
     system("cls");
     system("chcp 65001 > nul");
 
@@ -63,17 +64,42 @@ static void InitGameMessage()
         "███████║╚██████╔╝██║  ██║ ╚████╔╝ ██║ ╚████╔╝ ██║  ██║███████╗    ██║ ╚═╝ ██║╚██████╔╝██████╔╝███████╗",
         "╚══════╝ ╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚═╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝"};
 
-    for (int i = 0; i < 6; ++i)
-    {
-        gotoxy(10, 8 + i);
-        std::cout << texto[i] << "\n\n";
-    }
-    system("chcp 437 > nul");
+    // Colores (combinaciones de fondo/texto)
+    const std::string colores[] = {"0C", "0A", "09", "0E", "0D", "0B"}; // Negro fondo + variado texto
+    int colorIndex = 0;
+    const int numColores = sizeof(colores) / sizeof(colores[0]);
 
+    // Mostrar texto inferior desde el principio
     gotoxy(35, 17);
-    std::cout << ">>Dodge obstacles and survive ad long as possible<<" << "\n";
+    std::cout << ">>Dodge obstacles and survive as long as possible<<";
+    gotoxy(50, 15);
+    std::cout << "[Press ENTER to continue]" << "\n\n";
 
-    WaitEnter();
+    // Bucle de parpadeo hasta que se presione Enter
+
+    while (!_kbhit()) // _kbhit() detecta si se ha presionado alguna tecla
+    {
+        system(("color " + colores[colorIndex]).c_str());
+        colorIndex = (colorIndex + 1) % numColores;
+
+        for (int i = 0; i < 6; ++i)
+        {
+            gotoxy(10, 8 + i);
+            std::cout << texto[i];
+        }
+        Sleep(450);
+
+        for (int i = 0; i < 6; ++i)
+        {
+            gotoxy(10, 8 + i);
+            std::cout << std::string(texto[i].size(), ' ');
+        }
+        Sleep(300);
+    }
+
+    _getch();           // Captura el Enter para continuar
+    system("color 07"); // Restaurar color original
+    system("chcp 437 > nul");
     system("cls");
 }
 
