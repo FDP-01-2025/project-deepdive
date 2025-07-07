@@ -1,6 +1,7 @@
 #ifndef MENUPRINCIPAL_H
 #define MENUPRINCIPAL_H
 
+#include <iomanip>
 #include <iostream>
 #include <windows.h>
 #include <conio.h>
@@ -184,7 +185,55 @@ const static void runMenu()
                     }
                     else if (selected == 2)
                     {
-                        // Salir
+                                                // Dentro de tu opción “Salir”, sustituye el mensaje plano por este bloque:
+
+                        // 1) Define el ASCII art para “EXITING” (6 líneas)
+                        static const std::string exitArt[6] = {
+                            "███████╗██╗   ██╗██╗████████╗██╗███╗   ██╗ ███████╗",
+                            "██╔════╝╚██╗ ██╔╝██║╚══██╔══╝██║████╗  ██║██╔═════╝",
+                            "█████╗   ╚████╔╝ ██║   ██║   ██║██╔██╗ ██║██║  ███╗",
+                            "██╔══╝   ╔████║  ██║   ██║   ██║██║╚██╗██║██║   ██║",
+                            "███████╗██╔╝ ╚██╗██║   ██║   ██║██║ ╚████║╚██████╔╝",
+                            "╚══════╝╚═╝   ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ "};
+                        // 2) Limpia la panta a y ajusta color
+                        system("cls");
+                        setColor(10); // Verde brillante
+
+                        // 3) Imprime las líneas donde quieras (ejemplo justo debajo del título)
+                        system("chcp 65001 > nul");
+                        int y0 = TITLE_ROWS + 2;
+                        for (int i = 0; i < 6; ++i)
+                        {
+                            gotoxy(0, y0 + i);
+                            std::cout << exitArt[i];
+                        }
+                        system("chcp 437 > nul");
+
+                        // Animación de bloques █ como puntos suspensivos
+                        // Tras dibujar exitArt y restaurar CP437, reemplaza la animación de 4 bloques por una barra de carga:
+
+                        // Parámetros de la barra
+                        int yBar = y0 + 7;     // fila donde la barras irá
+                        int barWidth = 30;     // ancho total de la barra
+                        char fill = char(219); // █
+                        char empty = ' ';
+
+                        // Dibuja y actualiza la barra
+                        for (int i = 0; i <= barWidth; ++i)
+                        {
+                            gotoxy(0, yBar);
+                            std::cout << "Cargando: [";
+                            // Parte llena
+                            for (int j = 0; j < barWidth; ++j)
+                                std::cout << (j < i ? fill : empty);
+                            std::cout << "] ";
+                            // Porcentaje opcional
+                            std::cout << std::setw(3) << (i * 100 / barWidth) << "%";
+
+                            Sleep(80);
+                        }
+
+                        Sleep(300);
                         return;
                     }
                     // Aquí: Options(1) y High Scores(2)
