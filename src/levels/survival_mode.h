@@ -5,13 +5,13 @@
 #include "../headers/game_data.h"
 #include "../headers/game_limits.h"
 #include "../headers/game_data.h"
-#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada key.
+#include <conio.h> // It allows the use of the getch() function to detect the keystrokes of each key.
 #include <limits>
 #include <string>
 
 static Submarine survivalSubmarine;
 static Rocket survivalRockets[5];
-static int survivalNumrockets;
+static int survivalNumRockets;
 static int chosenSubmarineStyle = 1;
 static std::string captain;
 
@@ -25,14 +25,14 @@ struct DifficultySettings
     int activeRockets;
 };
 
-// Calcula la dificultad en base al tiempo
+// Calculates difficulty based on time
 DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
 {
-    int speed = std::min(elapsedSeconds / 10, 20); // Sube la dificultad cada 10 segundos. Tope de velocidad 20;
+    int speed = std::min(elapsedSeconds / 10, 20); // Increases difficulty every 10 seconds. Speed cap at 20.
 
-    int targetFrameTime = BASE_FRAME_TIME_MS - std::min(speed, 8); // FPS máximo ajustable
-    float rocketSpeed = 0.4f + speed * 0.05f;                      // Aumenta velocidad de los cohetes con el tiempo (0.4f -> velocidad inicial, 0.5f aumento de velocidad por nivel)
-    int activeRockets = std::min(3 + speed, totalRockets);         // Activa más cohetes progresivamente
+    int targetFrameTime = BASE_FRAME_TIME_MS - std::min(speed, 8); // Max adjustable FPS
+    float rocketSpeed = 0.4f + speed * 0.05f;                      // Increases rocket speed over time (0.4f -> initial speed, 0.5f increase per level)
+    int activeRockets = std::min(3 + speed, totalRockets);         // Activates more rockets progressively
 
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
@@ -169,7 +169,7 @@ static void Player()
         return;
     }
 
-    // Mostrar personajes
+    // Show characters
     while (getline(file, line))
     {
         int style = ((count - 1) % 6) + 1;
@@ -186,7 +186,7 @@ static void Player()
     }
     file.close();
 
-    // Pedir opción
+    // Request option
     do
     {
         std::cout << "🔱 Elige tu personaje (1 a " << count - 1 << "): ";
@@ -204,11 +204,11 @@ static void Player()
         }
     } while (true);
 
-    // Volver a leer el archivo para obtener el capitán seleccionado
+    // Reopen the file to get the selected captain
     file.open("database/characters.txt");
     if (!file.is_open())
     {
-        std::cout << "⚠️ Error: No se pudo volver a abrir el archivo.\n";
+        std::cout << "⚠️ Error: Could not reopen the file.\n";
         WaitEnter();
         return;
     }
@@ -225,7 +225,7 @@ static void Player()
     }
     file.close();
 
-    // Confirmar selección
+    // Confirm selection
     if (selectedCaptain.empty())
     {
         std::cout << "❌ No se encontró el capitán seleccionado.\n";
@@ -255,38 +255,38 @@ static void InitGameSurvivalMode()
     survivalRockets[2] = {106, 15};
     survivalRockets[3] = {108, 9};
     survivalRockets[4] = {110, 6};
-    survivalNumrockets = 5;
+    survivalNumRockets = 5;
 }
 
 static void GameLoopSurvivalMode()
 {
     GameLimits();
 
-    // Se guarda el tiempo actual al comenzar el juego (marca de inicio)
+    // Save the current time when the game starts (start mark)
     auto startTime = std::chrono::high_resolution_clock::now();
-    // Se guarda el tiempo de la "última actualización de fotograma" (frame). Inicialmente, es el mismo que el de inicio
+    // Save the time of the "last frame update". Initially, it's the same as the start time
     auto lastFrameTime = std::chrono::high_resolution_clock::now();
 
     auto now = startTime;
     while (survivalSubmarine.lifes > 0)
     {
-        // Se obtiene el tiempo actual en este instante del bucle
+        // Get the current time at this moment in the loop
         now = std::chrono::high_resolution_clock::now();
 
-        // Se calcula el tiempo transcurrido desde el último frame, en milisegundos
-        // Esto permite ajustar los movimientos y animaciones según el tiempo real entre frames
+        // Calculate the time elapsed since the last frame, in milliseconds
+        // This allows adjusting movements and animations based on the real time between frames
         auto deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastFrameTime).count();
 
-        // Se actualiza lastFrameTime para la próxima iteración del bucle
+        // Update lastFrameTime for the next iteration of the loop
         lastFrameTime = now;
 
-        // Se calcula el tiempo total transcurrido desde que inició el juego (en segundos)
+        // Calculate the total time elapsed since the game started (in seconds)
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - startTime).count();
 
-        // Se actualizan los parámetros de dificultad en función del tiempo transcurrido y la cantidad de cohetes activos
-        auto settings = UpdateDifficulty(elapsed, survivalNumrockets);
+        // Update difficulty settings based on elapsed time and active rocket count
+        auto settings = UpdateDifficulty(elapsed, survivalNumRockets);
 
-        // Imprime el contador
+        // Print the timer
         Timer(elapsed);
 
         if (kbhit())
@@ -301,7 +301,7 @@ static void GameLoopSurvivalMode()
             CollisionRocket(survivalRockets[i], survivalSubmarine);
         }
 
-        // CONTROL DE FPS:
+        // FPS CONTROL:
         auto frameEndTime = std::chrono::high_resolution_clock::now();
         auto frameDuration = std::chrono::duration_cast<std::chrono::milliseconds>(frameEndTime - now).count();
 

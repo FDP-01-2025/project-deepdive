@@ -15,15 +15,15 @@ static const std::string framesRokets[] =
         "<##E==",
         "<##E~~",
         "<##E<<"};
-// Pinta la forma del pescado
+ // Paint the shape of the fish
 
-static void Paintrocket(Rocket &rocket)
+static void PaintRocket(Rocket &rocket)
 {
     gotoxy(static_cast<int>(rocket.x), rocket.y);
     std::cout << framesRokets[rocket.frame];
 }
 
-// Borra la forma del pescado
+//Remove the shape of the fish
 static void ClearRocket(Rocket &rocket)
 {
     gotoxy(static_cast<int>(rocket.x), rocket.y);
@@ -33,26 +33,26 @@ static void ClearRocket(Rocket &rocket)
 static void MoveRocket(Rocket &rocket, float speed)
 {
     ClearRocket(rocket);
-    // La cantidad de movimiento depende del parámetro 'speed'
+    //The amount of motion depends on the 'speed' parameter.
     rocket.x -= speed;
 
     if (rocket.x <= 5.0f)
     {
-        // Reinicia la posición X del cohete al borde derecho (110.0)
+        // Reset the rocket's X position to the right edge (110.0)
         rocket.x = 110.0f;
 
-        // Asigna una nueva posición
+        // Assign a new position
         rocket.y = rand() % 25 + 3;
     }
-    // Actualiza el frame de animación del cohete (cicla entre 0, 1 y 2)
+    // Update the rocket's animation frame (cycles between 0, 1, and 2)
     rocket.frame = (rocket.frame + 1) % 3;
-    // Dibuja el cohete en su nueva posición y con el nuevo frame de animación
-    Paintrocket(rocket);
+    // Draw the rocket in its new position and with the new animation frame
+    PaintRocket(rocket);
 }
 
 static void CollisionRocket(Rocket &rocket, Submarine &submarine)
 {
-    // Detecta si la posición del cohete es igual a la del submarino
+    // Detect if the rocket's position is equal to the submarine's
     if (rocket.x >= submarine.x && rocket.x <= submarine.x + 12 && rocket.y >= submarine.y && rocket.y <= submarine.y + 2)
     {
         submarine.heart--;

@@ -10,10 +10,10 @@
 #include <ctime>
 #include <algorithm>
 
-// Handle de consola
+// Console handle
 const static HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-// Cambia color de texto
+// Change text color
 const static void setColor(int fg)
 {
     SetConsoleTextAttribute(hConsole, fg);
@@ -26,7 +26,7 @@ const static void setColor(int fg)
 #include "../headers/game_data.h"
 #include "../headers/hide_cursor.h"
 
-// --- Arte ASCII del título ---
+// --- ASCII art of the title ---
 const int TITLE_ROWS = 9;
 const int MENU_WIDTH = 50;
 const std::string titleLines[TITLE_ROWS] = {
@@ -39,15 +39,15 @@ const std::string titleLines[TITLE_ROWS] = {
     "ESTE MENU AÚN ESTÁ EN DESARROLLO, POR FAVOR SEA PACIENTE, GRACIAS, BESOS",
     "                                                                       "};
 
-// Función para mostrar scores de los jugadores
+//Function to show players' scores
 
-// Color aleatorio (1..15)
+// Random color (1..15)
 const static int randomColor()
 {
     return rand() % 15 + 1;
 }
 
-// Dibuja título en su color
+// Draw the title in its color
 const static void drawTitle(int color)
 {
     setColor(color);
@@ -61,7 +61,7 @@ const static void drawTitle(int color)
     system("chcp 437 > nul");
 }
 
-// Dibuja una opción
+// Draw a menu option
 const static void drawMenuOption(int row, bool selected, const std::string &text)
 {
 
@@ -75,7 +75,7 @@ const static void drawMenuOption(int row, bool selected, const std::string &text
     system("chcp 437 > nul");
 }
 
-// Dibuja borde arriba y abajo del bloque de opciones
+// Draw the top and bottom borders of the options block
 const static void MenuBorder(int linesHigh)
 {
     setColor(7);
@@ -90,7 +90,7 @@ const static void MenuBorder(int linesHigh)
     }
 }
 
-// Ejecuta menú principal y submenú de niveles
+// Execute main menu and submenu of levels
 const static void runMenu()
 {
     // setlocale(LC_ALL, "es_ES.UTF-8");
@@ -109,17 +109,17 @@ const static void runMenu()
     int titleColor = randomColor();
     DWORD lastTitle = GetTickCount();
 
-    // Dibujo inicial
+    // Initial drawing
     system("cls");
     drawTitle(titleColor);
     MenuBorder(linesHigh);
     for (int i = 0; i < N_main; ++i)
         drawMenuOption(i, i == selected, mainOpts[i]);
 
-    // Bucle principal
+    // Main loop
     while (true)
     {
-        // 1) Actualizar color del título cada 1s
+        // 1) Update title color every 1s
         DWORD now = GetTickCount();
         if (now - lastTitle >= 1000)
         {
@@ -128,12 +128,12 @@ const static void runMenu()
             lastTitle = now;
         }
 
-        // 2) Gestionar entrada de usuario
+        // 2) Manage user input
         if (_kbhit())
         {
             int key = _getch();
 
-            // Flechas
+            // Arrows
             if (key == 0 || key == 224)
             {
                 key = _getch();
@@ -147,7 +147,7 @@ const static void runMenu()
                 else
                     continue;
 
-                // Repinta únicamente las dos opciones afectadas
+                // Repaint only the two affected options.
                 const std::string *opts = inLevelMenu ? levelOpts : mainOpts;
                 drawMenuOption(prev, false, opts[prev]);
                 drawMenuOption(selected, true, opts[selected]);
@@ -159,16 +159,16 @@ const static void runMenu()
                 {
                     if (selected == 0)
                     {
-                        // Entrar a niveles
+                        // Enter levels
                         inLevelMenu = true;
                         selected = 0;
-                        // Borra menú principal
+                        // Clear main menu
                         for (int i = 0; i < N_main; ++i)
                         {
                             gotoxy(0, TITLE_ROWS + i);
                             std::cout << std::string(MENU_WIDTH, ' ');
                         }
-                        // Pinta submenú
+                        // Draw submenu
                         for (int i = 0; i < N_level; ++i)
                             drawMenuOption(i, i == selected, levelOpts[i]);
                     }
@@ -176,7 +176,7 @@ const static void runMenu()
                     {
                         readFile("database/db_deepdive.txt");
 
-                        // Redibuja el menú principal
+                        // Redraw main menu
                         system("cls");
                         drawTitle(titleColor);
                         MenuBorder(linesHigh);
@@ -185,9 +185,9 @@ const static void runMenu()
                     }
                     else if (selected == 2)
                     {
-                                                // Dentro de tu opción “Salir”, sustituye el mensaje plano por este bloque:
+                        // In your 'Exit' option, replace the plain message with this block:
 
-                        // 1) Define el ASCII art para “EXITING” (6 líneas)
+                        // 1) Define the ASCII art for “EXITING” (6 lines)
                         static const std::string exitArt[6] = {
                             "███████╗██╗   ██╗██╗████████╗██╗███╗   ██╗ ███████╗",
                             "██╔════╝╚██╗ ██╔╝██║╚══██╔══╝██║████╗  ██║██╔═════╝",
@@ -195,11 +195,11 @@ const static void runMenu()
                             "██╔══╝   ╔████║  ██║   ██║   ██║██║╚██╗██║██║   ██║",
                             "███████╗██╔╝ ╚██╗██║   ██║   ██║██║ ╚████║╚██████╔╝",
                             "╚══════╝╚═╝   ╚═╝╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ "};
-                        // 2) Limpia la panta a y ajusta color
+                        // 2) Clear the screen and adjust color
                         system("cls");
-                        setColor(10); // Verde brillante
+                        setColor(10); // Bright green
 
-                        // 3) Imprime las líneas donde quieras (ejemplo justo debajo del título)
+                        // 3) Print the lines where you want (e.g. right below the title)
                         system("chcp 65001 > nul");
                         int y0 = TITLE_ROWS + 2;
                         for (int i = 0; i < 6; ++i)
@@ -209,25 +209,25 @@ const static void runMenu()
                         }
                         system("chcp 437 > nul");
 
-                        // Animación de bloques █ como puntos suspensivos
-                        // Tras dibujar exitArt y restaurar CP437, reemplaza la animación de 4 bloques por una barra de carga:
+                        // Animation of blocks █ as ellipsis
+                        // After drawing exitArt and restoring CP437, replace the 4-block animation with a loading bar:
 
-                        // Parámetros de la barra
-                        int yBar = y0 + 7;     // fila donde la barras irá
-                        int barWidth = 30;     // ancho total de la barra
+                        // Loading bar parameters
+                        int yBar = y0 + 7;     // Row where the bar will go
+                        int barWidth = 30;     // Total width of the bar
                         char fill = char(219); // █
                         char empty = ' ';
 
-                        // Dibuja y actualiza la barra
+                        // Draw and update the bar
                         for (int i = 0; i <= barWidth; ++i)
                         {
                             gotoxy(0, yBar);
-                            std::cout << "Cargando: [";
-                            // Parte llena
+                            std::cout << "Loading: [";
+                            // Full part
                             for (int j = 0; j < barWidth; ++j)
                                 std::cout << (j < i ? fill : empty);
                             std::cout << "] ";
-                            // Porcentaje opcional
+                            // Optional percentage
                             std::cout << std::setw(3) << (i * 100 / barWidth) << "%";
 
                             Sleep(80);
@@ -236,32 +236,32 @@ const static void runMenu()
                         Sleep(300);
                         return;
                     }
-                    // Aquí: Options(1) y High Scores(2)
+                    // Here: Options(1) and High Scores(2)
                 }
                 else
                 {
-                    // Dentro de niveles
+                    // Inside levels
                     if (selected == N_level - 1)
                     {
-                        // Regresar
+                        // Return
                         inLevelMenu = false;
                         selected = 0;
-                        // Borra niveles
+                        // Clear levels
                         for (int i = 0; i < N_level; ++i)
                         {
                             gotoxy(0, TITLE_ROWS + i);
                             std::cout << std::string(MENU_WIDTH, ' ');
                         }
-                        // Vuelve a menú principal
+                        // Return to main menu
                         for (int i = 0; i < N_main; ++i)
                             drawMenuOption(i, i == selected, mainOpts[i]);
                     }
                     else
                     {
-                        // Elegir nivel concreto
+                        // Choose specific level
                         if (selected >= 0 && selected < N_level - 1)
                         {
-                            // Ejecutar el nivel correspondiente
+                            // Execute the corresponding level
                             switch (selected)
                             {
                             case 0:;
@@ -288,7 +288,7 @@ const static void runMenu()
                             case 4:;
                                 break;
                             }
-                            // Una vez que regrese del nivel, refrescamos el menú principal:
+                            // Once back from the level, refresh the main menu:
                             system("cls");
                             drawTitle(titleColor);
                             MenuBorder(linesHigh);
@@ -305,7 +305,7 @@ const static void runMenu()
             {
                 if (inLevelMenu)
                 {
-                    // Regresar a principal
+                    // Return to main menu
                     inLevelMenu = false;
                     selected = 0;
                     for (int i = 0; i < N_level; ++i)

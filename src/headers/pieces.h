@@ -12,14 +12,14 @@ typedef struct
 
  void Victorylevel2(); 
 
-// Pinta la forma de la pieza
+// Paint the shape of the piece
 void Paintpieces(pieces &pieces)
 {
     gotoxy(pieces.x, pieces.y);
     std::cout << ("(@)") << "\n";
 }
 
-// Borra la forma de la pieza
+// Delete the shape of the piece
 void Deletepieces(pieces &pieces)
 {
     gotoxy(pieces.x, pieces.y);
@@ -30,9 +30,7 @@ void Movepieces(pieces &pieces)
 {
     gotoxy(pieces.x, pieces.y);
     std::cout << ("        ") << "\n";
-    /*Se asigna una posición inicial de la pieza en x, y se genera una posición aleatoria en y.
-    La posición de la pieza va decreciendo en x, hasta llegar a la posición 5 en x,
-    y luego se vuelve a ejecutar el mismo proceso.*/
+    /*.*/
     pieces.x--;
     if (pieces.x <= 5)
     {
@@ -42,15 +40,14 @@ void Movepieces(pieces &pieces)
     Paintpieces(pieces);
 }
 
-/*Se declara el espacio que ocupa el submarino en "x" y "y", si la posición de "x" y "y"
-coinciden, se detecta un impacto, se reduce la salud del submarino y los obstáculos vuelven a su posición
-inicial.*/
+/*The space occupied by the submarine is declared in 'x' and 'y', if the position of 'x' and 'y'
+coincide, an impact is detected, the health of the submarine is reduced, and the obstacles return to their initial position.*/
 void Collisionpieces(pieces &pieces, Submarine &submarine)
 {
     if (pieces.x >= submarine.x && pieces.x <= submarine.x + 11 &&
         pieces.y >= submarine.y && pieces.y <= submarine.y + 3)
     {
-        // Aumento de oxigeno
+        // Increase oxygen
 
         if (submarine.oxygen < 30)
         {
@@ -65,12 +62,12 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
                 Victorylevel2();
             }
         }
-        // Reposicionar la pieza antes del parpadeo
+        // Reposition the piece before blinking
         Deletepieces(pieces);
         pieces.x = 110;
         pieces.y = rand() % 10 + 3;
 
-        // Efecto de parpadeo
+        // Blinking effect
         for (int i = 0; i < 3; i++)
         {
             DeleteSubmarine(submarine);
@@ -79,7 +76,7 @@ void Collisionpieces(pieces &pieces, Submarine &submarine)
             Sleep(100);
         }
 
-        // Reposicionar la pieza
+        // Reposition the piece
         Deletepieces(pieces);
         pieces.x = 110;
         pieces.y = rand() % 10 + 3;

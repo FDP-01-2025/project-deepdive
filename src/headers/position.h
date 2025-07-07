@@ -1,18 +1,18 @@
 #ifndef POSITION_H_INCLUDED
 #define POSITION_H_INCLUDED
-#include <windows.h> //Permite darle una posición al cursor.
+#include <windows.h> //it allows you to position the cursor.
 
-/*Función para mover el cursor de la consola, en "x" y "y".*/
+/*Function to move the console cursor, in "x" and "y".*/
 void gotoxy(int x, int y)
 {
     HANDLE hCon;
-    //Obtiene el manejador handle de la consola.
+    //Gets the console handle.
     hCon = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD dwPos;
     dwPos.X = x;
     dwPos.Y = y;
 
-    //Mueve el cursor en la posición "x" y "y".
+    //Moves the cursor to the position "x" and "y".
     SetConsoleCursorPosition(hCon, dwPos);
 }
 
