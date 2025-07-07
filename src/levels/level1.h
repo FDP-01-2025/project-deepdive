@@ -75,12 +75,11 @@ inline void Victorylevel1()
         std::cout << congrats[i];
     }
 
-    gotoxy(43, 15);
+    gotoxy(35, 15);
     std::cout << "You successfully filled the oxygen bar!✅";
 
     gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
-
     std::cin.ignore();
     std::cin.get();
     system("cls");

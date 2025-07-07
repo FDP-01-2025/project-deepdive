@@ -83,7 +83,6 @@ inline void Victorylevel2()
 
     gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
-
     std::cin.clear();
     std::cin.sync();
     std::cin.get();
@@ -206,9 +205,9 @@ static void GameLooplevel2()
     if (devouredAlly || !stillAlive)
     {
         if (devouredAlly)
-            messageDevouredFish = "🐠 [The allied fish was devoured] 🐠";
+            messageDevouredFish = "🐠[The allied fish was devoured]🐠";
         else if (!stillAlive)
-            messageDevouredFish = "💀 [You ran out of lives] 💀";
+            messageDevouredFish = "   💀 [You ran out of lives] 💀";
 
         GameOverlevel2(messageDevouredFish);
     }
