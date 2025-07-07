@@ -5,36 +5,55 @@
 #include <string>
 #include <chrono> //Permite trabajar con el tiempo.
 
-const int MAX_TIMES = 5;
+const int MAX_TIMES = 3;
 
 static void GameCharacters()
 {
     std::ofstream file("database/characters.txt");
-    file << "Sebas\n"
-         << "Alex\n"
-         << "Alisson\n";
+    file << "Armand Cortez\n"
+         << "Silvia Marlowe\n"
+         << "Theo Vázquez\n"
+         << "Ingrid Falkner\n"
+         << "Horacio Blackmoor\n";
     file.close();
 }
 
-void SaveGameTimeToFile(int duration)
+void SaveGameTimeToFile(int duration, std::string captain)
 {
+    std::string captains[MAX_TIMES + 1];
     int times[MAX_TIMES + 1];
     int count = 0;
+    bool replaced = false;
 
-    // Leer los tiempos desde el archivo interno (solo los segundos)
-    std::ifstream infile("database/db_deepdive_data.txt");
+    // Leer los registros existentes (capitán + tiempo)
+    std::ifstream infile("database/temp.txt");
     if (infile.is_open())
     {
-        while (count < MAX_TIMES && infile >> times[count])
+        while (count < MAX_TIMES && infile >> captains[count] >> times[count])
         {
             count++;
         }
         infile.close();
     }
 
-    // Agregar el nuevo tiempo
-    times[count] = duration;
-    count++;
+    // Verificar si el capitán ya existe
+    for (int i = 0; i < count; i++)
+    {
+        if (captains[i] == captain)
+        {
+            times[i] = duration; // Reemplaza su tiempo actual por el nuevo
+            replaced = true;
+            break;
+        }
+    }
+
+    // Si no se reemplazó, agregar nuevo registro
+    if (!replaced && count < MAX_TIMES + 1)
+    {
+        captains[count] = captain;
+        times[count] = duration;
+        count++;
+    }
 
     // Ordenar los tiempos de mayor a menor
     for (int i = 0; i < count - 1; i++)
@@ -43,30 +62,28 @@ void SaveGameTimeToFile(int duration)
         {
             if (times[j] > times[i])
             {
-                int temp = times[i];
-                times[i] = times[j];
-                times[j] = temp;
+                std::swap(times[i], times[j]);
+                std::swap(captains[i], captains[j]);
             }
         }
     }
 
-    // Limitar a los mejores 5
+    // Limitar a los mejores 3
     if (count > MAX_TIMES)
         count = MAX_TIMES;
 
-    // Guardar los tiempos antes de ser procesados en el archivo de datos
-    std::ofstream datafile("database/db_deepdive_data.txt");
+    // Guardar datos en archivo base (para lectura interna)
+    std::ofstream datafile("database/temp.txt");
     if (datafile.is_open())
     {
         for (int i = 0; i < count; i++)
         {
-            datafile << times[i] << "\n";
+            datafile << captains[i] << " " << times[i] << "\n";
         }
         datafile.close();
-        remove("database/db_deepdive_data.txt");
     }
 
-    // Guardar el ranking en la base de datos
+    // Guardar ranking visible
     std::ofstream outfile("database/db_deepdive.txt");
     if (outfile.is_open())
     {
@@ -74,10 +91,12 @@ void SaveGameTimeToFile(int duration)
         {
             int minutes = times[i] / 60;
             int seconds = times[i] % 60;
-            outfile << (i + 1) << "°: " << minutes << " min " << seconds << " sec\n";
+            outfile << "\t" << (i + 1) << "°\t\t\t" << captains[i]
+                    << "\t\t  " << minutes << " min " << seconds << " sec\n";
         }
         outfile.close();
     }
+    remove("database/temp.txt");
 }
 
 void readFile(const std::string &db_deepdive)

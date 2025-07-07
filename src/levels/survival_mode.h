@@ -6,11 +6,14 @@
 #include "../headers/game_limits.h"
 #include "../headers/game_data.h"
 #include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
+#include <limits>
+#include <string>
 
 static Submarine survivalSubmarine;
 static Rocket survivalRockets[5];
 static int survivalNumrocketes;
-static int chosenSubmarineStyle = 1; 
+static int chosenSubmarineStyle = 1;
+static std::string captain;
 
 const int BASE_FPS = 60;
 const int BASE_FRAME_TIME_MS = 1000 / BASE_FPS;
@@ -33,24 +36,20 @@ DifficultySettings UpdateDifficulty(int elapsedSeconds, int totalRockets)
 
     return {targetFrameTime, rocketSpeed, activeRockets};
 }
-
 static void WaitEnter()
 {
-    std::string entry;
     gotoxy(46, 15);
-    std::cout << "[Press ENTER to continue]" << "\n\n";
-    std::getline(std::cin, entry);
+    std::cout << "[Press ENTER to continue]\n\n";
 
-    while (!entry.empty())
+    while (true)
     {
+        int key = _getch();
+        if (key == 13)
+            break; // 13 = Enter
         gotoxy(46, 15);
-        std::cout << "                         " << "\n";
-        gotoxy(46, 15);
-        std::cout << "[Only press ENTER to continue]" << "\n\n";
-        std::getline(std::cin, entry);
+        std::cout << "[Only press ENTER to continue]\n\n";
     }
 }
-
 static void InitGameMessage()
 {
     system("cls");
@@ -78,9 +77,14 @@ static void InitGameMessage()
     system("cls");
 }
 
-static void GameOverSurvivalMode()
+static void GameOverSurvivalMode(int duration)
 {
+    while (_kbhit())
+        _getch();
+
     system("cls");
+    int minutes = duration / 60;
+    int seconds = duration % 60;
     system("chcp 65001 > nul");
 
     const std::string texto[6] = {
@@ -97,21 +101,16 @@ static void GameOverSurvivalMode()
         std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
+    gotoxy(45, 17);
+    std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
+
+    WaitEnter();
 }
 
 void Timer(int time)
 {
     gotoxy(5, 1);
     std::cout << "Time: " << time << " sec.";
-}
-
-static void GameTime(int duration)
-{
-    int minutes = duration / 60;
-    int seconds = duration % 60;
-    gotoxy(45, 17);
-    std::cout << ">>Survived time: " << minutes << " min" << " " << seconds << " sec<<" << "\n";
-    WaitEnter();
 }
 
 static void SubmarineType(int style)
@@ -142,17 +141,30 @@ static void SubmarineType(int style)
 
         std::cout << "\033[1;35m  " << (char)40 << (char)61 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)61 << (char)41 << "\033[0m" << "\n";
         break;
+    case 4:
+        std::cout << "\033[1;34m       " << (char)95 << (char)209 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;34m " << (char)177 << (char)62 << (char)95 << (char)95 << (char)45 << (char)47 << (char)248 << (char)248 << (char)92 << (char)45 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;34m  " << (char)40 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)223 << (char)41 << "\033[0m" << "\n";
+        break;
+    case 5:
+        std::cout << "\033[1;34m       " << (char)95 << (char)252 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;34m " << (char)176 << (char)62 << (char)95 << (char)95 << (char)219 << (char)47 << (char)233 << (char)233 << (char)92 << (char)45 << "\033[0m" << "\n";
+
+        std::cout << "\033[1;34m  " << (char)91 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)206 << (char)93 << "\033[0m" << "\n";
+        break;
     default:
         break;
     }
     system("chcp 65001 > nul");
 }
 
-
 static void Player()
 {
     int count = 1, option;
-    std::string line;
+    std::string line, selectedCaptain;
 
     system("cls");
     system("chcp 65001 > nul");
@@ -166,38 +178,74 @@ static void Player()
     }
 
     // Mostrar personajes
-  while (getline(file, line))
-{
-    int style = (count - 1) % 3 + 1;
+    while (getline(file, line))
+    {
+        int style = ((count - 1) % 5) + 1;
 
-    std::cout << "\033[1;37m[🔔] Canal táctico -- ID " << count << "\033[0m\n";
-    std::cout << "\033[1;37m--------------------------------------------\033[0m\n";
-    std::cout << "\033[1;37m👤 Registro de Capitán: " << line << "\033[0m\n";
-    std::cout << "\033[1;37m🛠️ Submarino tipo-" << style << " asignado:\033[0m\n";
-    
-    SubmarineType(style); // debe estar alineado visualmente
+        std::cout << "\033[1;37m[🔔] Canal táctico -- ID " << count << "\033[0m\n";
+        std::cout << "\033[1;37m--------------------------------------------\033[0m\n";
+        std::cout << "\033[1;37m👤 Registro de Capitán: " << line << "\033[0m\n";
+        std::cout << "\033[1;37m🛠️ Submarino tipo-" << style << " asignado:\033[0m\n";
 
-    std::cout << "\033[1;37m--------------------------------------------\033[0m\n\n";
+        SubmarineType(style);
 
-    count++;
-}
-
+        std::cout << "\033[1;37m--------------------------------------------\033[0m\n\n";
+        count++;
+    }
     file.close();
 
-    // Capturar selección
-    std::cout << "🔱 Elige tu personaje (1 a " << count - 1 << "): ";
-    std::cin >> option;
-
-    if (option < 1 || option >= count)
+    // Pedir opción
+    do
     {
-        std::cout << "❌ Selección inválida. Intenta nuevamente.\n";
+        std::cout << "🔱 Elige tu personaje (1 a " << count - 1 << "): ";
+        std::cin >> option;
+
+        if (std::cin.fail() || option < 1 || option >= count)
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cout << "❌ Selección inválida. Intenta nuevamente.\n";
+        }
+        else
+        {
+            break;
+        }
+    } while (true);
+
+    // Volver a leer el archivo para obtener el capitán seleccionado
+    file.open("database/characters.txt");
+    if (!file.is_open())
+    {
+        std::cout << "⚠️ Error: No se pudo volver a abrir el archivo.\n";
         WaitEnter();
         return;
     }
 
-    // Asignar estilo del submarino según selección
-    chosenSubmarineStyle = ((option - 1) % 3) + 1;
+    count = 1;
+    while (getline(file, line))
+    {
+        if (count == option)
+        {
+            selectedCaptain = line;
+            break;
+        }
+        count++;
+    }
+    file.close();
 
+    // Confirmar selección
+    if (selectedCaptain.empty())
+    {
+        std::cout << "❌ No se encontró el capitán seleccionado.\n";
+    }
+    else
+    {
+        std::cout << "✅ Capitán asignado: " << selectedCaptain << "\n";
+        captain = selectedCaptain;
+        chosenSubmarineStyle = ((option - 1) % 4) + 1;
+    }
+
+    system("pause");
     system("chcp 437 > nul");
     system("cls");
 }
@@ -206,7 +254,7 @@ static void InitGameSurvivalMode()
 {
     InitGameMessage();
     Player();
-    survivalSubmarine = {5, 15, 3, 2};
+    survivalSubmarine = {5, 15, 3, 1};
     PaintSubmarine(survivalSubmarine, chosenSubmarineStyle);
     PaintHearts(survivalSubmarine);
 
@@ -278,10 +326,9 @@ static void GameLoopSurvivalMode()
 
     auto duration = std::chrono::duration_cast<std::chrono::seconds>(now - startTime).count();
 
-    SaveGameTimeToFile(duration);
+    SaveGameTimeToFile(duration, captain);
 
-    GameOverSurvivalMode();
-    GameTime(duration);
+    GameOverSurvivalMode(duration);
 }
 
 #endif
