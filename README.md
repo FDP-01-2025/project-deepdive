@@ -1,4 +1,5 @@
 # 🌊 DeepDive:
+
 ![DeepDive Logo](assets/deepdive_logo.gif)
 
 > Un proyecto del equipo **AlgorithMinds**, desarrollado con pasión bajo el sello de **AlgorithTech**  
@@ -170,6 +171,6 @@ proyect-deepdive
 │  
 |── main.cpp
 |── assets/
-|    └── deepdive_logo.gif
+|    └──deepdive_logo.gif
 └── README.md
 
