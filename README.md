@@ -56,9 +56,9 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
     <li>Enfréntate a peces guardianes que custodian cada una de las piezas.</li>
     <li>Ten cuidado!! Hay Piezas con formas extrañas(Podrian ser peces).</li>
   </ul>
-</details>
 
-![Level One](assets/Level1.png)
+  ![Level One](assets/Level1.png)
+</details>
 
 ---
 
@@ -70,9 +70,9 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
     <li>Coordina tus movimientos y ataques para sobrevivir juntos hasta el final del nivel.</li>
     <li>No dejes que devoren al pez aliado!!!</li>
   </ul>
-</details>
 
-![Level Two](assets/Level2.png)
+  ![Level Two](assets/Level2.png)
+</details>
 
 ---
 
@@ -84,10 +84,12 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
     <li>El escenario cuenta con elementos interactivos que puedes usar a tu favor.</li>
     <li>¡Derrota al jefe para completar la aventura y salvar el océano!</li>
   </ul>
+
+  ![Level Three](assets/final.png)
+![Historia](assets/History.png)
+
 </details>
 
-![Level Three](assets/final.png)
-![Hisotira](assets/History.png)
 
 ---
 
