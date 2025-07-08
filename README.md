@@ -47,7 +47,6 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 </details>
 
 
-
 ---
 
 <details>
@@ -60,6 +59,7 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 </details>
 
 ![Level One](assets/Level1.png)
+
 ---
 
 <details>
@@ -73,6 +73,7 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 </details>
 
 ![Level Two](assets/Level2.png)
+
 ---
 
 <details>
@@ -87,6 +88,7 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 
 ![Level Three](assets/FinalBoss.png)
 ![Level Tri](assets/History.png)
+
 ---
 
 ## 🔧 Sistema modular del juego DeepDive
