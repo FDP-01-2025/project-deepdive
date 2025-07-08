@@ -201,8 +201,10 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 - IDE recomendado: Visual Studio, Code::Blocks, Dev-C++
 
 ---
-Diagrama de Flujo - SaveGameTimeToFile
-Puedes visualizar el flujograma completo de la función SaveGameTimeToFile en el siguiente enlace de Draw.io:
+# Diagrama de Flujo - SaveGameTimeToFile
+
+- 📖 Puedes visualizar el flujograma completo de la función SaveGameTimeToFile en el siguiente enlace de Draw.io:
+
 
 🔗 https://app.diagrams.net/?splash=0#G1aGttnwUjs3KdRKdzymE3WiWaWwU7Ik3P#%7B%22pageId%22%3A%22lpSrSyElroRk1R7k_qEU%22%7D
 
