@@ -34,14 +34,19 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 
 <details>
   <summary>🧱 <strong>Supervivencia</strong> </summary>
-
   <ul>
     <li>Sobrevive a oleadas de peces enemigos que aparecen de manera aleatoria.</li>
-    <li>Evita obstáculos y recoge burbujas de oxígeno para mantener tu barra de vida.</li>
     <li>La dificultad aumenta con el tiempo: enemigos más rápidos y en mayor cantidad.</li>
     <li>Perfecto para practicar y mejorar tus habilidades antes de los niveles principales.</li>
+    <li>Puedes ir viendo tu tiempo para mejorar poco a poco!!</li>
   </ul>
+
+  ![Survival Mode](assets/survival_mode.png)
+  **En este asombroso modo puedes eligir a tu gusto uno de los 4 submarinos!!**
+  ![Skins]
 </details>
+
+
 
 ---
 
@@ -50,23 +55,24 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
   <ul>
     <li>Explora el fondo marino para encontrar piezas esenciales que te permitirán rellenar el oxígeno del submarino.</li>
     <li>Enfréntate a peces guardianes que custodian cada una de las piezas.</li>
-    <li>Resuelve pequeños acertijos para acceder a zonas bloqueadas.</li>
-    <li>Gestiona bien el tiempo y el oxígeno para no quedarte atrapado.</li>
+    <li>Ten cuidado!! Hay Piezas con formas extrañas(Podrian ser peces).</li>
   </ul>
 </details>
 
+![Level One](assets/Level1.png)
 ---
 
 <details>
   <summary>🔱 <strong>Nivel 2: Defensa y escolta</strong></summary>
   <ul>
     <li>Tu misión es proteger y escoltar a un pez aliado a través de un territorio peligroso.</li>
-    <li>Destruye a los enemigos que intentan atacar al pez aliado.</li>
     <li>El trayecto incluye zonas con corrientes marinas que afectan el movimiento.</li>
     <li>Coordina tus movimientos y ataques para sobrevivir juntos hasta el final del nivel.</li>
+    <li>No dejes que devoren al pez aliado!!!</li>
   </ul>
 </details>
 
+![Level Two](assets/Level2.png)
 ---
 
 <details>
@@ -79,6 +85,8 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
   </ul>
 </details>
 
+![Level Three](assets/FinalBoss.png)
+![Level Tri](assets/History.png)
 ---
 
 ## 🔧 Sistema modular del juego DeepDive
@@ -178,9 +186,10 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 ---
 
 ## 🤝 Créditos
-Desarrollado por AlgorithMinds
-Bajo el sello de AlgorithTech
-🧠 “Impulsamos el futuro con cada línea de pensamiento”
+- Desarrollado por AlgorithMinds
+- Bajo el sello de AlgorithTech
+
+-**🧠 “Impulsamos el futuro con cada línea de pensamiento”**
 
 ---
 
