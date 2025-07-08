@@ -164,13 +164,9 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 **Integrantes del Equipo**
 **Nombre completo:** Esteban Alejandro Mate Lúe **Carnet:** 00235525
-
 **Nombre completo:** Yukio Alberto Ogawa Urquilla **Carnet:** 00171625
-
 **Nombre completo:** René Alexander Moya Hernández **Carnet:** 00090925
-
 **Nombre completo:** Javier Gerardo Mangandí Izaguirre **Carnet:** 00204125
-
 ---
 
 ## 🏗️ Tecnologías utilizadas
@@ -231,17 +227,11 @@ g++ -I src/headers main.cpp -o prueba
 - **Terminal** compatible con la salida del juego
 
 ---
-
-¿Necesitas instrucciones específicas para otro lenguaje (Python, Java, etc.) o para incluir pasos sobre dependencias adicionales?
-
 ## 🤝 Créditos
 - Desarrollado por AlgorithMinds
 - Bajo el sello de AlgorithTech
-
 -**🧠 “Impulsamos el futuro con cada línea de pensamiento”**
-
 ---
-
 ## 📂 Estructura del proyecto (resumen)
 ```plaintext
 proyect-deepdive
