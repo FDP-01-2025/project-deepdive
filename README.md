@@ -195,11 +195,9 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 Abre una terminal y ejecuta:
 
 ```bash
-git clone
+git clone https://github.com/FDP-01-2025/project-deepdive.git
 
 ```
-
-*Cambia `` por el nombre real de tu repositorio en GitHub.*
 
 ---
 
@@ -213,21 +211,17 @@ cd project-deepdive
 
 ### 3. Compilar el proyecto
 
-Si tu proyecto es en C/C++, por ejemplo:
-
 ```bash
 g++ -I src/headers main.cpp -o prueba
 ```
-*O usa el comando de compilación adecuado según tu lenguaje y archivos.*
 
 ---
 
 ### 4. Ejecutar el juego
 
 ```bash
-./submarino
+.\prueba.exe
 ```
-*o el nombre del ejecutable que generó la compilación.*
 
 ---
 
