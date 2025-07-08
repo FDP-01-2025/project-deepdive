@@ -217,7 +217,9 @@ git clone https://github.com/FDP-01-2025/project-deepdive.git
 ### 2. Accede a la carpeta del proyecto
 
 ```bash
-cd project-deepdive
+En terminal "cmd ó git bash": code .
+También directamente desde Visual Studio Code, se agrega al Workspace
+
 ```
 
 ---
@@ -225,6 +227,7 @@ cd project-deepdive
 ### 3. Compilar el proyecto
 
 ```bash
+En la terminal (Ctrl+J) escribimos 
 g++ -I src/headers main.cpp -o prueba
 ```
 
@@ -233,6 +236,7 @@ g++ -I src/headers main.cpp -o prueba
 ### 4. Ejecutar el juego
 
 ```bash
+En terminal denuevo:
 .\prueba.exe
 ```
 
