@@ -29,10 +29,35 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 - ✅ Cohetes ofensivos y detección de colisiones
 - ✅ Bordes protegidos: no traspasa los límites del mapa
 - ✅ Modo historia con 3 niveles únicos:
-  - 🧱 **Supervivencia**: Sobrevive el mayor tiempo posible
-  - 🐟 **Nivel 1**: Consigue las piezas para poder rellenar el oxigeno.
-  - 🔱 **Nivel 2**: Defiente y escolta al pez aliado
-  - ⚓ **Nivel 3**: Derrota al jefe final.
+  <details>
+  - <summary>🧱 **Supervivencia** </summary>
+  **
+  
+  </details>
+
+  ---
+
+  <details>
+  - <summary>🐟 **Nivel 1**:</summary> 
+    Consigue las piezas para poder rellenar el oxigeno.
+  **
+  </details>
+
+  ---
+
+  <details>
+  - <summary>🔱 **Nivel 2**:</summary>Defiente y escolta al pez aliado
+  **
+
+  </details>
+
+  ---
+
+
+  <details>
+  - <summary>⚓ **Nivel 3**:</summary> Derrota al jefe final.
+    **
+  </details>
 
 ---
 ## 🔧 Sistema modular del juego DeepDive

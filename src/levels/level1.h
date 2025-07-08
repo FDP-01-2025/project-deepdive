@@ -3,20 +3,12 @@
 #include "../headers/fish.h"
 #include "../headers/pieces.h"
 #include "../headers/game_limits.h"
-#include <conio.h> // It allows the use of the getch() function to detect the keystrokes of each key.
+#include <conio.h> //Permite utilizar la función getch(), para detectar las pulsaciones de cada tecla.
 /*
-OBJECTIVE OF LEVEL 2:
--COLLECT THE PIECES TO FILL THE OXYGEN BAR AND UNLOCK OTHER LEVELS
+OBJETIVO DEL NIVEL 2:
+-REUNIR LAS PIEZAS PARA LLENAR LA BARRA DE OXYGENO Y PODER DESBLOQUEAR OTROS NIVELES
 
 */
-static Submarine level1Submarine;
-static Fish level1Fishes[4];
-static int level1Numfishes;
-static pieces level1Pieces[1]; // Numero de Piezas
-static int chosenSubmarineStylelevel1=1;
-static int level1NumPieces;
-extern int sleepTime; //Tiempo inicial de espera
-
 static void WaitEnterlevel1()
 {
     gotoxy(46, 15);
@@ -36,7 +28,7 @@ static void InitGameMessagelevel1()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string title[7] = {
+    const std::string titulo[7] = {
         "██╗      ███████╗ ██╗   ██╗ ███████╗ ██╗                ██╗",
         "██║      ██╔════╝ ██║   ██║ ██╔════╝ ██║               ███║",
         "██║      █████╗   ██║   ██║ █████╗   ██║               ╚██║",
@@ -48,8 +40,8 @@ static void InitGameMessagelevel1()
 
     for (int i = 0; i < 7; ++i)
     {
-        gotoxy(30, 8 + i);  // Adjust according to the desired position
-        std::cout << title[i];
+        gotoxy(30, 8 + i);  // Ajusta según la posición deseada
+        std::cout << titulo[i];
     }
 
     gotoxy(43, 15);
@@ -83,11 +75,12 @@ inline void Victorylevel1()
         std::cout << congrats[i];
     }
 
-    gotoxy(35, 15);
+    gotoxy(43, 15);
     std::cout << "You successfully filled the oxygen bar!✅";
 
     gotoxy(45, 17);
     std::cout << "[ Press ENTER to return to menu ]";
+
     std::cin.ignore();
     std::cin.get();
     system("cls");
@@ -98,7 +91,7 @@ static void GameOverlevel1()
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string text[6] = {
+    const std::string texto[6] = {
         " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
         "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
         "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
@@ -109,12 +102,20 @@ static void GameOverlevel1()
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(25, 6 + i);
-        std::cout << text[i] << "\n\n";
+        std::cout << texto[i] << "\n\n";
     }
     system("chcp 437 > nul");
     WaitEnterlevel1();
     system("cls");
 }
+
+static Submarine level1Submarine;
+static Fish level1Fishes[4];
+static int level1Numfishes;
+static pieces level1Pieces[1]; // Numero de Piezas
+static int chosenSubmarineStylelevel1=1;
+static int level1NumPieces;
+extern int sleepTime; //Tiempo inicial de espera
 
 static void InitGamelevel1()
 {   
@@ -144,12 +145,12 @@ static void GameLooplevel1()
     GameLimits();
     do
     {
-
-        // to ensure that the new deltaTime is measured correctly in the next round
+        
+        // para que en la siguiente vuelta se mida el nuevo deltaTime correctamente
         if (kbhit())
         {
-            char key = getch();
-            MoveSubmarine(key, level1Submarine);
+            char tecla = getch();
+            MoveSubmarine(tecla, level1Submarine);
         }
 
         for (int i = 0; i < level1Numfishes; i++)
