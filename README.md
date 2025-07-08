@@ -164,7 +164,7 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 **Integrantes del Equipo**
 
-**Nombre completo:** Esteban Alejandro Mate Lúe **Carnet:** 00235525
+*Nombre completo:* Esteban Alejandro Mate Lúe **Carnet:** 00235525
 
 **Nombre completo:** Yukio Alberto Ogawa Urquilla **Carnet:** 00171625
 
