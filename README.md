@@ -157,24 +157,29 @@ Construye el menú principal interactivo:
 
 ---
 
-## 🧠 Equipo de desarrollo
-
-👨‍💻 **AlgorithMinds**  
+#🧠 Equipo de Desarrollo - AlgorithMinds
 Un equipo de mentes creativas que combinan programación estructurada, lógica algorítmica y diseño visual ASCII para crear experiencias inmersivas desde la terminal.
 
-**Integrantes del Equipo**
+##👨‍💻 Esteban Alejandro Mate Lúe
+**Carnet:** 00235525
+**Rol:** Líder de Desarrollo Backend & Arquitecto de Software
+🔧 Se encarga de la estructura lógica del sistema, diseño de algoritmos eficientes y la integración de módulos. Su enfoque está en la robustez y escalabilidad del código.
 
-*Nombre completo:* Esteban Alejandro Mate Lúe **Carnet:_ 00235525
-[]
+##🎨 Yukio Alberto Ogawa Urquilla
+**Carnet:** 00171625
+**Rol:** Diseñador Gráfico & Artista ASCII
+🖌️ Responsable del diseño visual en la terminal, creación de arte ASCII y experiencia de usuario. Aporta creatividad y estilo visual al proyecto.
 
-**Nombre completo:** Yukio Alberto Ogawa Urquilla **Carnet:** 00171625
-[Diseñador Gráfico]
+##🧪 René Alexander Moya Hernández
+**Carnet:** 00090925
+**Rol:** Tester & Especialista en Calidad de Código
+🧰 Encargado de pruebas, depuración y aseguramiento de calidad. Se asegura de que cada módulo funcione correctamente y cumpla con los estándares del equipo.
 
-**Nombre completo:** René Alexander Moya Hernández **Carnet:** 00090925
-[]
+##🧩 Javier Gerardo Mangandí Izaguirre
+**Carnet:** 00204125
+**Rol:** Desarrollador de Módulos
+🧱 Encargado de construir e integrar componentes funcionales dentro del sistema. Su trabajo se enfoca en desarrollar módulos reutilizables y bien estructurados que permiten ampliar las funcionalidades del proyecto de forma ordenada y eficiente.
 
-**Nombre completo:** Javier Gerardo Mangandí Izaguirre **Carnet:** 00204125
-[]
 ---
 
 ## 🏗️ Tecnologías utilizadas
