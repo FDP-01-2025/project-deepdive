@@ -29,12 +29,68 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 - ✅ Cohetes ofensivos y detección de colisiones
 - ✅ Bordes protegidos: no traspasa los límites del mapa
 - ✅ Modo historia con 3 niveles únicos:
-  - 🧱 **Supervivencia**: Sobrevive el mayor tiempo posible
-  - 🐟 **Nivel 1**: Consigue las piezas para poder rellenar el oxigeno.
-  - 🔱 **Nivel 2**: Defiente y escolta al pez aliado
-  - ⚓ **Nivel 3**: Derrota al jefe final.
 
 ---
+
+<details>
+  <summary>🧱 <strong>Supervivencia</strong> </summary>
+  <ul>
+    <li>Sobrevive a oleadas de peces enemigos que aparecen de manera aleatoria.</li>
+    <li>La dificultad aumenta con el tiempo: enemigos más rápidos y en mayor cantidad.</li>
+    <li>Perfecto para practicar y mejorar tus habilidades antes de los niveles principales.</li>
+    <li>Puedes ir viendo tu tiempo para mejorar poco a poco!!</li>
+  </ul>
+
+  ![Survival Mode](assets/survival_mode.png)
+  **En este asombroso modo puedes eligir a tu gusto uno de los 4 submarinos!!**
+  ![Skins]
+</details>
+
+
+---
+
+<details>
+  <summary>🐟 <strong>Nivel 1: Recupera las piezas</strong></summary>
+  <ul>
+    <li>Explora el fondo marino para encontrar piezas esenciales que te permitirán rellenar el oxígeno del submarino.</li>
+    <li>Enfréntate a peces guardianes que custodian cada una de las piezas.</li>
+    <li>Ten cuidado!! Hay Piezas con formas extrañas(Podrian ser peces).</li>
+  </ul>
+</details>
+
+![Level One](assets/Level1.png)
+
+---
+
+<details>
+  <summary>🔱 <strong>Nivel 2: Defensa y escolta</strong></summary>
+  <ul>
+    <li>Tu misión es proteger y escoltar a un pez aliado a través de un territorio peligroso.</li>
+    <li>El trayecto incluye zonas con corrientes marinas que afectan el movimiento.</li>
+    <li>Coordina tus movimientos y ataques para sobrevivir juntos hasta el final del nivel.</li>
+    <li>No dejes que devoren al pez aliado!!!</li>
+  </ul>
+</details>
+
+![Level Two](assets/Level2.png)
+
+---
+
+<details>
+  <summary>⚓ <strong>Nivel 3: Jefe final</strong></summary>
+  <ul>
+    <li>Enfréntate a un temible jefe marino con patrones de ataque únicos.</li>
+    <li>Aprovecha los cohetes y tu destreza para esquivar ataques especiales.</li>
+    <li>El escenario cuenta con elementos interactivos que puedes usar a tu favor.</li>
+    <li>¡Derrota al jefe para completar la aventura y salvar el océano!</li>
+  </ul>
+</details>
+
+![Level Three](assets/FinalBoss.png)
+![Level Tri](assets/History.png)
+
+---
+
 ## 🔧 Sistema modular del juego DeepDive
 
 <details>
@@ -132,9 +188,10 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 ---
 
 ## 🤝 Créditos
-Desarrollado por AlgorithMinds
-Bajo el sello de AlgorithTech
-🧠 “Impulsamos el futuro con cada línea de pensamiento”
+- Desarrollado por AlgorithMinds
+- Bajo el sello de AlgorithTech
+
+-**🧠 “Impulsamos el futuro con cada línea de pensamiento”**
 
 ---
 
