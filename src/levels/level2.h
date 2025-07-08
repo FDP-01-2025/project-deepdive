@@ -191,7 +191,7 @@ static void GameLooplevel2()
         int remaining = 180 - static_cast<int>(elapsed);
         int minutes = remaining / 60;
         int seconds = remaining % 60;
-        std::cout << "Tiempo restante: " << minutes << "m " << (seconds < 10 ? "0" : "") << seconds << "s     ";
+        std::cout << "Time remaining: " << minutes << "min " << (seconds < 10 ? "0" : "") << seconds << "sec     ";
 
         if (level2Submarine.lifes <= 0)
         {

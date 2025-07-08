@@ -164,7 +164,7 @@ static void Player()
 
     if (!file.is_open())
     {
-        std::cout << "⚠️ Error: No se pudo abrir el archivo de personajes.\n";
+        std::cout << "⚠️ Error: Could not open the character file.\n";
         WaitEnter();
         return;
     }
@@ -174,10 +174,10 @@ static void Player()
     {
         int style = ((count - 1) % 6) + 1;
 
-        std::cout << "\033[1;37m[🔔] Canal táctico -- ID " << count << "\033[0m\n";
+        std::cout << "\033[1;37m[🔔] Tactical Channel -- ID " << count << "\033[0m\n";
         std::cout << "\033[1;37m--------------------------------------------\033[0m\n";
-        std::cout << "\033[1;37m👤 Registro de Capitán: " << line << "\033[0m\n";
-        std::cout << "\033[1;37m🛠️ Submarino tipo-" << style << " asignado:\033[0m\n";
+        std::cout << "\033[1;37m👤 Captain Record: " << line << "\033[0m\n";
+        std::cout << "\033[1;37m🛠️ Assigned Submarine type-" << style << ":\033[0m\n";
 
         SubmarineType(style);
 
@@ -189,14 +189,14 @@ static void Player()
     // Request option
     do
     {
-        std::cout << "🔱 Elige tu personaje (1 a " << count - 1 << "): ";
+        std::cout << "🔱 Choose your character (1 to " << count - 1 << "): ";
         std::cin >> option;
 
         if (std::cin.fail() || option < 1 || option >= count)
         {
             std::cin.clear();
             std::cin.ignore(1000, '\n');
-            std::cout << "❌ Selección inválida. Intenta nuevamente.\n";
+            std::cout << "❌ Invalid selection. Please try again.\n";
         }
         else
         {
@@ -228,11 +228,11 @@ static void Player()
     // Confirm selection
     if (selectedCaptain.empty())
     {
-        std::cout << "❌ No se encontró el capitán seleccionado.\n";
+        std::cout << "❌ Selected captain not found.\n";
     }
     else
     {
-        std::cout << "✅ Capitán asignado: " << selectedCaptain << "\n";
+        std::cout << "✅ Assigned captain: " << selectedCaptain << "\n";
         captain = selectedCaptain;
         chosenSubmarineStyle = ((option - 1) % 4) + 1;
     }
