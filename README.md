@@ -188,6 +188,63 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 - IDE recomendado: Visual Studio, Code::Blocks, Dev-C++
 
 ---
+## 📖 Manual de Usuario
+
+### 1. Clonar el repositorio
+
+Abre una terminal y ejecuta:
+
+```bash
+git clone https://github.com/Javier-Mangandi/tu-repositorio.git
+```
+
+*Cambia `tu-repositorio` por el nombre real de tu repositorio en GitHub.*
+
+---
+
+### 2. Accede a la carpeta del proyecto
+
+```bash
+cd tu-repositorio
+```
+
+---
+
+### 3. Compilar el proyecto
+
+Si tu proyecto es en C/C++, por ejemplo:
+
+```bash
+g++ main.cpp -o submarino
+```
+*O usa el comando de compilación adecuado según tu lenguaje y archivos.*
+
+---
+
+### 4. Ejecutar el juego
+
+```bash
+./submarino
+```
+*o el nombre del ejecutable que generó la compilación.*
+
+---
+
+### 5. Requisitos
+
+- **Compilador C/C++** (por ejemplo, `gcc`, `g++` o MinGW en Windows)
+- **Terminal** compatible con la salida del juego
+
+---
+
+### 6. Notas
+
+- Si tu juego utiliza imágenes, asegúrate que los archivos de recursos estén en la carpeta correcta.
+- Si tienes archivos de configuración, revisa que estén incluidos o bien documentados.
+
+---
+
+¿Necesitas instrucciones específicas para otro lenguaje (Python, Java, etc.) o para incluir pasos sobre dependencias adicionales?
 
 ## 🤝 Créditos
 - Desarrollado por AlgorithMinds
