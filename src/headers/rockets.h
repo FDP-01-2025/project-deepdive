@@ -55,14 +55,15 @@ static void CollisionRocket(Rocket &rocket, Submarine &submarine)
     // Detect if the rocket's position is equal to the submarine's
     if (rocket.x >= submarine.x && rocket.x <= submarine.x + 12 && rocket.y >= submarine.y && rocket.y <= submarine.y + 2)
     {
-        submarine.heart--;
+        submarine.heart--;  // Reduce submarine's health by one
         if (submarine.heart > 0)
         {
-            CollisionSubmarine(submarine);
+            CollisionSubmarine(submarine); // Handle submarine collision effects (e.g., animation)
         }
         DestroySubmarine(submarine);
         ClearRocket(rocket);
         PaintHearts(submarine);
+         // Reset rocket position to right side with random vertical position
         rocket.x = 110;
         rocket.y = rand() % 20 + 3;
     }

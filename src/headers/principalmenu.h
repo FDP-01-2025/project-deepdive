@@ -133,12 +133,12 @@ const static void runMenu()
         {
             int key = _getch();
 
-            // Arrows
-            if (key == 0 || key == 224)
+            // Handling arrow key inputs
+            if (key == 0 || key == 224)  // Arrow keys return two codes: first 0 or 224, then actual code
             {
                 key = _getch();
                 int prev = selected;
-                int N = inLevelMenu ? N_level : N_main;
+                int N = inLevelMenu ? N_level : N_main; // Number of menu options depends on current menu
 
                 if (key == 72) // ↑
                     selected = (selected + N - 1) % N;

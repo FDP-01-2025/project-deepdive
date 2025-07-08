@@ -5,9 +5,9 @@
 using namespace std;
 int main()
 {
-    HideCursor();
-    GameCharacters();
-    runMenu(); // Llama al menú y controla toda su ejecución
+    HideCursor(); // Hide the console cursor for a cleaner interface
+    GameCharacters(); // Initialize game characters by writing them to a file
+    runMenu(); // Run the main menu of the game
 
     return 0;
 }

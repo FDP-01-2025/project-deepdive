@@ -7,8 +7,8 @@ void gotoxy(int x, int y)
 {
     HANDLE hCon;
     //Gets the console handle.
-    hCon = GetStdHandle(STD_OUTPUT_HANDLE);
-    COORD dwPos;
+    hCon = GetStdHandle(STD_OUTPUT_HANDLE);  // Get the console handle
+    COORD dwPos;  // Declare a COORD structure to hold the cursor position
     dwPos.X = x;
     dwPos.Y = y;
 

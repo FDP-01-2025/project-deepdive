@@ -7,6 +7,7 @@ typedef struct
     int x, y;
 } AllyFish;
 
+// Forward declaration of Submarine class
 static const std::string framesAllyFish[] = {
     ">{{{°>",
     ">{{{o>",
