@@ -195,17 +195,18 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 Abre una terminal y ejecuta:
 
 ```bash
-git clone https://github.com/Javier-Mangandi/tu-repositorio.git
+git clone
+
 ```
 
-*Cambia `tu-repositorio` por el nombre real de tu repositorio en GitHub.*
+*Cambia `` por el nombre real de tu repositorio en GitHub.*
 
 ---
 
 ### 2. Accede a la carpeta del proyecto
 
 ```bash
-cd tu-repositorio
+cd project-deepdive
 ```
 
 ---
@@ -215,7 +216,7 @@ cd tu-repositorio
 Si tu proyecto es en C/C++, por ejemplo:
 
 ```bash
-g++ main.cpp -o submarino
+g++ -I src/headers main.cpp -o prueba
 ```
 *O usa el comando de compilación adecuado según tu lenguaje y archivos.*
 
@@ -234,13 +235,6 @@ g++ main.cpp -o submarino
 
 - **Compilador C/C++** (por ejemplo, `gcc`, `g++` o MinGW en Windows)
 - **Terminal** compatible con la salida del juego
-
----
-
-### 6. Notas
-
-- Si tu juego utiliza imágenes, asegúrate que los archivos de recursos estén en la carpeta correcta.
-- Si tienes archivos de configuración, revisa que estén incluidos o bien documentados.
 
 ---
 
