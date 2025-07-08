@@ -13,7 +13,7 @@
 Lucha por sobrevivir, esquivar obstáculos, eliminar enemigos y escoltar a tu valioso aliado: un pez que necesita protección.
 Con animaciones ASCII, niveles progresivos y mecánicas fluidas, DeepDive te sumerge en una experiencia de código y estrategia.
 
-Consiste en un videojuego desarrollado en C++ que se ejecuta exclusivamente en consola. El Jugador controla un submarino que debe esquivar obstáculos como peces y rocas mientras avanza bajo el mar. El juego se maneja mediante menús interactivos y el uso del teclado expecíficamente con las teclas **(W,A,S,D)** para moverse.
+Consiste en un videojuego desarrollado en C++ que se ejecuta exclusivamente en consola. El Jugador controla un submarino que debe esquivar obstáculos como peces y rocas mientras avanza bajo el mar. El juego se maneja mediante menús interactivos y el uso del teclado expecíficamente con las teclas **"(W,A,S,D)"** para moverse.
 
 Los obstáculos se generaran aleatoriamente usando estructuras y la funcion rand(), y el submarino tiene un sistemas de vidas que le permite resistir varios impactos antes de perder. La interfaz gráfica se basa en caracteres ASCII, y se usa la función kbhit() de la librería conio.h para detectar las teclas presionadas.
 
