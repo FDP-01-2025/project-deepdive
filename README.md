@@ -164,14 +164,17 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 **Integrantes del Equipo**
 
-*Nombre completo:* Esteban Alejandro Mate Lúe **Carnet:** 00235525
+*Nombre completo:* Esteban Alejandro Mate Lúe **Carnet:_ 00235525
+[]
 
 **Nombre completo:** Yukio Alberto Ogawa Urquilla **Carnet:** 00171625
+[Diseñador Gráfico]
 
 **Nombre completo:** René Alexander Moya Hernández **Carnet:** 00090925
+[]
 
 **Nombre completo:** Javier Gerardo Mangandí Izaguirre **Carnet:** 00204125
-
+[]
 ---
 
 ## 🏗️ Tecnologías utilizadas
