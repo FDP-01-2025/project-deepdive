@@ -208,7 +208,7 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 Abre una terminal y ejecuta:
 
 ```bash
-git clone https://github.com/FDP-01-2025/project-deepdive.git
+git clone "https://github.com/FDP-01-2025/project-deepdive.git"
 
 ```
 
@@ -217,7 +217,7 @@ git clone https://github.com/FDP-01-2025/project-deepdive.git
 ### 2. Accede a la carpeta del proyecto
 
 ```bash
-En terminal "cmd ó git bash": code .
+En terminal cmd ó git bash: "code . "
 También directamente desde Visual Studio Code, se agrega al Workspace
 
 ```
@@ -228,7 +228,7 @@ También directamente desde Visual Studio Code, se agrega al Workspace
 
 ```bash
 En la terminal (Ctrl+J) escribimos 
-g++ -I src/headers main.cpp -o prueba
+" g++ -I src/headers main.cpp -o prueba "
 ```
 
 ---
@@ -237,7 +237,7 @@ g++ -I src/headers main.cpp -o prueba
 
 ```bash
 En terminal denuevo:
-.\prueba.exe
+" .\prueba.exe "
 ```
 
 ---
