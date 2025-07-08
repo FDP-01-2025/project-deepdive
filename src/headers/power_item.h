@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include "position.h"
 #include "submarine.h"
-
+// Coordinates of the power-up item
 static int itemX = 0;
 static int itemY = 0;
 static bool itemVisible = false;
@@ -42,6 +42,7 @@ static void hideItem()
 // Detects collision between submarine and item
 static bool detectItemCollision(const Submarine& sub)
 {
+    // Checks if the submarine has collided with the power-up item
     if (!itemVisible)
         return false;
 

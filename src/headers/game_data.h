@@ -6,7 +6,7 @@
 #include <chrono> // Allows working with time.
 
 const int MAX_TIMES = 4;
-
+// This function saves a list of character names into a text file
 static void GameCharacters()
 {
     std::ofstream file("database/characters.txt");
@@ -16,7 +16,7 @@ static void GameCharacters()
          << "Ingrid Falkner\n";
     file.close();
 }
-
+// This function saves the game duration along with the captain's name
 void SaveGameTimeToFile(int duration, std::string captain)
 {
     std::string captains[MAX_TIMES + 1];

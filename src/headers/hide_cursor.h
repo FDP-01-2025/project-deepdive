@@ -1,6 +1,7 @@
 #ifndef HIDE_CURSOR_H_INCLUDED
 #define HIDE_CURSOR_H_INCLUDED
-#include <windows.h>
+#include <windows.h> // For Windows console functions
+// Function to hide the console cursor
 void HideCursor()
 {
     HANDLE hCon;

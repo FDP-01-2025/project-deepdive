@@ -5,6 +5,7 @@
 #include "submarine.h"
 #include <iostream>
 
+// Forward declaration of Submarine class
 typedef struct
 {
     int x, y, frame;
@@ -62,7 +63,7 @@ static void CollisionFish(Fish &fish, Submarine &submarine)
         fish.y = rand() % 20 + 3;
     }
 }
-
+// Check if the fish is within the bounds of the submarine
 static bool CollisionWithInvulnerability(Fish &fish, Submarine &submarine)
 {
     fish.x >= submarine.x &&fish.x <= submarine.x + 11 && fish.y >= submarine.y &&fish.y <= submarine.y + 3;

@@ -3,7 +3,7 @@
 #include "position.h"
 #include "submarine.h"
 #include <iostream>
-
+// Forward declaration of Submarine class
 typedef struct
 {
     int x, y;

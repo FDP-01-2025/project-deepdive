@@ -23,14 +23,15 @@ typedef struct
 static int optionSubmarine = 1;
 
 /* Paint the submarine with ASCII code characters */
-
+// This function paints the submarine based on the selected option.
+// The submarine is painted in different colors and styles depending on the option chosen.
 inline void PaintSubmarine(Submarine &submarine, int option)
 {
-
+    // Clear the previous submarine
     optionSubmarine = option;
     switch (optionSubmarine)
-    {
-    case 1:
+    {   
+    case 1:   // Paint the submarine in blue
         gotoxy(submarine.x, submarine.y);
         std::cout << "\033[1;34m       " << (char)95 << (char)218 << "\033[0m";
 
@@ -40,7 +41,8 @@ inline void PaintSubmarine(Submarine &submarine, int option)
         gotoxy(submarine.x, submarine.y + 2);
         std::cout << "\033[1;34m  " << (char)40 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)41 << "\033[0m";
         break;
-    case 2:
+    case 2:  // Paint the submarine in cyan
+        // The submarine is painted in cyan color using ANSI escape codes.
         gotoxy(submarine.x, submarine.y);
         std::cout << "\033[1;36m       " << (char)95 << (char)201 << "\033[0m";
 
@@ -51,7 +53,8 @@ inline void PaintSubmarine(Submarine &submarine, int option)
         std::cout << "\033[1;36m  " << (char)40 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)205 << (char)41 << "\033[0m";
 
         break;
-    case 3:
+    case 3:  // Paint the submarine in magenta
+        // The submarine is painted in magenta color using ANSI escape codes.
         gotoxy(submarine.x, submarine.y);
         std::cout << "\033[1;35m       " << (char)95 << (char)254 << "\033[0m";
 
@@ -62,7 +65,8 @@ inline void PaintSubmarine(Submarine &submarine, int option)
         std::cout << "\033[1;35m  " << (char)40 << (char)61 << (char)95 << (char)95 << (char)95 << (char)95 << (char)95 << (char)61 << (char)41 << "\033[0m";
 
         break;
-    case 4:
+    case 4:  // Paint the submarine in red
+        // The submarine is painted in red color using ANSI escape codes.
         gotoxy(submarine.x, submarine.y);
         std::cout << "\033[1;34m       " << (char)95 << (char)209 << "\033[0m";
 
@@ -160,7 +164,7 @@ void DestroySubmarine(Submarine &submarine)
         PaintSubmarine(submarine, optionSubmarine);
     }
 }
-
+//Displays a blinking animation when the submarine gets hit (but is not destroyed)
 void CollisionSubmarine(Submarine &submarine)
 {
     for (int i = 0; i < 3; i++)
@@ -195,8 +199,13 @@ void MoveSubmarine(char key, Submarine &submarine)
     PaintSubmarine(submarine, optionSubmarine);
 }
 
+
+  // Submarine movement with ally fish
+ // The ally fish follows the submarine's position, moving behind it.
 void MoveWithAlly(char key, Submarine &submarine)
 {
+    // Delete the ally fish before moving the submarine
+    // DeleteAllyFish(allySubmarine);
     DeleteSubmarine(submarine);
 
     if ((key == LEFT || key == LEFTlc) && submarine.x > 7)

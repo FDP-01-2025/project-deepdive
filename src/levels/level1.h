@@ -16,22 +16,22 @@ static Pieces level1Pieces[1]; // Number of Pieces
 static int chosenSubmarineStylelevel1 = 1;
 static int level1NumPieces;
 static int sleepTime = 10; // Initial waiting time
-
+// Function to wait for the player to press Enter before starting the game
 static void WaitEnterlevel1()
 {
     gotoxy(46, 15);
-    std::cout << "[Press ENTER to continue]\n\n";
+    std::cout << "[Press ENTER to continue]\n\n";  // Display message to wait for Enter key
 
-    while (true)
+    while (true)  // Loop until Enter is pressed
     {
         int key = _getch();
         if (key == 13)
             break; // 13 = Enter
         gotoxy(46, 15);
-        std::cout << "[Only press ENTER to continue]\n\n";
-    }
+        std::cout << "[Only press ENTER to continue]\n\n";   // Display message if any other key is pressed
+    } 
 }
-static void InitGameMessagelevel1()
+static void InitGameMessagelevel1()   // Initialize the game message for level 1
 {
     system("cls");
     system("chcp 65001 > nul");
@@ -52,17 +52,17 @@ static void InitGameMessagelevel1()
     }
 
     gotoxy(43, 15);
-    std::cout << "[ Press ENTER twice to continue ]";
+    std::cout << "[ Press ENTER twice to continue ]";    // Display message to wait for Enter key
 
     gotoxy(30, 17);
-    std::cout << ">> OBJECTIVE: Collect the pieces to refill the oxygen bar❗ <<";
+    std::cout << ">> OBJECTIVE: Collect the pieces to refill the oxygen bar❗ <<";   /// Display the objective of the level
 
     std::cin.ignore();
     std::cin.get();
     system("cls");
 }
 
-inline void Victorylevel1()
+inline void Victorylevel1()   // Function to display the victory message for level 1
 {
     system("cls");
     system("chcp 65001 > nul");
@@ -93,7 +93,7 @@ inline void Victorylevel1()
     system("cls");
 }
 
-static void GameOverlevel1()
+static void GameOverlevel1()   /// Function to display the game over message for level 1
 {
     system("cls");
     system("chcp 65001 > nul");
@@ -116,18 +116,19 @@ static void GameOverlevel1()
     system("cls");
 }
 
-static void InitGamelevel1()
+static void InitGamelevel1()  /// Function to initialize the game for level 1
 {
-    InitGameMessagelevel1();
+    InitGameMessagelevel1();  // Display the game message for level 1
+    WaitEnterlevel1();        // Wait for the player to press Enter
     system("cls");
     setColor(15);
     gotoxy(5, 1);
-    std::cout << "Principal Objective: Refil the oxygen❗";
-    level1Submarine = {5, 15, 1, 3};
+    std::cout << "Principal Objective: Refil the oxygen❗";   // Display the main objective of the level
+    level1Submarine = {5, 15, 1, 3};          // Initialize the submarine with position (5, 15), 1 heart, 3 lives, and oxygen level 0
     PaintSubmarine(level1Submarine, chosenSubmarineStylelevel1);
     PaintHearts(level1Submarine);
     PaintOxygen(level1Submarine);
-
+// Initialize the submarine's oxygen level and hearts
     level1Fishes[0] = {80, 3};
     level1Fishes[1] = {90, 10};
     level1Fishes[2] = {100, 15};
@@ -138,11 +139,11 @@ static void InitGamelevel1()
     level1NumPieces = 1;
 }
 
-static void GameLooplevel1()
+static void GameLooplevel1()   /// Function to run the game loop for level 1
 {
-    bool fullOxygen = false, collisionPieces = false, isAlive = true;
+    bool fullOxygen = false, collisionPieces = false, isAlive = true;   // Initialize game state variables
     int countCollision = 0;
-    GameLimits();
+    GameLimits();       // Draw the game limits on the screen
     do
     {
         // to ensure that the new deltaTime is measured correctly in the next round
@@ -152,10 +153,10 @@ static void GameLooplevel1()
             MoveSubmarine(key, level1Submarine);
         }
 
-        for (int i = 0; i < level1Numfishes; i++)
+        for (int i = 0; i < level1Numfishes; i++)   // Move each fish in the level
         {
-            MoveFish(level1Fishes[i]);
-            CollisionFish(level1Fishes[i], level1Submarine);
+            MoveFish(level1Fishes[i]);  // Move the fish
+            CollisionFish(level1Fishes[i], level1Submarine);   // Check for collision with the submarine
         }
         for (int i = 0; i < level1NumPieces; i++)
         {
@@ -169,23 +170,23 @@ static void GameLooplevel1()
         }
         // Increase oxygen
 
-        if (collisionPieces)
+        if (collisionPieces)    // If a piece is collected
         {
-            level1Submarine.oxygen++;
+            level1Submarine.oxygen++;   // Increase the oxygen level by 1
             countCollision++;
-            PaintOxygen(level1Submarine);
-            if (countCollision % 5 == 0 && sleepTime > 1)
+            PaintOxygen(level1Submarine);  // Update the oxygen bar display
+            if (countCollision % 5 == 0 && sleepTime > 1)  // Every 5 pieces collected, decrease the sleep time
                 sleepTime--;
         }
 
-        if (level1Submarine.oxygen >= 30)
+        if (level1Submarine.oxygen >= 30)  // Check if the oxygen level is full
         {
-            fullOxygen = true;
+            fullOxygen = true;  // Set the flag to indicate full oxygen
         }
 
         collisionPieces = false;
 
-        if (level1Submarine.lifes <= 0)
+        if (level1Submarine.lifes <= 0)  // Check if the submarine is out of lives
         {
             isAlive = false;
         }
