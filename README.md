@@ -163,10 +163,15 @@ Construye el menú principal interactivo:
 Un equipo de mentes creativas que combinan programación estructurada, lógica algorítmica y diseño visual ASCII para crear experiencias inmersivas desde la terminal.
 
 **Integrantes del Equipo**
+
 **Nombre completo:** Esteban Alejandro Mate Lúe **Carnet:** 00235525
+
 **Nombre completo:** Yukio Alberto Ogawa Urquilla **Carnet:** 00171625
+
 **Nombre completo:** René Alexander Moya Hernández **Carnet:** 00090925
+
 **Nombre completo:** Javier Gerardo Mangandí Izaguirre **Carnet:** 00204125
+
 ---
 
 ## 🏗️ Tecnologías utilizadas
