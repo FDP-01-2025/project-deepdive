@@ -162,7 +162,7 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 ### 👨‍💻 Esteban Alejandro Mate Lúe
 **Carnet:** 00235525
-**Rol:** [Líder de Desarrollo Backend & Arquitecto de Software]
+**Rol:** [Líder de Desarrollo & Arquitecto de Software]
 > 🔧 Se encarga de la estructura lógica del sistema, diseño de algoritmos eficientes y la integración de módulos. Su enfoque está en la robustez y escalabilidad del código.
 
 ### 🎨 Yukio Alberto Ogawa Urquilla
@@ -177,8 +177,8 @@ Un equipo de mentes creativas que combinan programación estructurada, lógica a
 
 ### 🧩 Javier Gerardo Mangandí Izaguirre
 **Carnet:** 00204125
-**Rol:** [Desarrollador de Módulos] 
-> 🧱 Encargado de construir e integrar componentes funcionales dentro del sistema. Su trabajo se enfoca en desarrollar módulos reutilizables y bien estructurados que permiten ampliar las funcionalidades del proyecto de forma ordenada y eficiente.
+**Rol:** [Desarrollador de Módulos & Artista ASCII] 
+> 🧱 Encargado de construir e integrar componentes funcionales dentro del sistema. Su trabajo se enfoca en desarrollar módulos reutilizables y bien estructurados que permiten ampliar las funcionalidades del proyecto de forma ordenada y eficiente. Junto con algunas creaciones con caracteres ASCII.
 
 ---
 
