@@ -43,7 +43,7 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
 
   ![Survival Mode](assets/survival_mode.png)
   **En este asombroso modo puedes eligir a tu gusto uno de los 4 submarinos!!**
-  ![Skins](assets/skins.png)
+  ![Skins](assets/Skins.png)
 </details>
 
 
@@ -86,7 +86,7 @@ Además, se guarda un récord de distancia recorrida en un archivo de texto, per
   </ul>
 </details>
 
-![Level Three](assets/FinalBoss.png)
+![Level Three](assets/final.png)
 ![Hisotira](assets/History.png)
 
 ---
