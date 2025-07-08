@@ -87,7 +87,6 @@ inline void Victorylevel2()
     std::cin.clear();
     std::cin.sync();
     std::cin.get();
-    std::cin.get();
     system("cls");
 }
 
@@ -98,7 +97,7 @@ static void GameOverlevel2(std::string messegeDevouredFish)
     system("cls");
     system("chcp 65001 > nul");
 
-    const std::string texto[6] = {
+    const std::string text[6] = {
         " ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗",
         "██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗",
         "██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝",
@@ -109,7 +108,7 @@ static void GameOverlevel2(std::string messegeDevouredFish)
     for (int i = 0; i < 6; ++i)
     {
         gotoxy(25, 6 + i);
-        std::cout << texto[i] << "\n\n";
+        std::cout << text[i] << "\n\n";
     }
     gotoxy(42, 17);
     std::cout << messegeDevouredFish;

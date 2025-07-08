@@ -12,10 +12,10 @@ OBJECTIVE OF LEVEL 2:
 static Submarine level1Submarine;
 static Fish level1Fishes[4];
 static int level1Numfishes;
-static pieces level1Pieces[1]; // Numero de Piezas
-static int chosenSubmarineStylelevel1=1;
+static Pieces level1Pieces[1]; // Number of Pieces
+static int chosenSubmarineStylelevel1 = 1;
 static int level1NumPieces;
-extern int sleepTime; //Tiempo inicial de espera
+static int sleepTime = 10; // Initial waiting time
 
 static void WaitEnterlevel1()
 {
@@ -43,12 +43,11 @@ static void InitGameMessagelevel1()
         "██║      ██╔══╝   ╚██╗ ██╔╝ ██╔══╝   ██║                ██║",
         "███████╗ ███████╗  ╚████╔╝  ███████╗ ███████╗           ██║",
         "╚══════╝ ╚══════╝   ╚═══╝   ╚══════╝ ╚══════╝           ╚═╝ ",
-        "                                                                    "
-    };
+        "                                                                    "};
 
     for (int i = 0; i < 7; ++i)
     {
-        gotoxy(30, 8 + i);  // Adjust according to the desired position
+        gotoxy(30, 8 + i); // Adjust according to the desired position
         std::cout << title[i];
     }
 
@@ -69,12 +68,12 @@ inline void Victorylevel1()
     system("chcp 65001 > nul");
 
     const std::string congrats[6] = {
-    " ██████╗ ██████╗ ██╗   █╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗     █████╗ ████████╗██╗ ██████╗ ██╗   █╗██████╗",
-    "██╔════╝██╔═══██╗███╗  █║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║    ██╔══██╗╚══██╔══╝██║██╔═══██╗███╗  █║██╔═══╝",
-    "██║     ██║   ██║█╔██╗ █║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║    ███████║   ██║   ██║██║   ██║█╔██╗ █║██████╗",
-    "██║     ██║   ██║█║╚██╗█║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║    ██╔══██║   ██║   ██║██║   ██║█║╚██╗█║╚═══██║",
-    "╚██████╗╚██████╔╝█║ ╚███║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝██████╗██║  ██║   ██║   ██║╚██████╔╝█║ ╚███║██████║",
-    " ╚═════╝ ╚═════╝ ╚╝  ╚══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚╝  ╚══╝ ╚════╝",
+        " ██████╗ ██████╗ ██╗   █╗ ██████╗ ██████╗  █████╗ ████████╗██╗   ██╗██╗     █████╗ ████████╗██╗ ██████╗ ██╗   █╗██████╗",
+        "██╔════╝██╔═══██╗███╗  █║██╔════╝ ██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██║    ██╔══██╗╚══██╔══╝██║██╔═══██╗███╗  █║██╔═══╝",
+        "██║     ██║   ██║█╔██╗ █║██║  ███╗██████╔╝███████║   ██║   ██║   ██║██║    ███████║   ██║   ██║██║   ██║█╔██╗ █║██████╗",
+        "██║     ██║   ██║█║╚██╗█║██║   ██║██╔══██╗██╔══██║   ██║   ██║   ██║██║    ██╔══██║   ██║   ██║██║   ██║█║╚██╗█║╚═══██║",
+        "╚██████╗╚██████╔╝█║ ╚███║╚██████╔╝██║  ██║██║  ██║   ██║   ╚██████╔╝██████╗██║  ██║   ██║   ██║╚██████╔╝█║ ╚███║██████║",
+        " ╚═════╝ ╚═════╝ ╚╝  ╚══╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚╝  ╚══╝ ╚════╝",
     };
 
     for (int i = 0; i < 6; ++i)
@@ -118,11 +117,11 @@ static void GameOverlevel1()
 }
 
 static void InitGamelevel1()
-{   
+{
     InitGameMessagelevel1();
     system("cls");
     setColor(15);
-    gotoxy(5,1);
+    gotoxy(5, 1);
     std::cout << "Principal Objective: Refil the oxygen❗";
     level1Submarine = {5, 15, 1, 3};
     PaintSubmarine(level1Submarine, chosenSubmarineStylelevel1);
@@ -139,13 +138,13 @@ static void InitGamelevel1()
     level1NumPieces = 1;
 }
 
-
 static void GameLooplevel1()
 {
+    bool fullOxygen = false, collisionPieces = false, isAlive = true;
+    int countCollision = 0;
     GameLimits();
     do
     {
-
         // to ensure that the new deltaTime is measured correctly in the next round
         if (kbhit())
         {
@@ -161,13 +160,48 @@ static void GameLooplevel1()
         for (int i = 0; i < level1NumPieces; i++)
         {
             Movepieces(level1Pieces[i]);
-            Collisionpieces(level1Pieces[i], level1Submarine);
+
+            if (Collition(level1Pieces[i], level1Submarine))
+            {
+                CollisionPieces(level1Pieces[i], level1Submarine); // Impact effect
+                collisionPieces = true;
+            }
         }
+        // Increase oxygen
+
+        if (collisionPieces)
+        {
+            level1Submarine.oxygen++;
+            countCollision++;
+            PaintOxygen(level1Submarine);
+            if (countCollision % 5 == 0 && sleepTime > 1)
+                sleepTime--;
+        }
+
+        if (level1Submarine.oxygen >= 30)
+        {
+            fullOxygen = true;
+        }
+
+        collisionPieces = false;
+
+        if (level1Submarine.lifes <= 0)
+        {
+            isAlive = false;
+        }
+
         Sleep(sleepTime);
 
-    } while (level1Submarine.lifes > 0);
-    GameOverlevel1();
+    } while (!fullOxygen && isAlive);
 
+    if (fullOxygen)
+    {
+        Victorylevel1();
+    }
+    else
+    {
+        GameOverlevel1();
+    }
 }
 
 #endif

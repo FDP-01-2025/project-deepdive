@@ -36,7 +36,7 @@ const std::string titleLines[TITLE_ROWS] = {
     "██║  ██║██╔══╝  ██╔══╝  ██╔═══╝     ██║  ██║██║╚██╗ ██╔╝██╔══╝  ",
     "██████╔╝███████╗███████╗██║         ██████╔╝██║ ╚████╔╝ ███████╗",
     "╚═════╝ ╚══════╝╚══════╝╚═╝         ╚═════╝ ╚═╝  ╚═══╝  ╚══════╝",
-    "ESTE MENU AÚN ESTÁ EN DESARROLLO, POR FAVOR SEA PACIENTE, GRACIAS, BESOS",
+    "                                                                       ",
     "                                                                       "};
 
 // Function to show players' scores
